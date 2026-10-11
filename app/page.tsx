@@ -5,290 +5,271 @@ import { useState } from "react";
 
 const categories = [
   {
-    name: "Naat Sharif",
+    title: "Naat Sharif",
+    arabic: "نعت",
+    description: "Ishq-e-Rasool ﷺ ke pur-noor alfaaz",
     href: "/naat",
-    symbol: "نعت",
-    description: "Ishq-e-Rasool ﷺ",
+    number: "01",
   },
   {
-    name: "Salam",
+    title: "Salam",
+    arabic: "سلام",
+    description: "Adab aur aqeedat ka izhaar",
     href: "/salam",
-    symbol: "سلام",
-    description: "Adab aur aqeedat",
+    number: "02",
   },
   {
-    name: "Manqabat",
+    title: "Manqabat",
+    arabic: "منقبت",
+    description: "Auliya-e-Kiram ki shaan",
     href: "/manqabat",
-    symbol: "منقبت",
-    description: "Auliya ki shaan",
+    number: "03",
   },
   {
-    name: "Hamd",
+    title: "Hamd",
+    arabic: "حمد",
+    description: "Allah Ta'ala ki hamd-o-sana",
     href: "/hamd",
-    symbol: "حمد",
-    description: "Allah ki hamd",
+    number: "04",
   },
   {
-    name: "Biography",
+    title: "Seerat",
+    arabic: "سیرت",
+    description: "Islami tareekh aur paighaam",
     href: "/biography",
-    symbol: "سیرت",
-    description: "Islami tareekh",
+    number: "05",
   },
-];
-
-const popularSearches = [
-  "Naat Sharif",
-  "Ya Nabi Salam Alaika",
-  "Hamd",
-  "Manqabat",
 ];
 
 export default function HomePage() {
   const [search, setSearch] = useState("");
 
-  function handleSearch(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  function handleSearch(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
 
     const query = search.trim();
 
-    if (!query) return;
-
-    window.location.href = `/naat?search=${encodeURIComponent(query)}`;
-  }
-
-  function searchPopular(term: string) {
-    setSearch(term);
-    window.location.href = `/naat?search=${encodeURIComponent(term)}`;
+    if (query) {
+      window.location.href = `/naat?search=${encodeURIComponent(query)}`;
+    }
   }
 
   return (
-    <main className="home-page">
-      {/* BISMILLAH HERO */}
-
-      <section className="luxury-home">
-        <div className="luxury-frame">
-          <span className="ornament ornament-top" aria-hidden="true">
-            ✦
+    <main className="site-home">
+      <header className="site-header">
+        <Link href="/" className="brand">
+          <span className="brand-mark">۞</span>
+          <span>
+            <strong>Islamic Kalam</strong>
+            <small>WORDS OF FAITH</small>
           </span>
+        </Link>
 
-          <div className="bismillah-content">
-            <span
-              className="arabic-overline allah-name"
-              lang="ar"
-              dir="rtl"
-            >
-              الله
-            </span>
+        <nav className="header-nav">
+          <Link href="/naat">Kalaam</Link>
+          <a href="#quran">Quran</a>
+          <a href="#study">Study</a>
+        </nav>
+      </header>
 
-            <h1
-              className="bismillah-title"
-              lang="ar"
-              dir="rtl"
-            >
-              بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-            </h1>
-
-            <div className="gold-divider" aria-hidden="true">
-              <span />
-              <i>✦</i>
-              <span />
-            </div>
-          </div>
-
-          <span className="ornament ornament-bottom" aria-hidden="true">
-            ✦
-          </span>
+      <section className="hero-section">
+        <div className="hero-label">
+          <span className="status-dot" />
+          YOUR ISLAMIC SPACE
         </div>
-      </section>
 
-      {/* SEARCH SECTION */}
-
-      <section className="home-search-section">
-        <p className="home-tagline">
-          ISLAMIC KALAAM COLLECTION
+        <p className="hero-bismillah" lang="ar" dir="rtl">
+          بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
         </p>
 
-        <h2>
-          Find Your Favourite <span>Kalaam</span>
-        </h2>
+        <h1>
+          Read with faith.
+          <br />
+          <span>Live with purpose.</span>
+        </h1>
 
-        <form
-          className="home-search"
-          onSubmit={handleSearch}
-          role="search"
-        >
-          <span aria-hidden="true">⌕</span>
+        <p className="hero-description">
+          Quran ki roshni, Kalaam ki mithaas aur ilm ka safar —
+          sab ek hi jagah.
+        </p>
+
+        <form className="main-search" onSubmit={handleSearch}>
+          <span className="search-icon" aria-hidden="true">
+            ⌕
+          </span>
 
           <input
             type="search"
             value={search}
-            onChange={(event) => setSearch(event.target.value)}
-            placeholder="Search Naat, Salam, Manqabat..."
-            aria-label="Search Islamic Kalam"
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Naat, Hamd ya koi Kalaam search karein..."
+            aria-label="Search Islamic Kalaam"
           />
 
-          {search && (
-            <button
-              type="button"
-              className="home-search-clear"
-              onClick={() => setSearch("")}
-              aria-label="Clear search"
-            >
-              ×
-            </button>
-          )}
-
-          <button type="submit">
-            Search
-          </button>
+          <button type="submit">Search ↗</button>
         </form>
 
-        <p className="home-search-note">
-          Explore Naat, Salam, Manqabat, Hamd aur Islami Seerat
-        </p>
-
-        <div className="home-popular-searches">
-          <span>Popular:</span>
-
-          {popularSearches.map((term) => (
-            <button
-              key={term}
-              type="button"
-              onClick={() => searchPopular(term)}
-            >
-              {term}
-            </button>
-          ))}
+        <div className="hero-bottom">
+          <span>QURAN</span>
+          <i />
+          <span>KALAAM</span>
+          <i />
+          <span>ILM</span>
         </div>
       </section>
 
-      {/* CATEGORY SECTION */}
+      <section className="daily-ayah" id="quran">
+        <div className="ayah-topline">
+          <span className="section-kicker">A MOMENT OF REFLECTION</span>
+          <span className="ayah-reference">AL-QURAN · 94:5</span>
+        </div>
 
-      <section
-        className="home-categories"
-        id="categories"
-        aria-labelledby="categories-heading"
-      >
-        <div className="home-section-heading">
+        <div className="ayah-content">
+          <p className="ayah-arabic" lang="ar" dir="rtl">
+            فَإِنَّ مَعَ الْعُسْرِ يُسْرًا
+          </p>
+
+          <p className="ayah-translation">
+            “Toh beshak mushkil ke saath aasani hai.”
+          </p>
+
+          <p className="ayah-note">
+            Har mushkil ke saath Allah ki taraf se aasani ki umeed rakhein.
+          </p>
+
+          <a
+            href="https://quran.com/94/5"
+            target="_blank"
+            rel="noreferrer"
+            className="text-link"
+          >
+            Quran mein padhein <span>↗</span>
+          </a>
+        </div>
+      </section>
+
+      <section className="collection-section" id="kalaam">
+        <div className="section-heading">
           <div>
-            <p className="home-tagline">EXPLORE COLLECTION</p>
-
-            <h2 id="categories-heading">
-              Browse Categories
-            </h2>
+            <span className="section-kicker">THE COLLECTION</span>
+            <h2>Explore Kalaam<span>.</span></h2>
           </div>
 
-          <span
-            className="home-section-decoration"
-            aria-hidden="true"
-          >
-            ✦
-          </span>
+          <Link href="/naat" className="view-all">
+            View collection ↗
+          </Link>
         </div>
 
-        <div className="home-category-grid">
+        <div className="category-list">
           {categories.map((category) => (
             <Link
               href={category.href}
-              key={category.href}
-              className="home-category-card"
+              className="category-item"
+              key={category.title}
             >
-              <span
-                className="home-category-symbol"
-                lang="ar"
-                dir="rtl"
-                aria-hidden="true"
-              >
-                {category.symbol}
+              <span className="category-number">{category.number}</span>
+
+              <span className="category-arabic" lang="ar" dir="rtl">
+                {category.arabic}
               </span>
 
-              <span className="home-category-name">
-                {category.name}
+              <span className="category-info">
+                <strong>{category.title}</strong>
+                <small>{category.description}</small>
               </span>
 
-              <span className="home-category-description">
-                {category.description}
-              </span>
-
-              <span
-                className="home-category-arrow"
-                aria-hidden="true"
-              >
-                ↗
-              </span>
+              <span className="category-arrow">↗</span>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* FEATURED SECTION */}
-
-      <section className="home-feature">
-        <div
-          className="home-feature-symbol"
-          lang="ar"
-          dir="rtl"
-          aria-hidden="true"
-        >
-          ﷺ
-        </div>
-
-        <div className="home-feature-content">
-          <p className="home-tagline">
-            LOVE & DEVOTION
-          </p>
-
-          <h2>Darood-o-Salam</h2>
+      <section className="study-section" id="study">
+        <div className="study-copy">
+          <span className="section-kicker">GO BEYOND READING</span>
+          <h2>
+            Read it.
+            <br />
+            Understand it.
+            <br />
+            <span>Remember it.</span>
+          </h2>
 
           <p>
-            Adab, aqeedat aur mohabbat ka khoobsurat izhaar.
+            Quran padhein, ayat ke maani samjhein aur apne deeni
+            mutaale ko behtar tareeqe se organize karein.
           </p>
+
+          <a
+            href="https://quran.com"
+            target="_blank"
+            rel="noreferrer"
+            className="study-button"
+          >
+            Start your journey <span>↗</span>
+          </a>
         </div>
 
-        <Link
-          href="/salam"
-          className="home-feature-link"
-        >
-          Explore <span aria-hidden="true">→</span>
-        </Link>
+        <div className="study-cards">
+          <a
+            href="https://quran.com"
+            target="_blank"
+            rel="noreferrer"
+            className="study-card"
+          >
+            <span className="study-card-icon">۞</span>
+            <span className="study-card-label">01 / READ</span>
+            <strong>Read the Quran</strong>
+            <small>Tilawat, tarjuma aur mutaala</small>
+            <span className="study-card-arrow">↗</span>
+          </a>
+
+          <a
+            href="https://qirtaas.io"
+            target="_blank"
+            rel="noreferrer"
+            className="study-card"
+          >
+            <span className="study-card-icon">✎</span>
+            <span className="study-card-label">02 / ORGANIZE</span>
+            <strong>Islamic Notes</strong>
+            <small>Deeni ilm aur references ko organize karein</small>
+            <span className="study-card-arrow">↗</span>
+          </a>
+
+          <a
+            href="https://tazkiya.chat"
+            target="_blank"
+            rel="noreferrer"
+            className="study-card"
+          >
+            <span className="study-card-icon">☾</span>
+            <span className="study-card-label">03 / REFLECT</span>
+            <strong>Understand Ayat</strong>
+            <small>Quran ki taleemat ko aur gehraai se explore karein</small>
+            <span className="study-card-arrow">↗</span>
+          </a>
+        </div>
       </section>
 
-      {/* FOOTER */}
-
-      <footer className="home-footer">
-        <Link
-          href="/"
-          className="home-footer-brand"
-          aria-label="Islamic Kalam home"
-        >
-          <span aria-hidden="true">۞</span>{" "}
-          Islamic Kalam
+      <footer className="site-footer">
+        <Link href="/" className="footer-brand">
+          ۞ Islamic Kalam
         </Link>
 
-        <p className="home-footer-description">
-          Alfaaz mein aqeedat, dilon mein mohabbat.
-        </p>
+        <p>Ilm se roshni, alfaaz se aqeedat.</p>
 
-        <nav
-          className="home-footer-links"
-          aria-label="Footer navigation"
-        >
-          {categories.map((category) => (
-            <Link
-              href={category.href}
-              key={category.href}
-            >
-              {category.name}
-            </Link>
-          ))}
-        </nav>
+        <div className="footer-links">
+          <Link href="/naat">Kalaam</Link>
+          <a href="#quran">Quran</a>
+          <a href="#study">Study</a>
+        </div>
 
-        <div className="home-footer-divider" aria-hidden="true" />
-
-        <small>
-          © {new Date().getFullYear()} Islamic Kalam. All rights reserved.
-        </small>
+        <div className="footer-bottom">
+          <span>© {new Date().getFullYear()} Islamic Kalam</span>
+          <span>Made with care and purpose.</span>
+        </div>
       </footer>
     </main>
   );
-              }
+}
