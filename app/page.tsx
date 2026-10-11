@@ -4,270 +4,220 @@ import Link from "next/link";
 import { useState } from "react";
 
 const categories = [
-  {
-    title: "Naat Sharif",
-    arabic: "نعت",
-    description: "Ishq-e-Rasool ﷺ ke pur-noor alfaaz",
-    href: "/naat",
-    number: "01",
-  },
-  {
-    title: "Salam",
-    arabic: "سلام",
-    description: "Adab aur aqeedat ka izhaar",
-    href: "/salam",
-    number: "02",
-  },
-  {
-    title: "Manqabat",
-    arabic: "منقبت",
-    description: "Auliya-e-Kiram ki shaan",
-    href: "/manqabat",
-    number: "03",
-  },
-  {
-    title: "Hamd",
-    arabic: "حمد",
-    description: "Allah Ta'ala ki hamd-o-sana",
-    href: "/hamd",
-    number: "04",
-  },
-  {
-    title: "Seerat",
-    arabic: "سیرت",
-    description: "Islami tareekh aur paighaam",
-    href: "/biography",
-    number: "05",
-  },
+  { title: "Naat Sharif", arabic: "نعت", href: "/naat" },
+  { title: "Salam", arabic: "سلام", href: "/salam" },
+  { title: "Manqabat", arabic: "منقبت", href: "/manqabat" },
+  { title: "Hamd", arabic: "حمد", href: "/hamd" },
+  { title: "Seerat", arabic: "سیرت", href: "/biography" },
 ];
 
 export default function HomePage() {
-  const [search, setSearch] = useState("");
+  const [query, setQuery] = useState("");
 
   function handleSearch(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    const query = search.trim();
+    const value = query.trim();
+    if (!value) return;
 
-    if (query) {
-      window.location.href = `/naat?search=${encodeURIComponent(query)}`;
-    }
+    window.location.href = `/naat?search=${encodeURIComponent(value)}`;
   }
 
   return (
     <main className="site-home">
-      <header className="site-header">
-        <Link href="/" className="brand">
-          <span className="brand-mark">۞</span>
-          <span>
-            <strong>Islamic Kalam</strong>
-            <small>WORDS OF FAITH</small>
-          </span>
+      <header className="qh-header">
+        <Link href="/" className="qh-brand">
+          <span className="qh-logo">۞</span>
+          <span>Islamic Kalam</span>
         </Link>
 
-        <nav className="header-nav">
-          <Link href="/naat">Kalaam</Link>
+        <nav className="qh-nav">
           <a href="#quran">Quran</a>
-          <a href="#study">Study</a>
+          <a href="#kalaam">Kalaam</a>
+          <a href="#learn">Learn</a>
         </nav>
+
+        <Link href="/naat" className="qh-header-button">
+          Explore
+        </Link>
       </header>
 
-      <section className="hero-section">
-        <div className="hero-label">
-          <span className="status-dot" />
-          YOUR ISLAMIC SPACE
-        </div>
-
-        <p className="hero-bismillah" lang="ar" dir="rtl">
-          بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-        </p>
-
-        <h1>
-          Read with faith.
-          <br />
-          <span>Live with purpose.</span>
-        </h1>
-
-        <p className="hero-description">
-          Quran ki roshni, Kalaam ki mithaas aur ilm ka safar —
-          sab ek hi jagah.
-        </p>
-
-        <form className="main-search" onSubmit={handleSearch}>
-          <span className="search-icon" aria-hidden="true">
-            ⌕
+      <section className="qh-hero">
+        <div className="qh-hero-content">
+          <span className="qh-eyebrow">
+            YOUR SPACE FOR ISLAMIC KNOWLEDGE
           </span>
 
-          <input
-            type="search"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Naat, Hamd ya koi Kalaam search karein..."
-            aria-label="Search Islamic Kalaam"
-          />
+          <h1>
+            Find peace in
+            <br />
+            <span>every word.</span>
+          </h1>
 
-          <button type="submit">Search ↗</button>
-        </form>
+          <p>
+            Quran ki tilawat se lekar dil ko chhoo lene wale Kalaam tak,
+            apne deeni safar ko yahan se shuru karein.
+          </p>
 
-        <div className="hero-bottom">
-          <span>QURAN</span>
-          <i />
-          <span>KALAAM</span>
-          <i />
-          <span>ILM</span>
+          <form className="qh-search" onSubmit={handleSearch}>
+            <span aria-hidden="true">⌕</span>
+
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search Naat, Hamd, Salam..."
+              aria-label="Search Islamic Kalam"
+            />
+
+            <button type="submit" aria-label="Search">
+              →
+            </button>
+          </form>
+
+          <div className="qh-quick-links">
+            <span>Explore:</span>
+            <a href="#quran">Quran</a>
+            <a href="#kalaam">Naat Sharif</a>
+            <a href="#learn">Islamic Learning</a>
+          </div>
+        </div>
+
+        <div className="qh-hero-side" aria-hidden="true">
+          <div className="qh-orbit qh-orbit-one" />
+          <div className="qh-orbit qh-orbit-two" />
+
+          <div className="qh-center-symbol">
+            <span>۞</span>
+            <div className="qh-center-line" />
+            <small>اقْرَأْ</small>
+            <p>Read · Reflect · Remember</p>
+          </div>
         </div>
       </section>
 
-      <section className="daily-ayah" id="quran">
-        <div className="ayah-topline">
-          <span className="section-kicker">A MOMENT OF REFLECTION</span>
-          <span className="ayah-reference">AL-QURAN · 94:5</span>
-        </div>
-
-        <div className="ayah-content">
-          <p className="ayah-arabic" lang="ar" dir="rtl">
-            فَإِنَّ مَعَ الْعُسْرِ يُسْرًا
-          </p>
-
-          <p className="ayah-translation">
-            “Toh beshak mushkil ke saath aasani hai.”
-          </p>
-
-          <p className="ayah-note">
-            Har mushkil ke saath Allah ki taraf se aasani ki umeed rakhein.
-          </p>
-
-          <a
-            href="https://quran.com/94/5"
-            target="_blank"
-            rel="noreferrer"
-            className="text-link"
-          >
-            Quran mein padhein <span>↗</span>
-          </a>
-        </div>
-      </section>
-
-      <section className="collection-section" id="kalaam">
-        <div className="section-heading">
+      <section className="qh-section qh-quran" id="quran">
+        <div className="qh-section-heading">
           <div>
-            <span className="section-kicker">THE COLLECTION</span>
-            <h2>Explore Kalaam<span>.</span></h2>
+            <span className="qh-eyebrow">START WITH THE QURAN</span>
+            <h2>Reconnect with the Quran</h2>
           </div>
 
-          <Link href="/naat" className="view-all">
-            View collection ↗
+          <span className="qh-section-icon">۞</span>
+        </div>
+
+        <div className="qh-quran-panel">
+          <div className="qh-quran-copy">
+            <span className="qh-mini-label">THE HOLY QURAN</span>
+            <h3>Read. Understand. Reflect.</h3>
+            <p>
+              Quran padhein, tarjuma explore karein aur Allah ke paighaam
+              par gaur karein.
+            </p>
+
+            <a
+              className="qh-primary-button"
+              href="https://quran.com"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Open Quran <span>↗</span>
+            </a>
+          </div>
+
+          <div className="qh-quran-arabic" lang="ar" dir="rtl">
+            <span>بِسْمِ اللَّهِ</span>
+            <span>الرَّحْمَٰنِ</span>
+            <span>الرَّحِيمِ</span>
+          </div>
+        </div>
+      </section>
+
+      <section className="qh-section" id="kalaam">
+        <div className="qh-section-heading">
+          <div>
+            <span className="qh-eyebrow">EXPLORE THE COLLECTION</span>
+            <h2>Islamic Kalaam</h2>
+            <p className="qh-heading-description">
+              Alfaaz jo dil ko sukoon aur rooh ko taazgi dein.
+            </p>
+          </div>
+
+          <Link href="/naat" className="qh-view-all">
+            View all ↗
           </Link>
         </div>
 
-        <div className="category-list">
-          {categories.map((category) => (
+        <div className="qh-category-grid">
+          {categories.map((category, index) => (
             <Link
               href={category.href}
-              className="category-item"
-              key={category.title}
+              className="qh-category"
+              key={category.href}
             >
-              <span className="category-number">{category.number}</span>
+              <span className="qh-category-index">
+                {String(index + 1).padStart(2, "0")}
+              </span>
 
-              <span className="category-arabic" lang="ar" dir="rtl">
+              <span className="qh-category-arabic" lang="ar" dir="rtl">
                 {category.arabic}
               </span>
 
-              <span className="category-info">
-                <strong>{category.title}</strong>
-                <small>{category.description}</small>
-              </span>
+              <strong>{category.title}</strong>
 
-              <span className="category-arrow">↗</span>
+              <span className="qh-category-arrow">↗</span>
             </Link>
           ))}
         </div>
       </section>
 
-      <section className="study-section" id="study">
-        <div className="study-copy">
-          <span className="section-kicker">GO BEYOND READING</span>
-          <h2>
-            Read it.
-            <br />
-            Understand it.
-            <br />
-            <span>Remember it.</span>
-          </h2>
-
+      <section className="qh-learn-section" id="learn">
+        <div>
+          <span className="qh-eyebrow">KEEP LEARNING</span>
+          <h2>Knowledge begins with curiosity.</h2>
           <p>
-            Quran padhein, ayat ke maani samjhein aur apne deeni
-            mutaale ko behtar tareeqe se organize karein.
+            Quran, Islamic notes aur deeni sawalon ko explore karne ke
+            liye useful resources dekhein.
           </p>
-
-          <a
-            href="https://quran.com"
-            target="_blank"
-            rel="noreferrer"
-            className="study-button"
-          >
-            Start your journey <span>↗</span>
-          </a>
         </div>
 
-        <div className="study-cards">
-          <a
-            href="https://quran.com"
-            target="_blank"
-            rel="noreferrer"
-            className="study-card"
-          >
-            <span className="study-card-icon">۞</span>
-            <span className="study-card-label">01 / READ</span>
-            <strong>Read the Quran</strong>
-            <small>Tilawat, tarjuma aur mutaala</small>
-            <span className="study-card-arrow">↗</span>
+        <div className="qh-resource-links">
+          <a href="https://qirtaas.io" target="_blank" rel="noreferrer">
+            <span className="qh-resource-icon">✎</span>
+            <span>
+              <strong>Qirtaas</strong>
+              <small>Explore Islamic study tools</small>
+            </span>
+            <span className="qh-resource-arrow">↗</span>
           </a>
 
-          <a
-            href="https://qirtaas.io"
-            target="_blank"
-            rel="noreferrer"
-            className="study-card"
-          >
-            <span className="study-card-icon">✎</span>
-            <span className="study-card-label">02 / ORGANIZE</span>
-            <strong>Islamic Notes</strong>
-            <small>Deeni ilm aur references ko organize karein</small>
-            <span className="study-card-arrow">↗</span>
-          </a>
-
-          <a
-            href="https://tazkiya.chat"
-            target="_blank"
-            rel="noreferrer"
-            className="study-card"
-          >
-            <span className="study-card-icon">☾</span>
-            <span className="study-card-label">03 / REFLECT</span>
-            <strong>Understand Ayat</strong>
-            <small>Quran ki taleemat ko aur gehraai se explore karein</small>
-            <span className="study-card-arrow">↗</span>
+          <a href="https://tazkiya.chat" target="_blank" rel="noreferrer">
+            <span className="qh-resource-icon">☾</span>
+            <span>
+              <strong>Tazkiya</strong>
+              <small>Explore Quranic learning</small>
+            </span>
+            <span className="qh-resource-arrow">↗</span>
           </a>
         </div>
       </section>
 
-      <footer className="site-footer">
-        <Link href="/" className="footer-brand">
-          ۞ Islamic Kalam
+      <footer className="qh-footer">
+        <Link href="/" className="qh-brand">
+          <span className="qh-logo">۞</span>
+          <span>Islamic Kalam</span>
         </Link>
 
-        <p>Ilm se roshni, alfaaz se aqeedat.</p>
+        <p>Ilm se roshni. Kalaam se aqeedat.</p>
 
-        <div className="footer-links">
-          <Link href="/naat">Kalaam</Link>
-          <a href="#quran">Quran</a>
-          <a href="#study">Study</a>
-        </div>
-
-        <div className="footer-bottom">
+        <div className="qh-footer-bottom">
           <span>© {new Date().getFullYear()} Islamic Kalam</span>
-          <span>Made with care and purpose.</span>
+          <a href="#top" onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}>
+            Back to top ↑
+          </a>
         </div>
       </footer>
     </main>
