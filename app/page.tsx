@@ -1,80 +1,190 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { naats } from "@/data/naat";
-import { salams } from "@/data/salam";
-import { manqabats } from "@/data/manqabat";
-import { hamds } from "@/data/hamd";
 
-const allKalams = [
-  ...naats,
-  ...salams,
-  ...manqabats,
-  ...hamds,
+const collections = [
+  {
+    title: "Naat Sharif",
+    subtitle: "Nabi ﷺ ki mohabbat aur shaan mein",
+    symbol: "☾",
+    href: "/naat",
+    color: "teal",
+  },
+  {
+    title: "Manqabat",
+    subtitle: "Buzurgan-e-deen ki shaan mein",
+    symbol: "✧",
+    href: "/manqabat",
+    color: "green",
+  },
+  {
+    title: "Hamd",
+    subtitle: "Allah ki hamd-o-sana ke kalam",
+    symbol: "۞",
+    href: "/hamd",
+    color: "gold",
+  },
+  {
+    title: "Salam",
+    subtitle: "Adab aur aqeedat se bhare salam",
+    symbol: "❋",
+    href: "/salam",
+    color: "blue",
+  },
 ];
 
 export default function Home() {
   const [search, setSearch] = useState("");
 
-  const results = allKalams.filter((kalam) =>
-    `${kalam.title} ${kalam.poet} ${kalam.lyrics.roman}`
+  const filteredCollections = collections.filter((item) =>
+    `${item.title} ${item.subtitle}`
       .toLowerCase()
       .includes(search.toLowerCase())
   );
 
   return (
-    <main className="container">
+    <main className="home-page">
+      <header className="topbar">
+        <a className="brand" href="/">
+          <span className="brand-icon">۞</span>
+          <span>Islamic Kalam</span>
+        </a>
+
+        <nav className="main-nav">
+          <a className="nav-active" href="/">Home</a>
+          <a href="/naat">Naat</a>
+          <a href="/salam">Salam</a>
+          <a href="/manqabat">Manqabat</a>
+          <a href="/hamd">Hamd</a>
+          <a href="/biography">Biography</a>
+        </nav>
+
+        <a className="nav-button" href="/naat">
+          Explore Kalam <span>↗</span>
+        </a>
+      </header>
+
       <section className="hero">
-        <p className="bismillah">﷽</p>
+        <div className="hero-badge">
+          <span className="badge-dot" />
+          A HOME FOR BEAUTIFUL KALAM
+        </div>
 
-        <h1>Islamic Kalam</h1>
-
-        <p className="hero-subtitle">
-          A beautiful collection of Naat, Manqabat, Hamd and Salam
+        <p className="bismillah">
+          بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
         </p>
 
-        <input
-          className="search-input"
-          type="search"
-          placeholder="Search Kalam or poet..."
-          value={search}
-          onChange={(event) => setSearch(event.target.value)}
-          aria-label="Search Kalam or poet"
-        />
-      </section>
+        <h1>
+          Islamic <span>Kalam.</span>
+        </h1>
 
-      {search.trim() !== "" && (
-        <section className="kalam-section">
-          <h2>Search Results</h2>
+        <p className="hero-subtitle">
+          Words of love, faith and devotion.
+        </p>
 
-          {results.length === 0 ? (
-            <p>No Kalam found.</p>
-          ) : (
-            <div className="kalam-grid">
-              {results.map((kalam, index) => (
-                <article className="kalam-card" key={`${kalam.id}-${index}`}>
-                  <h3>{kalam.title}</h3>
-                  <p>{kalam.poet}</p>
-                  <p>{kalam.category}</p>
-                </article>
-              ))}
-            </div>
-          )}
-        </section>
-      )}
+        <div className="gold-divider">
+          <span />
+        </div>
 
-      <section className="kalam-section">
-        <h2>Explore Categories</h2>
+        <p className="hero-description">
+          Discover beautiful Naat, Salam, Manqabat and Hamd —
+          <br className="desktop-break" />
+          a peaceful collection of words that touch the heart.
+        </p>
 
-        <div className="category-grid">
-          <Link href="/naat" className="category-card">Naat</Link>
-          <Link href="/salam" className="category-card">Salam</Link>
-          <Link href="/manqabat" className="category-card">Manqabat</Link>
-          <Link href="/hamd" className="category-card">Hamd</Link>
-          <Link href="/biography" className="category-card">Biography</Link>
+        <a className="hero-button" href="#collections">
+          Begin Your Journey <span>→</span>
+        </a>
+
+        <form
+          className="search-box"
+          onSubmit={(event) => {
+            event.preventDefault();
+            document
+              .getElementById("collections")
+              ?.scrollIntoView({ behavior: "smooth" });
+          }}
+        >
+          <span className="search-icon">⌕</span>
+          <input
+            type="search"
+            placeholder="Search Naat, Kalam or category..."
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+            aria-label="Search Kalam"
+          />
+          <button type="submit" aria-label="Search">
+            →
+          </button>
+        </form>
+
+        <div className="hero-bottom">
+          <span>✦</span> Adab <i /> Love <i /> Spirituality <span>✦</span>
         </div>
       </section>
+
+      <section className="collections-section" id="collections">
+        <div className="section-heading">
+          <div>
+            <p className="section-eyebrow">EXPLORE OUR LIBRARY</p>
+            <h2>Collections <span>.</span></h2>
+            <p className="section-description">
+              Find the kalam your heart is looking for.
+            </p>
+          </div>
+
+          <a href="/naat" className="view-all">
+            View library <span>↗</span>
+          </a>
+        </div>
+
+        <div className="collections-grid">
+          {filteredCollections.map((item) => (
+            <a
+              className={`collection-card ${item.color}`}
+              href={item.href}
+              key={item.title}
+            >
+              <div className="collection-top">
+                <span className="collection-symbol">{item.symbol}</span>
+                <span className="collection-arrow">↗</span>
+              </div>
+
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.subtitle}</p>
+              </div>
+
+              <span className="collection-link">
+                Explore collection <span>→</span>
+              </span>
+            </a>
+          ))}
+        </div>
+
+        {filteredCollections.length === 0 && (
+          <div className="no-results">
+            <span>⌕</span>
+            <h3>No collection found</h3>
+            <p>Try searching for Naat, Salam, Manqabat or Hamd.</p>
+          </div>
+        )}
+      </section>
+
+      <footer className="home-footer">
+        <a className="footer-brand" href="/">
+          <span>۞</span> Islamic Kalam
+        </a>
+        <p>Created with love, respect and devotion.</p>
+        <div className="footer-links">
+          <a href="/naat">Naat</a>
+          <a href="/salam">Salam</a>
+          <a href="/manqabat">Manqabat</a>
+          <a href="/hamd">Hamd</a>
+          <a href="/biography">Biography</a>
+        </div>
+        <small>© {new Date().getFullYear()} Islamic Kalam</small>
+      </footer>
     </main>
   );
 }
