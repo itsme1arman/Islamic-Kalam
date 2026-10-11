@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Islamic Kalam | नात, मनक़बत और हम्द</title>
+
+  <style>
+    :root {
+      --bg: #f8f6ef;
+      --card: #ffffff;
+      --text: #183b32;
+      --muted: #64776e;
+      --green: #08785c;
+      --gold: #c49a45;
+    }
+
+    body.dark {
+      --bg: #101d19;
+      --card: #1b2b25;
+      --text: #f4f0e4;
+      --muted: #b5c4ba;
+      --green: #36b58b;
+      --gold: #e3bd68;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      transition: 0.3s;
+    }
+
+    header {
+      padding: 18px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--gold);
+      gap: 12px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: var(--green);
+    }
+
+    button {
+      cursor: pointer;
+      border: 1px solid var(--gold);
+      border-radius: 10px;
+      padding: 10px 14px;
+      background: var(--card);
+      color: var(--text);
+    }
+
+    .hero {
+      text-align: center;
+      padding: 65px 20px 45px;
+      background: linear-gradient(135deg, var(--bg), var(--card));
+    }
+
+    .hero .arabic {
+      font-size: 34px;
+      color: var(--gold);
+      direction: rtl;
+    }
+
+    .hero h1 {
+      font-size: clamp(30px, 6vw, 48px);
+      margin: 18px 0 12px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .search {
+      display: flex;
+      max-width: 600px;
+      margin: 28px auto 0;
+      gap: 8px;
+    }
+
+    input {
+      min-width: 0;
+      flex: 1;
+      padding: 14px;
+      border: 1px solid var(--gold);
+      border-radius: 10px;
+      background: var(--card);
+      color: var(--text);
+      font-size: 16px;
+    }
+
+    .primary {
+      background: var(--green);
+      color: white;
+      border: none;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: auto;
+      padding: 30px 20px 60px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin: 25px 0;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 14px;
+    }
+
+    .category, .kalam-card {
+      background: var(--card);
+      border: 1px solid rgba(196, 154, 69, 0.45);
+      border-radius: 16px;
+      padding: 22px 16px;
+      text-align: center;
+    }
+
+    .category {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .category span {
+      display: block;
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .kalam-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .kalam-card {
+      text-align: left;
+    }
+
+    .kalam-card h3 {
+      margin-top: 0;
+    }
+
+    .kalam-card p {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .tag {
+      color: var(--green);
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .empty {
+      text-align: center;
+      color: var(--muted);
+      padding: 20px;
+      display: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px 15px;
+      border-top: 1px solid var(--gold);
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 15px;
+      }
+
+      .logo {
+        font-size: 18px;
+      }
+
+      .search {
+        flex-direction: column;
+      }
+
+      .hero {
+        padding-top: 45px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">☪ Islamic Kalam</div>
+    <button onclick="toggleTheme()" id="themeButton">🌙 Dark Mode</button>
+  </header>
+
+  <section class="hero">
+    <div class="arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+
+    <h1>Islamic Kalam</h1>
+
+    <p>
+      नात • मनक़बत • हम्द<br>
+      Naat • Manqabat • Hamd<br>
+      نعت • منقبت • حمد
+    </p>
+
+    <p>रूह को सुकून देने वाले कलाम, एक ही जगह।</p>
+
+    <div class="search">
+      <input
+        type="search"
+        id="searchInput"
+        placeholder="कलाम या शायर का नाम खोजें..."
+        oninput="searchKalam()"
+      >
+      <button class="primary" onclick="searchKalam()">खोजें</button>
+    </div>
+  </section>
+
+  <main>
+    <h2 class="section-title">कलाम की कैटेगरी</h2>
+
+    <div class="categories">
+      <div class="category" onclick="filterCategory('Naat')">
+        <span>🌙</span>नात शरीफ़
+      </div>
+
+      <div class="category" onclick="filterCategory('Manqabat')">
+        <span>✨</span>मनक़बत
+      </div>
+
+      <div class="category" onclick="filterCategory('Hamd')">
+        <span>🤲</span>हम्द
+      </div>
+
+      <div class="category" onclick="filterCategory('All')">
+        <span>📚</span>सभी कलाम
+      </div>
+    </div>
+
+    <h2 class="section-title">चुनिंदा कलाम</h2>
+
+    <div class="kalam-grid" id="kalamGrid">
+
+      <article class="kalam-card" data-category="Naat">
+        <div class="tag">NAAT • नात</div>
+        <h3>मेरे आका ﷺ</h3>
+        <p>नबी-ए-करीम ﷺ की शान में एक खूबसूरत नात।</p>
+        <button onclick="showMessage()">कलाम पढ़ें →</button>
+      </article>
+
+      <article class="kalam-card" data-category="Manqabat">
+        <div class="tag">MANQABAT • मनक़बत</div>
+        <h3>शान-ए-औलिया</h3>
+        <p>औलिया-ए-किराम की शान में मनक़बत।</p>
+        <button onclick="showMessage()">कलाम पढ़ें →</button>
+      </article>
+
+      <article class="kalam-card" data-category="Hamd">
+        <div class="tag">HAMD • हम्द</div>
+        <h3>तेरी हम्द या रब</h3>
+        <p>अल्लाह तआला की तारीफ़ और हम्द।</p>
+        <button onclick="showMessage()">कलाम पढ़ें →</button>
+      </article>
+
+    </div>
+
+    <p class="empty" id="emptyMessage">कोई कलाम नहीं मिला। दूसरा नाम खोजें।</p>
+
+    <p style="text-align:center; margin-top:30px; color:var(--muted)">
+      यह शुरुआती डिज़ाइन है। आगे इसमें असली कलाम, यूज़र अकाउंट,
+      पसंदीदा कलाम और एडमिन पैनल जोड़े जाएँगे।
+    </p>
+  </main>
+
+  <footer>
+    ☪ Islamic Kalam<br>
+    अदब • मोहब्बत • रूहानियत<br>
+    सभी अधिकार सुरक्षित
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle("dark");
+
+      const isDark = document.body.classList.contains("dark");
+
+      document.getElementById("themeButton").textContent =
+        isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+
+      localStorage.setItem("islamicKalamTheme", isDark ? "dark" : "light");
+    }
+
+    if (localStorage.getItem("islamicKalamTheme") === "dark") {
+      document.body.classList.add("dark");
+      document.getElementById("themeButton").textContent = "☀️ Light Mode";
+    }
+
+    function searchKalam() {
+      const query = document.getElementById("searchInput").value
+        .toLowerCase().trim();
+
+      const cards = document.querySelectorAll(".kalam-card");
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const matches = card.textContent.toLowerCase().includes(query);
+        card.style.display = matches ? "" : "none";
+
+        if (matches) visibleCount++;
+      });
+
+      document.getElementById("emptyMessage").style.display =
+        visibleCount === 0 ? "block" : "none";
+    }
+
+    function filterCategory(category) {
+      document.getElementById("searchInput").value = "";
+
+      const cards = document.querySelectorAll(".kalam-card");
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const matches =
+          category === "All" || card.dataset.category === category;
+
+        card.style.display = matches ? "" : "none";
+
+        if (matches) visibleCount++;
+      });
+
+      document.getElementById("emptyMessage").style.display =
+        visibleCount === 0 ? "block" : "none";
+
+      document.getElementById("kalamGrid").scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+
+    function showMessage() {
+      alert("असली कलाम और पूरा पढ़ने वाला पेज हम अगले चरण में जोड़ेंगे।");
+    }
+  </script>
+
+</body>
+</html>
