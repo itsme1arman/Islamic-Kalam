@@ -3,13 +3,13 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = {
-  title: "Islamic Kalam",
+  title: "Islamic Kalam | Naat, Salam, Manqabat & Hamd",
   description:
-    "Naat, Manqabat, Hamd aur Islamic biographies."
+    "Read Islamic Kalam in Roman Urdu, Urdu and Hindi, including Naat, Salam, Manqabat, Hamd and Islamic biographies.",
 };
 
 export default function RootLayout({
-  children
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
@@ -18,8 +18,10 @@ export default function RootLayout({
       <body>
         <Navbar />
         {children}
-        <footer className="footer">
-          Islamic Kalam · Adab, Ishq aur Roohaniyat
+
+        <footer>
+          <p>Islamic Kalam</p>
+          <p>Naat • Salam • Manqabat • Hamd</p>
         </footer>
       </body>
     </html>
