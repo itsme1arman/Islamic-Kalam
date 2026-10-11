@@ -23,9 +23,9 @@ export default function HomePage() {
           </div>
 
           <div className="bismillah-content">
-            <span className="arabic-overline" aria-hidden="true">
-              ۞
-            </span>
+            <span className="arabic-overline allah-name" lang="ar" dir="rtl">
+  الله
+</span>
 
             <h1 lang="ar" dir="rtl" className="bismillah-title">
               بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
