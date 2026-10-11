@@ -1,52 +1,21 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 
 const categories = [
-  {
-    title: "Naat Sharif",
-    subtitle: "Ishq-e-Rasool ﷺ",
-    description: "Aaqa ﷺ ki shaan mein khoobsurat kalaam",
-    href: "/naat",
-    number: "01",
-    symbol: "۞",
-  },
-  {
-    title: "Salam",
-    subtitle: "Adab-o-Mohabbat",
-    description: "Bargah-e-Risalat ﷺ mein nazrana-e-aqeedat",
-    href: "/salam",
-    number: "02",
-    symbol: "۞",
-  },
-  {
-    title: "Manqabat",
-    subtitle: "Madaah-e-Auliya",
-    description: "Buzurgan-e-Deen ki shaan mein kalaam",
-    href: "/manqabat",
-    number: "03",
-    symbol: "۞",
-  },
-  {
-    title: "Hamd Sharif",
-    subtitle: "Hamd-e-Baari Ta'ala",
-    description: "Allah Ta'ala ki hamd-o-sana",
-    href: "/hamd",
-    number: "04",
-    symbol: "۞",
-  },
-  {
-    title: "Islami Biography",
-    subtitle: "Seerat-o-Tareekh",
-    description: "Islami shakhsiyat aur unki zindagi",
-    href: "/biography",
-    number: "05",
-    symbol: "۞",
-  },
+  { name: "Naat Sharif", href: "/naat", symbol: "نعت" },
+  { name: "Salam", href: "/salam", symbol: "سلام" },
+  { name: "Manqabat", href: "/manqabat", symbol: "منقبت" },
+  { name: "Hamd", href: "/hamd", symbol: "حمد" },
+  { name: "Biography", href: "/biography", symbol: "سیرت" },
 ];
 
 export default function HomePage() {
+  const [search, setSearch] = useState("");
+
   return (
     <main className="home-page">
-      {/* BISMILLAH — ORIGINAL DESIGN PRESERVED */}
       <section className="luxury-home">
         <div className="luxury-frame">
           <div className="ornament ornament-top" aria-hidden="true">
@@ -75,36 +44,50 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* WELCOME */}
-      <section className="home-welcome">
-        <span className="home-eyebrow">A WORLD OF ISLAMIC KALAAM</span>
+      <section className="home-search-section">
+        <p className="home-tagline">ISLAMIC KALAAM COLLECTION</p>
 
         <h2>
-          Alfaaz-e-Aqeedat,
-          <br />
-          <span>Ehsaas-e-Mohabbat.</span>
+          Find Your Favourite <span>Kalaam</span>
         </h2>
 
-        <p>
-          Naat, Salam, Manqabat aur Hamd ka ek khoobsurat majmua.
-          Apne pasandeeda kalaam padhein aur roohani sukoon paayein.
-        </p>
+        <form
+          className="home-search"
+          onSubmit={(event) => {
+            event.preventDefault();
+            if (search.trim()) {
+              window.location.href =
+                `/naat?search=${encodeURIComponent(search.trim())}`;
+            }
+          }}
+        >
+          <span aria-hidden="true">⌕</span>
 
-        <a className="home-primary-button" href="#categories">
-          Explore Kalaam <span aria-hidden="true">↗</span>
-        </a>
+          <input
+            type="search"
+            placeholder="Search Naat, Salam, Manqabat..."
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+            aria-label="Search Islamic Kalaam"
+          />
+
+          <button type="submit">Search</button>
+        </form>
+
+        <p className="home-search-note">
+          Explore Naat, Salam, Manqabat, Hamd aur Islami Seerat
+        </p>
       </section>
 
-      {/* CATEGORIES */}
       <section className="home-categories" id="categories">
         <div className="home-section-heading">
           <div>
-            <span className="home-eyebrow">EXPLORE OUR COLLECTION</span>
-            <h2>Discover Kalaam</h2>
+            <span className="home-tagline">EXPLORE</span>
+            <h2>Browse Categories</h2>
           </div>
 
-          <span className="home-heading-mark" aria-hidden="true">
-            ✳
+          <span className="home-section-decoration" aria-hidden="true">
+            ✦
           </span>
         </div>
 
@@ -112,109 +95,55 @@ export default function HomePage() {
           {categories.map((category) => (
             <Link
               href={category.href}
-              className="home-category-card"
               key={category.href}
+              className="home-category-card"
             >
-              <div className="home-card-top">
-                <span className="home-card-number">
-                  {category.number}
-                </span>
-                <span className="home-card-symbol" aria-hidden="true">
-                  {category.symbol}
-                </span>
-              </div>
+              <span className="home-category-symbol" aria-hidden="true">
+                {category.symbol}
+              </span>
 
-              <div className="home-card-content">
-                <span className="home-card-subtitle">
-                  {category.subtitle}
-                </span>
-                <h3>{category.title}</h3>
-                <p>{category.description}</p>
-              </div>
+              <span className="home-category-name">{category.name}</span>
 
-              <div className="home-card-bottom">
-                <span>Explore collection</span>
-                <span className="home-card-arrow" aria-hidden="true">
-                  ↗
-                </span>
-              </div>
+              <span className="home-category-arrow" aria-hidden="true">
+                ↗
+              </span>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* FEATURED QUOTE */}
-      <section className="home-quote">
-        <span className="home-quote-ornament" aria-hidden="true">
-          ۞
+      <section className="home-feature">
+        <span className="home-feature-symbol" aria-hidden="true">
+          ﷺ
         </span>
 
-        <p lang="ar" dir="rtl" className="home-quote-arabic">
-          صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ
-        </p>
+        <div>
+          <p className="home-tagline">LOVE & DEVOTION</p>
+          <h2>Darood-o-Salam</h2>
+          <p>Adab, aqeedat aur mohabbat ka khoobsurat izhaar.</p>
+        </div>
 
-        <h2>Darood-o-Salam</h2>
-
-        <p className="home-quote-description">
-          Zikr, adab aur mohabbat se apne dil ko roshan karein.
-        </p>
-
-        <Link href="/salam" className="home-text-link">
-          Explore Salam <span aria-hidden="true">→</span>
+        <Link href="/salam" className="home-feature-link">
+          Explore →
         </Link>
       </section>
 
-      {/* BIOGRAPHY */}
-      <section className="home-biography">
-        <div className="home-bio-emblem" aria-hidden="true">
-          <span>۞</span>
-          <i>عِلْم</i>
-          <span>۞</span>
-        </div>
-
-        <div className="home-bio-content">
-          <span className="home-eyebrow">KNOW THE LEGACY</span>
-          <h2>
-            Stories that
-            <br />
-            <span>inspire generations.</span>
-          </h2>
-          <p>
-            Islami buzurgon, ulama aur mashhoor shakhsiyat ki zindagi
-            aur unke ilm-o-amal ke baare mein padhein.
-          </p>
-
-          <Link href="/biography" className="home-text-link">
-            Explore biographies <span aria-hidden="true">→</span>
-          </Link>
-        </div>
-      </section>
-
-      {/* FOOTER */}
       <footer className="home-footer">
-        <div className="home-footer-brand">
-          <span className="home-footer-symbol" aria-hidden="true">
-            ۞
-          </span>
-          <span>ISLAMIC KALAAM</span>
-        </div>
-
-        <p>
-          Alfaaz mein aqeedat, dilon mein mohabbat.
-        </p>
+        <Link href="/" className="home-footer-brand">
+          ۞ Islamic Kalam
+        </Link>
 
         <div className="home-footer-links">
-          <Link href="/naat">Naat</Link>
-          <Link href="/salam">Salam</Link>
-          <Link href="/manqabat">Manqabat</Link>
-          <Link href="/hamd">Hamd</Link>
-          <Link href="/biography">Biography</Link>
+          {categories.map((category) => (
+            <Link href={category.href} key={category.href}>
+              {category.name}
+            </Link>
+          ))}
         </div>
 
-        <div className="home-footer-bottom">
-          <span>© {new Date().getFullYear()} Islamic Kalaam</span>
-          <span>Made with respect & devotion</span>
-        </div>
+        <p>Alfaaz mein aqeedat, dilon mein mohabbat.</p>
+
+        <small>© {new Date().getFullYear()} Islamic Kalam</small>
       </footer>
     </main>
   );
