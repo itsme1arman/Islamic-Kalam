@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import styles from "./home.module.css";
 
 const categories = [
   { title: "Naat Sharif", arabic: "نعت", href: "/naat" },
@@ -26,33 +25,33 @@ export default function HomePage() {
   }
 
   return (
-    <main className={styles.home}>
-      <header className={styles.header}>
-        <Link href="/" className={styles.brand}>
-          <span className={styles.brandIcon}>۞</span>
+    <main className="home">
+      <header className="header">
+        <Link href="/" className="brand">
+          <span className="brandIcon">۞</span>
           <span>Islamic Kalam</span>
         </Link>
 
-        <nav className={styles.nav}>
+        <nav className="nav">
           <a href="#quran">Quran</a>
           <a href="#kalaam">Kalaam</a>
           <a href="#resources">Learn</a>
         </nav>
       </header>
 
-      <section className={styles.welcome}>
-        <p className={styles.bismillah} lang="ar" dir="rtl">
+      <section className="welcome">
+        <p className="bismillah" lang="ar" dir="rtl">
           بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
         </p>
 
         <h1>Your journey with the Quran and Kalaam</h1>
 
-        <p className={styles.subtitle}>
+        <p className="subtitle">
           Quran padhein, pasandeeda Kalaam dhoondein aur deeni ilm explore
           karein.
         </p>
 
-        <form className={styles.search} onSubmit={search}>
+        <form className="search" onSubmit={search}>
           <span aria-hidden="true">⌕</span>
           <input
             value={query}
@@ -63,7 +62,7 @@ export default function HomePage() {
           <button type="submit">Search</button>
         </form>
 
-        <div className={styles.quickLinks}>
+        <div className="quickLinks">
           <span>Popular:</span>
           <a href="#quran">Quran</a>
           <a href="#kalaam">Naat Sharif</a>
@@ -71,25 +70,25 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className={styles.verse} id="quran">
-        <div className={styles.sectionHeader}>
+      <section className="verse" id="quran">
+        <div className="sectionHeader">
           <div>
-            <span className={styles.label}>PAUSE AND REFLECT</span>
+            <span className="label">PAUSE AND REFLECT</span>
             <h2>Verse of the Day</h2>
           </div>
-          <span className={styles.verseNumber}>94:5</span>
+          <span className="verseNumber">94:5</span>
         </div>
 
-        <p className={styles.arabic} lang="ar" dir="rtl">
+        <p className="arabic" lang="ar" dir="rtl">
           فَإِنَّ مَعَ الْعُسْرِ يُسْرًا
         </p>
 
-        <p className={styles.translation}>
+        <p className="translation">
           “Beshak mushkil ke saath aasani hai.”
         </p>
 
         <a
-          className={styles.textLink}
+          className="textLink"
           href="https://quran.com/94/5"
           target="_blank"
           rel="noreferrer"
@@ -98,37 +97,37 @@ export default function HomePage() {
         </a>
       </section>
 
-      <section className={styles.collection} id="kalaam">
-        <div className={styles.sectionHeader}>
+      <section className="collection" id="kalaam">
+        <div className="sectionHeader">
           <div>
-            <span className={styles.label}>DISCOVER</span>
+            <span className="label">DISCOVER</span>
             <h2>Explore Kalaam</h2>
           </div>
-          <Link href="/naat" className={styles.textLink}>
+          <Link href="/naat" className="textLink">
             View all ↗
           </Link>
         </div>
 
-        <div className={styles.categoryGrid}>
+        <div className="categoryGrid">
           {categories.map((category) => (
             <Link
               href={category.href}
-              className={styles.category}
+              className="category"
               key={category.href}
             >
-              <span className={styles.categoryArabic} lang="ar" dir="rtl">
+              <span className="categoryArabic" lang="ar" dir="rtl">
                 {category.arabic}
               </span>
               <span>{category.title}</span>
-              <span className={styles.arrow}>↗</span>
+              <span className="arrow">↗</span>
             </Link>
           ))}
         </div>
       </section>
 
-      <section className={styles.resources} id="resources">
+      <section className="resources" id="resources">
         <div>
-          <span className={styles.label}>CONTINUE LEARNING</span>
+          <span className="label">CONTINUE LEARNING</span>
           <h2>Explore more Islamic resources</h2>
           <p>
             Quran ki tilawat, deeni study aur apne ilm ko badhane ke liye
@@ -136,7 +135,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className={styles.resourceList}>
+        <div className="resourceList">
           <a href="https://quran.com" target="_blank" rel="noreferrer">
             <span>Quran.com</span>
             <span>Read the Quran ↗</span>
@@ -154,9 +153,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <footer className={styles.footer}>
-        <Link href="/" className={styles.brand}>
-          <span className={styles.brandIcon}>۞</span>
+      <footer className="footer">
+        <Link href="/" className="brand">
+          <span className="brandIcon">۞</span>
           <span>Islamic Kalam</span>
         </Link>
 
