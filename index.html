@@ -80,7 +80,7 @@
     .menu-toggle { display: none; }
     .hero {
       position: relative; overflow: hidden; text-align: center;
-      padding: clamp(54px, 9vw, 96px) 20px 64px;
+      padding: clamp(36px, 6vw, 64px) 20px 44px;
       background: radial-gradient(ellipse at 50% 0%, var(--hero-glow), transparent 65%), var(--bg);
     }
     .hero:before, .hero:after {
@@ -89,9 +89,9 @@
     .hero:before { left: 7%; top: 17%; }
     .hero:after { right: 8%; top: 28%; font-size: 50px; }
     .eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 7px 13px; border: 1px solid var(--border); border-radius: 999px; color: var(--teal); background: var(--surface); font-size: 12px; font-weight: 800; letter-spacing: 1.4px; text-transform: uppercase; }
-    .bismillah { margin: 27px 0 7px; color: var(--teal); font-family: "Noto Naskh Arabic", "Traditional Arabic", serif; font-size: clamp(31px, 6vw, 52px); line-height: 1.7; direction: rtl; }
+    .bismillah { margin: 0 0 8px; color: var(--teal); font-family: "Noto Naskh Arabic", "Traditional Arabic", serif; font-size: clamp(31px, 6vw, 52px); line-height: 1.7; direction: rtl; }
     h1 { margin: 4px 0 10px; font-size: clamp(37px, 7vw, 68px); line-height: 1.1; letter-spacing: -2px; }
-    .hero-subtitle { margin: 0; color: var(--muted); font-size: clamp(17px, 2.7vw, 23px); }
+    .hero-subtitle { margin: 0; color: var(--text); font-size: clamp(18px, 2.8vw, 24px); font-weight: 600; }
     .gold-line { width: 78px; height: 4px; margin: 25px auto; border-radius: 99px; background: var(--gold); }
     .hero-copy { max-width: 600px; margin: 0 auto; color: var(--muted); font-size: 16px; }
     .hero-actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
@@ -99,10 +99,12 @@
     .primary { color: #fff; background: var(--teal); box-shadow: 0 9px 22px rgba(20,125,120,.18); }
     .secondary { color: var(--teal); background: var(--surface); }
     .secondary:hover { background: var(--surface-2); }
-    .search-panel { max-width: 760px; margin: 43px auto 0; padding: 8px; display: flex; gap: 8px; border: 1px solid var(--border); border-radius: 17px; background: var(--surface); box-shadow: var(--shadow); }
-    .search-panel input { flex: 1; min-width: 0; padding: 12px 14px; border: 0; outline: 0; color: var(--text); background: transparent; }
+    .search-panel { max-width: 640px; width: 100%; margin: 30px auto 0; padding: 7px 8px 7px 22px; display: flex; align-items: center; gap: 12px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); box-shadow: 0 5px 22px rgba(22,63,60,.10); transition: box-shadow .2s, border-color .2s; }
+    .search-panel:focus-within { border-color: var(--teal); box-shadow: 0 6px 26px rgba(20,125,120,.16); }
+    .search-panel input { flex: 1; min-width: 0; min-height: 48px; padding: 10px 0; border: 0; outline: 0; color: var(--text); background: transparent; font-size: 16px; }
     .search-panel input::placeholder { color: var(--muted); }
-    .search-panel .primary { white-space: nowrap; }
+    .search-panel .primary { flex: 0 0 46px; width: 46px; height: 46px; padding: 0; display: grid; place-items: center; border-radius: 50%; white-space: nowrap; font-size: 0; box-shadow: none; }
+    .search-panel .primary::before { content: "⌕"; font-size: 29px; line-height: 1; }
     .container { max-width: 1160px; margin: auto; padding: 28px 22px 68px; }
     .section-head { display: flex; justify-content: space-between; align-items: end; gap: 15px; margin: 12px 0 22px; }
     .section-head h2 { margin: 0; font-size: clamp(24px, 4vw, 31px); letter-spacing: -.7px; }
@@ -157,12 +159,11 @@
       .tools { gap: 6px; }
       .icon-btn { min-height: 38px; padding: 7px 9px; font-size: 13px; }
       .signin { min-height: 38px; padding: 7px 11px; font-size: 13px; }
-      .hero { padding: 43px 17px 43px; }
-      .hero:before, .hero:after { opacity: .17; }
-      h1 { letter-spacing: -1.2px; }
-      .search-panel { flex-direction: column; margin-top: 28px; padding: 7px; }
-      .search-panel input { min-height: 48px; }
-      .search-panel .primary { width: 100%; }
+      .hero { padding: 34px 17px 38px; }
+      .hero:before, .hero:after { opacity: .12; }
+      .search-panel { margin-top: 24px; padding: 5px 6px 5px 17px; }
+      .search-panel input { min-height: 44px; font-size: 15px; }
+      .search-panel .primary { flex: 0 0 42px; width: 42px; height: 42px; }
       .container { padding: 24px 15px 48px; }
       .collection-grid, .kalam-grid { grid-template-columns: 1fr; }
       .collection { min-height: 175px; }
@@ -198,19 +199,11 @@
   </header>
 
   <section class="hero">
-    <span class="eyebrow" data-i18n="eyebrow">A HOME FOR BEAUTIFUL KALAM</span>
-    <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-    <h1>Islamic Kalam</h1>
-    <p class="hero-subtitle" data-i18n="heroSubtitle">A beautiful collection of Naat, Manqabat &amp; Hamd</p>
-    <div class="gold-line"></div>
-    <p class="hero-copy" data-i18n="heroCopy">Words of devotion, love and reverence — thoughtfully gathered in one peaceful place.</p>
-    <div class="hero-actions">
-      <a class="primary" href="#collections" data-i18n="explore">Explore Collections&nbsp; →</a>
-      <a class="secondary" href="#featured" data-i18n="discover">Discover Kalam</a>
-    </div>
-    <form class="search-panel" id="searchForm">
-      <input id="searchInput" type="search" data-i18n-placeholder="searchPlaceholder" placeholder="Search by kalam, poet or words..." autocomplete="off">
-      <button class="primary" type="submit" data-i18n="search">Search&nbsp; ↗</button>
+    <div class="bismillah">بِسْمِ اللهِ الرَّحْمُنِ الرَّحِيمِ</div>
+    <p class="hero-subtitle" data-i18n="heroSubtitle">A beautiful collection of Naat, Manqabat</p>
+    <form class="search-panel" id="searchForm" role="search">
+      <input id="searchInput" type="search" data-i18n-placeholder="searchPlaceholder" placeholder="Search Kalam..." aria-label="Search Kalam" autocomplete="off">
+      <button class="primary" type="submit" aria-label="Search" data-i18n="search">Search</button>
     </form>
   </section>
 
@@ -294,9 +287,9 @@
     const translations = {
       en: {
         home:"Home", collections:"Collections", featured:"Featured Kalam", artists:"Artists", language:"Language", signIn:"Sign In",
-        eyebrow:"A HOME FOR BEAUTIFUL KALAM", heroSubtitle:"A beautiful collection of Naat, Manqabat & Hamd",
+        eyebrow:"A HOME FOR BEAUTIFUL KALAM", heroSubtitle:"A beautiful collection of Naat, Manqabat",
         heroCopy:"Words of devotion, love and reverence — thoughtfully gathered in one peaceful place.",
-        explore:"Explore Collections&nbsp; →", discover:"Discover Kalam", searchPlaceholder:"Search by kalam, poet or words...", search:"Search&nbsp; ↗",
+        explore:"Explore Collections&nbsp; →", discover:"Discover Kalam", searchPlaceholder:"Search Kalam...", search:"Search&nbsp; ↗",
         collectionsTitle:"Explore Collections", collectionsSub:"Find the words that speak to your heart.", viewAll:"View all →",
         naat:"Naat Sharif", manqabat:"Manqabat", hamd:"Hamd", naatDesc:"Expressions of love and praise for the Beloved Prophet ﷺ.",
         manqabatDesc:"Poetry honouring the revered people of faith.", hamdDesc:"Words of gratitude, praise and remembrance of Allah.",
@@ -310,9 +303,9 @@
       },
       ur: {
         home:"صفحۂ اول", collections:"مجموعے", featured:"منتخب کلام", artists:"شعراء", language:"زبان", signIn:"سائن اِن",
-        eyebrow:"خوبصورت کلام کا ایک مرکز", heroSubtitle:"نعت، منقبت اور حمد کا خوبصورت مجموعہ",
+        eyebrow:"خوبصورت کلام کا ایک مرکز", heroSubtitle:"نعت اور منقبت کا خوبصورت مجموعہ",
         heroCopy:"عقیدت، محبت اور احترام کے الفاظ — ایک پُرسکون جگہ پر جمع۔",
-        explore:"مجموعے دیکھیں&nbsp; ←", discover:"کلام دریافت کریں", searchPlaceholder:"کلام، شاعر یا الفاظ تلاش کریں...", search:"تلاش&nbsp; ↙",
+        explore:"مجموعے دیکھیں&nbsp; ←", discover:"کلام دریافت کریں", searchPlaceholder:"کلام تلاش کریں...", search:"تلاش&nbsp; ↙",
         collectionsTitle:"کلام کے مجموعے", collectionsSub:"وہ الفاظ تلاش کریں جو دل کو چھو جائیں۔", viewAll:"سب دیکھیں ←",
         naat:"نعت شریف", manqabat:"منقبت", hamd:"حمد", naatDesc:"محبوب نبی ﷺ کی محبت اور مدح کے کلمات۔",
         manqabatDesc:"اہلِ ایمان کی محترم ہستیوں کی شان میں شاعری۔", hamdDesc:"اللہ کی حمد، شکر اور یاد کے کلمات۔",
@@ -326,7 +319,7 @@
       },
       hi: {
         home:"होम", collections:"संग्रह", featured:"चुनिंदा कलाम", artists:"शायर", language:"भाषा", signIn:"साइन इन",
-        eyebrow:"खूबसूरत कलाम का एक ठिकाना", heroSubtitle:"नात, मनक़बत और हम्द का खूबसूरत संग्रह",
+        eyebrow:"खूबसूरत कलाम का एक ठिकाना", heroSubtitle:"नात और मनक़बत का खूबसूरत संग्रह",
         heroCopy:"अक़ीदत, मोहब्बत और एहतराम के अल्फ़ाज़ — एक सुकून भरी जगह पर।",
         explore:"संग्रह देखें&nbsp; →", discover:"कलाम देखें", searchPlaceholder:"कलाम, शायर या अल्फ़ाज़ खोजें...", search:"खोजें&nbsp; ↗",
         collectionsTitle:"कलाम के संग्रह", collectionsSub:"वे अल्फ़ाज़ खोजें जो दिल को छू जाएँ।", viewAll:"सभी देखें →",
