@@ -4,132 +4,308 @@ import Link from "next/link";
 import { useState } from "react";
 
 const categories = [
-  { number: "01", name: "Naat Sharif", urdu: "نعتِ رسول ﷺ", desc: "Ishq-e-Rasool ﷺ se mehke hue alfaaz", href: "/naat", symbol: "نعت" },
-  { number: "02", name: "Manqabat", urdu: "منقبت", desc: "Auliya-e-Kiram ki shaan mein pesh kalaam", href: "/manqabat", symbol: "من" },
-  { number: "03", name: "Biography", urdu: "سیرت و حالات", desc: "Buzurgan-e-Deen ki zindagi aur taleemaat", href: "/biography", symbol: "سیر" },
+  {
+    number: "01",
+    title: "Naat Sharif",
+    urdu: "نعتِ رسول ﷺ",
+    description:
+      "Aaqa-e-Kareem ﷺ ki shaan mein mohabbat bhare alfaaz.",
+    href: "/naat",
+    symbol: "ﷺ",
+  },
+  {
+    number: "02",
+    title: "Manqabat",
+    urdu: "منقبت",
+    description:
+      "Auliya-e-Kiram aur buzurgan-e-deen ki madah mein kalaam.",
+    href: "/manqabat",
+    symbol: "م",
+  },
+  {
+    number: "03",
+    title: "Biography",
+    urdu: "سیرت و حالات",
+    description:
+      "Buzurgan-e-deen ki zindagi, taleemaat aur roohani safar.",
+    href: "/biography",
+    symbol: "س",
+  },
 ];
 
 export default function HomePage() {
   const [query, setQuery] = useState("");
-  const [menuOpen, setMenuOpen] = useState(false);
 
-  function search(event: React.FormEvent<HTMLFormElement>) {
+  function handleSearch(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const value = query.trim();
-    window.location.href = value
-      ? `/naat?search=${encodeURIComponent(value)}`
+
+    const search = query.trim();
+
+    window.location.href = search
+      ? `/naat?search=${encodeURIComponent(search)}`
       : "/naat";
   }
 
   return (
-    <main className="ik-home">
-      <header className="ik-header">
-        <nav className="ik-nav" aria-label="Main navigation">
-          <Link href="/" className="ik-brand" aria-label="Islamic Kalam home">
-            <span className="ik-brand-mark" aria-hidden="true">ا</span>
-            <span><strong>Islamic Kalam</strong><small>ADAB · AQEEDAT · MOHABBAT</small></span>
-          </Link>
-          <button className="ik-menu-button" type="button" aria-label="Toggle menu"
-            aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>
-            {menuOpen ? "×" : "☰"}
-          </button>
-          <div className={`ik-nav-links ${menuOpen ? "is-open" : ""}`}>
-            <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link>
-            <Link href="/naat" onClick={() => setMenuOpen(false)}>Naat Sharif</Link>
-            <Link href="/manqabat" onClick={() => setMenuOpen(false)}>Manqabat</Link>
-            <Link href="/biography" onClick={() => setMenuOpen(false)}>Biography</Link>
-          </div>
-        </nav>
-      </header>
+    <main className="ik-site">
 
+      {/* HERO SECTION */}
       <section className="ik-hero">
-        <div className="ik-hero-grid" aria-hidden="true" />
-        <div className="ik-hero-inner">
-          <div className="ik-hero-copy">
-            <p className="ik-kicker"><span /> A COLLECTION OF DEVOTION <span /></p>
-            <h1>Alfaaz mein <em>aqeedat.</em><br />Dilon mein mohabbat.</h1>
-            <p className="ik-hero-intro">
-              Naat-o-Manqabat ke muntakhab kalaam aur buzurgan-e-deen ki
-              zindagi se judi maloomat — adab ke saath, ek jagah.
-            </p>
-            <form className="ik-search" onSubmit={search}>
-              <span className="ik-search-icon" aria-hidden="true">⌕</span>
-              <input value={query} onChange={(e) => setQuery(e.target.value)}
-                placeholder="Naat, Manqabat ya shakhsiyat search karein…" aria-label="Search Islamic Kalam" />
-              <button type="submit">Search <span aria-hidden="true">↗</span></button>
-            </form>
-            <div className="ik-quick-links">
-              <span>EXPLORE</span>
-              {categories.map((item) => <Link key={item.href} href={item.href}>{item.name}<b>↗</b></Link>)}
-            </div>
-          </div>
-          <div className="ik-hero-art" aria-label="Arabic calligraphy">
-            <div className="ik-art-ring ik-ring-one" />
-            <div className="ik-art-ring ik-ring-two" />
-            <span className="ik-art-star">✳</span>
-            <p lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-            <span className="ik-art-rule" />
-            <small lang="ar" dir="rtl">أَدَب · مَحَبَّة · عَقِيدَة</small>
-          </div>
+        <div className="ik-decoration ik-decoration-left">
+          ۞
         </div>
-        <div className="ik-hero-foot"><span>ILM</span><i>✳</i><span>ADAB</span><i>✳</i><span>MOHABBAT</span></div>
+
+        <div className="ik-decoration ik-decoration-right">
+          ۞
+        </div>
+
+        <div className="ik-hero-content">
+
+          <div className="ik-badge">
+            <span>✦</span>
+            ADAB · AQEEDAT · MOHABBAT
+            <span>✦</span>
+          </div>
+
+          <p className="ik-bismillah" lang="ar" dir="rtl">
+            بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+          </p>
+
+          <h1>
+            Alfaaz jo dil ko
+            <br />
+            chhoo jaayein,
+            <br />
+            <em>aqeedat jo rooh ko</em>
+            <br />
+            roshan kare.
+          </h1>
+
+          <p className="ik-description">
+            Naat Sharif, Manqabat aur buzurgan-e-deen ki
+            zindagi ka muntakhab majmua — mohabbat aur
+            adab ke saath.
+          </p>
+
+          <div className="ik-actions">
+            <Link href="/naat" className="ik-button ik-primary">
+              Explore Kalam <span>↗</span>
+            </Link>
+
+            <Link href="/biography" className="ik-button ik-outline">
+              Buzurgan-e-Deen <span>→</span>
+            </Link>
+          </div>
+
+          <form className="ik-search" onSubmit={handleSearch}>
+            <span className="ik-search-icon">⌕</span>
+
+            <input
+              type="search"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Naat, Manqabat ya naam search karein..."
+              aria-label="Search Islamic Kalam"
+            />
+
+            <button type="submit">
+              Search <span>↗</span>
+            </button>
+          </form>
+
+          <div className="ik-hero-note">
+            <span />
+            Ilm se roshni
+            <b>·</b>
+            Kalam se mohabbat
+            <b>·</b>
+            Adab ke saath
+            <span />
+          </div>
+
+        </div>
+
+        <div className="ik-scroll">
+          ↓
+        </div>
       </section>
 
-      <section className="ik-collections ik-container">
-        <div className="ik-section-head">
-          <div><p className="ik-label">THE COLLECTION</p><h2>Discover the words<br />that <em>move the heart.</em></h2></div>
-          <p>Teen categories. Ek roohani safar.</p>
+      {/* INTRODUCTION */}
+      <section className="ik-intro">
+        <div className="ik-eyebrow">
+          <span />
+          AAPKA ISTAQBAAL HAI
+          <span />
         </div>
-        <div className="ik-category-grid">
-          {categories.map((item) => (
-            <Link className="ik-category" href={item.href} key={item.href}>
-              <div className="ik-card-top"><span>{item.number}</span><span className="ik-card-arrow">↗</span></div>
-              <span className="ik-card-symbol" lang="ur" dir="rtl">{item.symbol}</span>
-              <h3>{item.name}</h3>
-              <p className="ik-urdu" lang="ur" dir="rtl">{item.urdu}</p>
-              <p className="ik-card-desc">{item.desc}</p>
-              <span className="ik-card-link">Explore collection <b>→</b></span>
+
+        <h2>
+          Ek jagah,
+          <br />
+          <em>roohani kalaam ka khazana.</em>
+        </h2>
+
+        <p>
+          Islamic Kalam par padhiye pasandeeda naatein,
+          manqabatein aur un azeem hastiyon ke halaat
+          jinhone apni zindagi deen, ilm aur mohabbat
+          ke liye waqf ki.
+        </p>
+      </section>
+
+      {/* CATEGORIES */}
+      <section className="ik-categories">
+
+        <div className="ik-section-heading">
+          <div>
+            <span className="ik-label">
+              EXPLORE OUR COLLECTION
+            </span>
+
+            <h2>
+              Apni pasand ka
+              <br />
+              <em>kalaam chuniye</em>
+            </h2>
+          </div>
+
+          <span
+            className="ik-heading-arabic"
+            lang="ar"
+            dir="rtl"
+          >
+            محبت و عقیدت
+          </span>
+        </div>
+
+        <div className="ik-card-grid">
+
+          {categories.map((category) => (
+            <Link
+              href={category.href}
+              className="ik-card"
+              key={category.href}
+            >
+              <div className="ik-card-top">
+                <span>{category.number}</span>
+                <span className="ik-arrow">↗</span>
+              </div>
+
+              <div className="ik-medallion">
+                <span lang="ar">{category.symbol}</span>
+              </div>
+
+              <h3>{category.title}</h3>
+
+              <p
+                className="ik-urdu"
+                lang="ur"
+                dir="rtl"
+              >
+                {category.urdu}
+              </p>
+
+              <p className="ik-card-description">
+                {category.description}
+              </p>
+
+              <div className="ik-card-link">
+                Collection dekhein
+                <span>→</span>
+              </div>
             </Link>
           ))}
+
         </div>
       </section>
 
-      <section className="ik-featured">
-        <div className="ik-featured-inner">
-          <div className="ik-featured-copy">
-            <p className="ik-label">SELECTED KALAAM</p>
-            <h2>Words of love.<br /><em>Written with reverence.</em></h2>
-            <p>Adab se parhein, mehsoos karein aur is khoobsurat riwayat se judein.</p>
-            <Link href="/naat" className="ik-under-link">Browse Naat Sharif <span>↗</span></Link>
-          </div>
-          <article className="ik-feature-card">
-            <div className="ik-feature-meta"><span>NAAT SHARIF</span><span lang="ar">ﷺ</span></div>
-            <p className="ik-arabic" lang="ar" dir="rtl">يَا رَسُولَ اللَّهِ سَلَامٌ عَلَيْكَ</p>
-            <div className="ik-divider"><i />✳<i /></div>
-            <h3>Explore the beauty of Naat Sharif</h3>
-            <p className="ik-feature-desc">Muntakhab kalaam aur unke alfaaz ka majmua.</p>
-            <Link href="/naat" className="ik-feature-action">Naat collection dekhein <span>↗</span></Link>
-          </article>
+      {/* FEATURED SECTION */}
+      <section className="ik-feature">
+
+        <div className="ik-feature-copy">
+          <span className="ik-label">
+            KALAAM KI DUNIYA
+          </span>
+
+          <h2>
+            Har lafz mein
+            <br />
+            <em>mohabbat,</em>
+            <br />
+            har misre mein aqeedat.
+          </h2>
+
+          <p>
+            Naat-o-Manqabat ke alfaaz ko padhein,
+            samjhein aur apni roohani riwayat se judein.
+          </p>
+
+          <Link href="/naat" className="ik-text-link">
+            Naat Sharif padhein
+            <span>↗</span>
+          </Link>
         </div>
+
+        <div className="ik-calligraphy">
+          <div className="ik-calligraphy-ring" />
+
+          <span className="ik-star">✳</span>
+
+          <p lang="ar" dir="rtl">
+            صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ
+          </p>
+
+          <span className="ik-gold-line" />
+
+          <small>
+            ISHQ · ADAB · AQEEDAT
+          </small>
+        </div>
+
       </section>
 
-      <section className="ik-bottom-cta ik-container">
-        <div className="ik-cta-seal" aria-hidden="true">ا</div>
-        <div className="ik-cta-copy"><p className="ik-label">ADAB · AQEEDAT · MOHABBAT</p>
-          <h2>Har kalaam mein ek <em>ehsaas.</em></h2>
-          <p>Naat, Manqabat aur seerat ka safar yahin se shuru karein.</p>
-        </div>
-        <Link href="/naat" className="ik-cta-button">Explore Kalam <span>↗</span></Link>
+      {/* QUOTE */}
+      <section className="ik-quote">
+        <span className="ik-quote-mark">“</span>
+
+        <p>
+          Adab, aqeedat aur mohabbat —
+          yahi hai hamare kalaam ki pehchaan.
+        </p>
+
+        <span className="ik-gold-line" />
+
+        <small>ISLAMIC KALAM</small>
       </section>
 
-      <footer className="ik-footer">
-        <div className="ik-footer-main ik-container">
-          <Link href="/" className="ik-footer-brand"><span>ا</span><div><strong>Islamic Kalam</strong><small>Alfaaz mein aqeedat, dilon mein mohabbat.</small></div></Link>
-          <div className="ik-footer-group"><b>EXPLORE</b><Link href="/naat">Naat Sharif</Link><Link href="/manqabat">Manqabat</Link><Link href="/biography">Biography</Link></div>
-          <div className="ik-footer-group"><b>OUR PURPOSE</b><span>Adab</span><span>Aqeedat</span><span>Mohabbat</span></div>
+      {/* FINAL CTA */}
+      <section className="ik-bottom">
+
+        <div className="ik-bottom-logo">
+          ا
         </div>
-        <div className="ik-footer-bottom"><span>© {new Date().getFullYear()} Islamic Kalam</span><span>Made with respect and care.</span></div>
-      </footer>
+
+        <div className="ik-bottom-copy">
+          <span className="ik-label">
+            ISLAMIC KALAM
+          </span>
+
+          <h2>
+            Rooh ko chhoo lene wale
+            <em> alfaaz.</em>
+          </h2>
+
+          <p>
+            Naat, Manqabat aur buzurgan-e-deen ka
+            safar shuru karein.
+          </p>
+        </div>
+
+        <Link href="/naat" className="ik-button ik-primary">
+          Explore Kalam <span>↗</span>
+        </Link>
+
+      </section>
+
     </main>
   );
 }
