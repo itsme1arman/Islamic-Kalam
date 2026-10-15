@@ -871,3 +871,560 @@ a {
     transition-duration: 0.01ms !important;
   }
   }
+/* =========================================
+   ISLAMIC KALAM — PREMIUM NAVBAR
+========================================= */
+
+.ik-header {
+  position: relative;
+  z-index: 100;
+  width: 100%;
+  background: rgba(253, 251, 245, 0.97);
+  border-bottom: 1px solid rgba(12, 83, 64, 0.12);
+  box-shadow: 0 8px 30px rgba(32, 53, 39, 0.06);
+}
+
+.ik-header-pattern {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.17;
+  background-image:
+    radial-gradient(circle at 0 0, transparent 25px, #c69b43 26px, transparent 28px),
+    radial-gradient(circle at 100% 100%, transparent 25px, #c69b43 26px, transparent 28px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(
+    90deg,
+    #000 0,
+    transparent 13%,
+    transparent 87%,
+    #000 100%
+  );
+}
+
+.ik-navbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 26px;
+  max-width: 1500px;
+  min-height: 112px;
+  margin: 0 auto;
+  padding: 18px 5%;
+}
+
+.ik-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 13px;
+  flex-shrink: 0;
+  color: #075b46;
+  text-decoration: none;
+}
+
+.ik-logo {
+  display: grid;
+  width: 65px;
+  height: 76px;
+  place-items: center;
+}
+
+.ik-logo svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ik-brand-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.ik-brand-name {
+  color: #075b46;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(23px, 2.1vw, 34px);
+  font-weight: 700;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.ik-brand-tagline {
+  color: #a87822;
+  font-family: "DM Sans", Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.4px;
+  white-space: nowrap;
+}
+
+.ik-brand-tagline i {
+  padding: 0 3px;
+  font-style: normal;
+}
+
+.ik-desktop-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(14px, 2.1vw, 31px);
+}
+
+.ik-nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 5px 0;
+  border: 0;
+  background: transparent;
+  color: #233b38;
+  font-family: "DM Sans", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.ik-nav-link:hover,
+.ik-menu-active {
+  color: #087157;
+}
+
+.ik-home-link {
+  color: #075b46;
+  font-weight: 700;
+}
+
+.ik-home-link::after {
+  position: absolute;
+  right: 0;
+  bottom: 1px;
+  left: 0;
+  height: 2px;
+  background: #087157;
+  content: "";
+}
+
+.ik-menu-button svg {
+  width: 15px;
+  height: 15px;
+  transition: transform 0.2s ease;
+}
+
+.ik-menu-active svg {
+  transform: rotate(180deg);
+}
+
+.ik-menu-wrap {
+  position: relative;
+}
+
+.ik-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: -18px;
+  z-index: 200;
+  width: 250px;
+  padding: 13px;
+  border: 1px solid rgba(12, 83, 64, 0.1);
+  border-radius: 15px;
+  background: #fffdf7;
+  box-shadow: 0 18px 45px rgba(23, 54, 42, 0.14);
+  animation: ik-dropdown-in 0.18s ease-out;
+}
+
+.ik-dropdown-heading {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 11px 13px;
+  border-bottom: 1px solid #eee9dc;
+  color: #075b46;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.ik-dropdown-symbol {
+  color: #b58b37;
+}
+
+.ik-dropdown-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 11px;
+  border-radius: 8px;
+  color: #40504a;
+  font-family: "DM Sans", Arial, sans-serif;
+  font-size: 13px;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.ik-dropdown-link:hover {
+  background: #eff4eb;
+  color: #075b46;
+}
+
+.ik-dropdown-arrow {
+  color: #b58b37;
+}
+
+.ik-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  height: 49px;
+  padding: 4px 5px 4px 15px;
+  border: 1px solid #e3e3d9;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.55);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ik-search:focus-within {
+  border-color: #8bb6a1;
+  box-shadow: 0 0 0 3px rgba(8, 113, 87, 0.07);
+}
+
+.ik-desktop-search {
+  width: clamp(200px, 23vw, 330px);
+  flex-shrink: 1;
+}
+
+.ik-search-icon {
+  width: 21px;
+  height: 21px;
+  flex-shrink: 0;
+  color: #2e4b48;
+}
+
+.ik-search input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #203b35;
+  font-family: "DM Sans", Arial, sans-serif;
+  font-size: 13px;
+}
+
+.ik-search input::placeholder {
+  color: #838a85;
+}
+
+.ik-search input::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
+.ik-search button {
+  display: grid;
+  width: 39px;
+  height: 39px;
+  flex-shrink: 0;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: #075b46;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.ik-search button:hover {
+  transform: scale(1.04);
+  background: #0b7559;
+}
+
+.ik-search button svg {
+  width: 20px;
+  height: 20px;
+}
+
+.ik-mobile-toggle {
+  display: none;
+  width: 45px;
+  height: 45px;
+  flex-shrink: 0;
+  place-items: center;
+  border: 0;
+  border-radius: 12px;
+  background: #075b46;
+  color: white;
+  cursor: pointer;
+}
+
+.ik-mobile-toggle svg {
+  width: 24px;
+  height: 24px;
+}
+
+.ik-mobile-panel {
+  display: none;
+}
+
+@keyframes ik-dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* TABLET AND MOBILE */
+
+@media (max-width: 1100px) {
+  .ik-navbar {
+    gap: 17px;
+    padding-right: 4%;
+    padding-left: 4%;
+  }
+
+  .ik-desktop-nav {
+    gap: 15px;
+  }
+
+  .ik-nav-link {
+    font-size: 13px;
+  }
+
+  .ik-brand {
+    gap: 9px;
+  }
+
+  .ik-logo {
+    width: 53px;
+    height: 64px;
+  }
+
+  .ik-brand-tagline {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+
+  .ik-desktop-search {
+    width: 205px;
+  }
+}
+
+@media (max-width: 850px) {
+  .ik-navbar {
+    min-height: 86px;
+    padding: 12px 5%;
+  }
+
+  .ik-logo {
+    width: 50px;
+    height: 59px;
+  }
+
+  .ik-brand-name {
+    font-size: 25px;
+  }
+
+  .ik-brand-tagline {
+    font-size: 8px;
+  }
+
+  .ik-desktop-nav,
+  .ik-desktop-search {
+    display: none;
+  }
+
+  .ik-mobile-toggle {
+    display: grid;
+  }
+
+  .ik-mobile-panel {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 4%;
+    left: 4%;
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    border: 1px solid transparent;
+    border-radius: 18px;
+    background: #fffdf7;
+    box-shadow: 0 20px 50px rgba(30, 53, 41, 0.16);
+    opacity: 0;
+    transition:
+      max-height 0.35s ease,
+      opacity 0.25s ease,
+      visibility 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+  .ik-mobile-panel.ik-panel-open {
+    max-height: 80vh;
+    overflow-y: auto;
+    visibility: visible;
+    border-color: #eae6d9;
+    opacity: 1;
+  }
+
+  .ik-mobile-panel-inner {
+    padding: 15px;
+  }
+
+  .ik-mobile-link {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 14px;
+    min-height: 58px;
+    padding: 12px 13px;
+    border: 0;
+    border-bottom: 1px solid #eeece3;
+    background: transparent;
+    color: #263f3a;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 17px;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .ik-mobile-home {
+    margin-bottom: 5px;
+    border-bottom: 0;
+    border-radius: 10px;
+    background: #edf3e9;
+    color: #075b46;
+    font-weight: 700;
+  }
+
+  .ik-mobile-link-icon {
+    display: grid;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    place-items: center;
+    color: #075b46;
+    font-size: 23px;
+  }
+
+  .ik-mobile-arrow {
+    margin-left: auto;
+    color: #a78032;
+  }
+
+  .ik-mobile-chevron {
+    width: 18px;
+    height: 18px;
+    margin-left: auto;
+    transition: transform 0.2s ease;
+  }
+
+  .ik-chevron-open {
+    transform: rotate(180deg);
+  }
+
+  .ik-mobile-submenu {
+    display: grid;
+    gap: 2px;
+    padding: 6px 0 12px 42px;
+    border-bottom: 1px solid #eeece3;
+  }
+
+  .ik-mobile-submenu a {
+    padding: 10px 12px;
+    border-radius: 7px;
+    color: #52625b;
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+  }
+
+  .ik-mobile-submenu a:hover {
+    background: #edf3e9;
+    color: #075b46;
+  }
+
+  .ik-mobile-search {
+    margin-top: 20px;
+  }
+
+  .ik-mobile-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 23px 10px 14px;
+    color: #8c9b77;
+    text-align: center;
+  }
+
+  .ik-bottom-crescent {
+    color: #b9994b;
+    font-family: Georgia, serif;
+    font-size: 31px;
+  }
+
+  .ik-mobile-bottom p {
+    margin: 7px 0 11px;
+    color: #69796a;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 14px;
+    font-style: italic;
+  }
+
+  .ik-bottom-divider {
+    color: #c6a75b;
+    font-size: 12px;
+    letter-spacing: 3px;
+  }
+}
+
+@media (max-width: 420px) {
+  .ik-navbar {
+    min-height: 78px;
+    gap: 8px;
+    padding: 10px 4%;
+  }
+
+  .ik-logo {
+    width: 43px;
+    height: 52px;
+  }
+
+  .ik-brand {
+    gap: 7px;
+  }
+
+  .ik-brand-name {
+    font-size: 21px;
+  }
+
+  .ik-brand-tagline {
+    font-size: 7px;
+    letter-spacing: 0.7px;
+  }
+
+  .ik-mobile-toggle {
+    width: 41px;
+    height: 41px;
+    border-radius: 10px;
+  }
+
+  .ik-mobile-panel {
+    right: 3%;
+    left: 3%;
+  }
+
+  .ik-mobile-panel-inner {
+    padding: 12px;
+  }
+}
