@@ -1,0 +1,220 @@
+/* Navbar and mobile navigation styles */
+
+/* =========================================
+   ISLAMIC KALAM — PREMIUM NAVBAR
+========================================= */
+
+.ik-header {
+  position: relative;
+  z-index: 100;
+  width: 100%;
+  background: rgba(253, 251, 245, 0.97);
+  border-bottom: 1px solid rgba(12, 83, 64, 0.12);
+  box-shadow: 0 8px 30px rgba(32, 53, 39, 0.06);
+}
+
+.ik-header-pattern {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.17;
+  background-image:
+    radial-gradient(circle at 0 0, transparent 25px, #c69b43 26px, transparent 28px),
+    radial-gradient(circle at 100% 100%, transparent 25px, #c69b43 26px, transparent 28px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(
+    90deg,
+    #000 0,
+    transparent 13%,
+    transparent 87%,
+    #000 100%
+  );
+}
+
+.ik-navbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 26px;
+  max-width: 1500px;
+  min-height: 112px;
+  margin: 0 auto;
+  padding: 18px 5%;
+}
+
+.ik-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 13px;
+  flex-shrink: 0;
+  color: #075b46;
+  text-decoration: none;
+}
+
+.ik-logo {
+  display: grid;
+  width: 65px;
+  height: 76px;
+  place-items: center;
+}
+
+.ik-logo svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ik-brand-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.ik-brand-name {
+  color: #075b46;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(23px, 2.1vw, 34px);
+  font-weight: 700;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.ik-brand-tagline {
+  color: #a87822;
+  font-family: "DM Sans", Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.4px;
+  white-space: nowrap;
+}
+
+.ik-brand-tagline i {
+  padding: 0 3px;
+  font-style: normal;
+}
+
+.ik-desktop-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(14px, 2.1vw, 31px);
+}
+
+.ik-nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 5px 0;
+  border: 0;
+  background: transparent;
+  color: #233b38;
+  font-family: "DM Sans", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.ik-nav-link:hover,
+.ik-menu-active {
+  color: #087157;
+}
+
+.ik-home-link {
+  color: #075b46;
+  font-weight: 700;
+}
+
+.ik-home-link::after {
+  position: absolute;
+  right: 0;
+  bottom: 1px;
+  left: 0;
+  height: 2px;
+  background: #087157;
+  content: "";
+}
+
+.ik-menu-button svg {
+  width: 15px;
+  height: 15px;
+  transition: transform 0.2s ease;
+}
+
+.ik-menu-active svg {
+  transform: rotate(180deg);
+}
+
+.ik-menu-wrap {
+  position: relative;
+}
+
+.ik-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: -18px;
+  z-index: 200;
+  width: 250px;
+  padding: 13px;
+  border: 1px solid rgba(12, 83, 64, 0.1);
+  border-radius: 15px;
+  background: #fffdf7;
+  box-shadow: 0 18px 45px rgba(23, 54, 42, 0.14);
+  animation: ik-dropdown-in 0.18s ease-out;
+}
+
+.ik-dropdown-heading {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 11px 13px;
+  border-bottom: 1px solid #eee9dc;
+  color: #075b46;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.ik-dropdown-symbol {
+  color: #b58b37;
+}
+
+.ik-dropdown-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 11px;
+  border-radius: 8px;
+  color: #40504a;
+  font-family: "DM Sans", Arial, sans-serif;
+  font-size: 13px;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.ik-dropdown-link:hover {
+  background: #eff4eb;
+  color: #075b46;
+}
+
+.ik-dropdown-arrow {
+  color: #b58b37;
+}
+
+.ik-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  height: 49px;
+  padding: 4px 5px 4px 15px;
+  border: 1px solid #e3e3d9;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.55);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
