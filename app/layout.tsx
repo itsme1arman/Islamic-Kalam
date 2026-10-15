@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Islamic Kalam | Naat, Salam, Manqabat & Hamd",
+  title: "Islamic Kalam | Naat, Manqabat & Islamic Biography",
   description:
-    "Read Islamic Kalam in Roman Urdu, Urdu and Hindi, including Naat, Salam, Manqabat, Hamd and Islamic biographies.",
+    "Explore Naat Sharif, Manqabat and Islamic biographies in Roman Urdu, Urdu and Hindi on Islamic Kalam.",
 };
 
 export default function RootLayout({
@@ -17,12 +18,10 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Navbar />
-        {children}
 
-        <footer>
-          <p>Islamic Kalam</p>
-          <p>Naat • Salam • Manqabat • Hamd</p>
-        </footer>
+        <main>{children}</main>
+
+        <Footer />
       </body>
     </html>
   );
