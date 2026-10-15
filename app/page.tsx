@@ -4,146 +4,131 @@ import Link from "next/link";
 import { useState } from "react";
 
 const categories = [
-  { name: "Naat Sharif", href: "/naat", symbol: "نعت" },
-  { name: "Salam", href: "/salam", symbol: "سلام" },
-  { name: "Manqabat", href: "/manqabat", symbol: "منقبت" },
-  { name: "Hamd", href: "/hamd", symbol: "حمد" },
-  { name: "Biography", href: "/biography", symbol: "سیرت" },
+  { number: "01", name: "Naat Sharif", urdu: "نعتِ رسول ﷺ", desc: "Ishq-e-Rasool ﷺ se mehke hue alfaaz", href: "/naat", symbol: "نعت" },
+  { number: "02", name: "Manqabat", urdu: "منقبت", desc: "Auliya-e-Kiram ki shaan mein pesh kalaam", href: "/manqabat", symbol: "من" },
+  { number: "03", name: "Biography", urdu: "سیرت و حالات", desc: "Buzurgan-e-Deen ki zindagi aur taleemaat", href: "/biography", symbol: "سیر" },
 ];
 
 export default function HomePage() {
-  const [search, setSearch] = useState("");
+  const [query, setQuery] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  function search(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const value = query.trim();
+    window.location.href = value
+      ? `/naat?search=${encodeURIComponent(value)}`
+      : "/naat";
+  }
 
   return (
-    <main className="home-page">
-      <section className="luxury-home">
-        <div className="luxury-frame">
-          <div className="ornament ornament-top" aria-hidden="true">
-            ✦
+    <main className="ik-home">
+      <header className="ik-header">
+        <nav className="ik-nav" aria-label="Main navigation">
+          <Link href="/" className="ik-brand" aria-label="Islamic Kalam home">
+            <span className="ik-brand-mark" aria-hidden="true">ا</span>
+            <span><strong>Islamic Kalam</strong><small>ADAB · AQEEDAT · MOHABBAT</small></span>
+          </Link>
+          <button className="ik-menu-button" type="button" aria-label="Toggle menu"
+            aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>
+            {menuOpen ? "×" : "☰"}
+          </button>
+          <div className={`ik-nav-links ${menuOpen ? "is-open" : ""}`}>
+            <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link>
+            <Link href="/naat" onClick={() => setMenuOpen(false)}>Naat Sharif</Link>
+            <Link href="/manqabat" onClick={() => setMenuOpen(false)}>Manqabat</Link>
+            <Link href="/biography" onClick={() => setMenuOpen(false)}>Biography</Link>
           </div>
+        </nav>
+      </header>
 
-          <div className="bismillah-content">
-            <span className="arabic-overline" aria-hidden="true">
-              ۞
-            </span>
-
-            <h1 lang="ar" dir="rtl" className="bismillah-title">
-              بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-            </h1>
-
-            <div className="gold-divider" aria-hidden="true">
-              <span />
-              <i>✦</i>
-              <span />
+      <section className="ik-hero">
+        <div className="ik-hero-grid" aria-hidden="true" />
+        <div className="ik-hero-inner">
+          <div className="ik-hero-copy">
+            <p className="ik-kicker"><span /> A COLLECTION OF DEVOTION <span /></p>
+            <h1>Alfaaz mein <em>aqeedat.</em><br />Dilon mein mohabbat.</h1>
+            <p className="ik-hero-intro">
+              Naat-o-Manqabat ke muntakhab kalaam aur buzurgan-e-deen ki
+              zindagi se judi maloomat — adab ke saath, ek jagah.
+            </p>
+            <form className="ik-search" onSubmit={search}>
+              <span className="ik-search-icon" aria-hidden="true">⌕</span>
+              <input value={query} onChange={(e) => setQuery(e.target.value)}
+                placeholder="Naat, Manqabat ya shakhsiyat search karein…" aria-label="Search Islamic Kalam" />
+              <button type="submit">Search <span aria-hidden="true">↗</span></button>
+            </form>
+            <div className="ik-quick-links">
+              <span>EXPLORE</span>
+              {categories.map((item) => <Link key={item.href} href={item.href}>{item.name}<b>↗</b></Link>)}
             </div>
           </div>
-
-          <div className="ornament ornament-bottom" aria-hidden="true">
-            ✦
+          <div className="ik-hero-art" aria-label="Arabic calligraphy">
+            <div className="ik-art-ring ik-ring-one" />
+            <div className="ik-art-ring ik-ring-two" />
+            <span className="ik-art-star">✳</span>
+            <p lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+            <span className="ik-art-rule" />
+            <small lang="ar" dir="rtl">أَدَب · مَحَبَّة · عَقِيدَة</small>
           </div>
         </div>
+        <div className="ik-hero-foot"><span>ILM</span><i>✳</i><span>ADAB</span><i>✳</i><span>MOHABBAT</span></div>
       </section>
 
-      <section className="home-search-section">
-        <p className="home-tagline">ISLAMIC KALAAM COLLECTION</p>
-
-        <h2>
-          Find Your Favourite <span>Kalaam</span>
-        </h2>
-
-        <form
-          className="home-search"
-          onSubmit={(event) => {
-            event.preventDefault();
-            if (search.trim()) {
-              window.location.href =
-                `/naat?search=${encodeURIComponent(search.trim())}`;
-            }
-          }}
-        >
-          <span aria-hidden="true">⌕</span>
-
-          <input
-            type="search"
-            placeholder="Search Naat, Salam, Manqabat..."
-            value={search}
-            onChange={(event) => setSearch(event.target.value)}
-            aria-label="Search Islamic Kalaam"
-          />
-
-          <button type="submit">Search</button>
-        </form>
-
-        <p className="home-search-note">
-          Explore Naat, Salam, Manqabat, Hamd aur Islami Seerat
-        </p>
-      </section>
-
-      <section className="home-categories" id="categories">
-        <div className="home-section-heading">
-          <div>
-            <span className="home-tagline">EXPLORE</span>
-            <h2>Browse Categories</h2>
-          </div>
-
-          <span className="home-section-decoration" aria-hidden="true">
-            ✦
-          </span>
+      <section className="ik-collections ik-container">
+        <div className="ik-section-head">
+          <div><p className="ik-label">THE COLLECTION</p><h2>Discover the words<br />that <em>move the heart.</em></h2></div>
+          <p>Teen categories. Ek roohani safar.</p>
         </div>
-
-        <div className="home-category-grid">
-          {categories.map((category) => (
-            <Link
-              href={category.href}
-              key={category.href}
-              className="home-category-card"
-            >
-              <span className="home-category-symbol" aria-hidden="true">
-                {category.symbol}
-              </span>
-
-              <span className="home-category-name">{category.name}</span>
-
-              <span className="home-category-arrow" aria-hidden="true">
-                ↗
-              </span>
+        <div className="ik-category-grid">
+          {categories.map((item) => (
+            <Link className="ik-category" href={item.href} key={item.href}>
+              <div className="ik-card-top"><span>{item.number}</span><span className="ik-card-arrow">↗</span></div>
+              <span className="ik-card-symbol" lang="ur" dir="rtl">{item.symbol}</span>
+              <h3>{item.name}</h3>
+              <p className="ik-urdu" lang="ur" dir="rtl">{item.urdu}</p>
+              <p className="ik-card-desc">{item.desc}</p>
+              <span className="ik-card-link">Explore collection <b>→</b></span>
             </Link>
           ))}
         </div>
       </section>
 
-      <section className="home-feature">
-        <span className="home-feature-symbol" aria-hidden="true">
-          ﷺ
-        </span>
-
-        <div>
-          <p className="home-tagline">LOVE & DEVOTION</p>
-          <h2>Darood-o-Salam</h2>
-          <p>Adab, aqeedat aur mohabbat ka khoobsurat izhaar.</p>
+      <section className="ik-featured">
+        <div className="ik-featured-inner">
+          <div className="ik-featured-copy">
+            <p className="ik-label">SELECTED KALAAM</p>
+            <h2>Words of love.<br /><em>Written with reverence.</em></h2>
+            <p>Adab se parhein, mehsoos karein aur is khoobsurat riwayat se judein.</p>
+            <Link href="/naat" className="ik-under-link">Browse Naat Sharif <span>↗</span></Link>
+          </div>
+          <article className="ik-feature-card">
+            <div className="ik-feature-meta"><span>NAAT SHARIF</span><span lang="ar">ﷺ</span></div>
+            <p className="ik-arabic" lang="ar" dir="rtl">يَا رَسُولَ اللَّهِ سَلَامٌ عَلَيْكَ</p>
+            <div className="ik-divider"><i />✳<i /></div>
+            <h3>Explore the beauty of Naat Sharif</h3>
+            <p className="ik-feature-desc">Muntakhab kalaam aur unke alfaaz ka majmua.</p>
+            <Link href="/naat" className="ik-feature-action">Naat collection dekhein <span>↗</span></Link>
+          </article>
         </div>
-
-        <Link href="/salam" className="home-feature-link">
-          Explore →
-        </Link>
       </section>
 
-      <footer className="home-footer">
-        <Link href="/" className="home-footer-brand">
-          ۞ Islamic Kalam
-        </Link>
-
-        <div className="home-footer-links">
-          {categories.map((category) => (
-            <Link href={category.href} key={category.href}>
-              {category.name}
-            </Link>
-          ))}
+      <section className="ik-bottom-cta ik-container">
+        <div className="ik-cta-seal" aria-hidden="true">ا</div>
+        <div className="ik-cta-copy"><p className="ik-label">ADAB · AQEEDAT · MOHABBAT</p>
+          <h2>Har kalaam mein ek <em>ehsaas.</em></h2>
+          <p>Naat, Manqabat aur seerat ka safar yahin se shuru karein.</p>
         </div>
+        <Link href="/naat" className="ik-cta-button">Explore Kalam <span>↗</span></Link>
+      </section>
 
-        <p>Alfaaz mein aqeedat, dilon mein mohabbat.</p>
-
-        <small>© {new Date().getFullYear()} Islamic Kalam</small>
+      <footer className="ik-footer">
+        <div className="ik-footer-main ik-container">
+          <Link href="/" className="ik-footer-brand"><span>ا</span><div><strong>Islamic Kalam</strong><small>Alfaaz mein aqeedat, dilon mein mohabbat.</small></div></Link>
+          <div className="ik-footer-group"><b>EXPLORE</b><Link href="/naat">Naat Sharif</Link><Link href="/manqabat">Manqabat</Link><Link href="/biography">Biography</Link></div>
+          <div className="ik-footer-group"><b>OUR PURPOSE</b><span>Adab</span><span>Aqeedat</span><span>Mohabbat</span></div>
+        </div>
+        <div className="ik-footer-bottom"><span>© {new Date().getFullYear()} Islamic Kalam</span><span>Made with respect and care.</span></div>
       </footer>
     </main>
   );
