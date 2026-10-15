@@ -1,0 +1,235 @@
+/* =================================
+   PROFESSIONAL ISLAMIC KALAM FOOTER
+================================= */
+
+.ik-footer {
+  position: relative;
+  overflow: hidden;
+  margin-top: 60px;
+  background: #103f34;
+  color: #f9f5e9;
+  font-family: "DM Sans", Arial, sans-serif;
+}
+
+.ik-footer::before {
+  position: absolute;
+  top: -100px;
+  right: -90px;
+  width: 250px;
+  height: 250px;
+  border: 1px solid rgba(210, 180, 105, 0.17);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+}
+
+.ik-footer::after {
+  position: absolute;
+  top: -65px;
+  right: -55px;
+  width: 180px;
+  height: 180px;
+  border: 1px solid rgba(210, 180, 105, 0.14);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+}
+
+.ik-footer-main {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.5fr 0.8fr 1fr 1.2fr;
+  gap: 45px;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 55px 5% 45px;
+}
+
+.ik-footer-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #fffaf0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 25px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.ik-footer-icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid #c8a65b;
+  border-radius: 50%;
+  color: #d5b86f;
+  font-size: 28px;
+}
+
+.ik-footer-description {
+  max-width: 340px;
+  margin: 20px 0;
+  color: #d4dfd5;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.ik-footer-motto {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  color: #d8bc79;
+  font-size: 11px;
+  letter-spacing: 0.3px;
+}
+
+.ik-footer-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 13px;
+}
+
+.ik-footer-column h3 {
+  margin: 5px 0 10px;
+  color: #e1c782;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.ik-footer-column > a:not(.ik-footer-about-button) {
+  color: #d4dfd5;
+  font-size: 13px;
+  line-height: 1.7;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.ik-footer-column > a:not(.ik-footer-about-button):hover {
+  transform: translateX(3px);
+  color: #e5cb85;
+}
+
+.ik-footer-purpose p {
+  margin: 0;
+  color: #d4dfd5;
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.ik-footer-about-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 7px;
+  padding: 10px 15px;
+  border: 1px solid rgba(221, 196, 130, 0.55);
+  border-radius: 7px;
+  color: #f3e5bc;
+  font-size: 13px;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.ik-footer-about-button:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.ik-footer-bottom {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 20px 5%;
+  border-top: 1px solid rgba(230, 215, 170, 0.18);
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.ik-footer-bottom p {
+  margin: 0;
+  color: #cbd8ce;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.ik-footer-credit span {
+  color: #e4bd71;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .ik-footer-main {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 35px;
+    padding: 45px 6%;
+  }
+}
+
+/* Mobile */
+@media (max-width: 540px) {
+  .ik-footer {
+    margin-top: 40px;
+  }
+
+  .ik-footer-main {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px 22px;
+    padding: 38px 6% 30px;
+  }
+
+  .ik-footer-brand {
+    grid-column: 1 / -1;
+  }
+
+  .ik-footer-logo {
+    font-size: 23px;
+  }
+
+  .ik-footer-description {
+    margin: 15px 0;
+    font-size: 13px;
+  }
+
+  .ik-footer-column {
+    gap: 11px;
+  }
+
+  .ik-footer-column h3 {
+    font-size: 16px;
+  }
+
+  .ik-footer-column > a:not(.ik-footer-about-button) {
+    font-size: 12px;
+  }
+
+  .ik-footer-purpose p {
+    font-size: 12px;
+  }
+
+  .ik-footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    padding: 17px 6%;
+  }
+
+  .ik-footer-bottom p {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 350px) {
+  .ik-footer-main {
+    grid-template-columns: 1fr;
+  }
+
+  .ik-footer-brand {
+    grid-column: auto;
+  }
+}
