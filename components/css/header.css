@@ -17,31 +17,13 @@
   pointer-events: none;
   opacity: 0.17;
   background-image:
-    radial-gradient(
-      circle at 0 0,
-      transparent 25px,
-      #c69b43 26px,
-      transparent 28px
-    ),
-    radial-gradient(
-      circle at 100% 100%,
-      transparent 25px,
-      #c69b43 26px,
-      transparent 28px
-    );
+    radial-gradient(circle at 0 0, transparent 25px, #c69b43 26px, transparent 28px),
+    radial-gradient(circle at 100% 100%, transparent 25px, #c69b43 26px, transparent 28px);
   background-size: 42px 42px;
-  mask-image: linear-gradient(
-    90deg,
-    #000 0,
-    transparent 13%,
-    transparent 87%,
-    #000 100%
-  );
+  mask-image: linear-gradient(90deg, #000 0, transparent 13%, transparent 87%, #000 100%);
 }
 
-/* =========================================
-   NAVBAR LAYOUT
-========================================= */
+/* NAVBAR */
 
 .ik-navbar {
   position: relative;
@@ -55,9 +37,7 @@
   padding: 18px 5%;
 }
 
-/* =========================================
-   BRAND & LOGO
-========================================= */
+/* BRAND & LOGO */
 
 .ik-brand {
   display: inline-flex;
@@ -110,9 +90,7 @@
   font-style: normal;
 }
 
-/* =========================================
-   DESKTOP NAVIGATION
-========================================= */
+/* DESKTOP NAVIGATION */
 
 .ik-desktop-nav {
   display: flex;
@@ -174,9 +152,7 @@
   position: relative;
 }
 
-/* =========================================
-   NAVIGATION DROPDOWN
-========================================= */
+/* NAVIGATION DROPDOWN */
 
 .ik-dropdown {
   position: absolute;
@@ -220,9 +196,7 @@
   font-family: "DM Sans", Arial, sans-serif;
   font-size: 13px;
   text-decoration: none;
-  transition:
-    background 0.2s ease,
-    color 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .ik-dropdown-link:hover {
@@ -230,9 +204,7 @@
   color: #075b46;
 }
 
-/* =========================================
-   SEARCH
-========================================= */
+/* SEARCH */
 
 .ik-search {
   display: flex;
@@ -244,9 +216,7 @@
   border: 1px solid #e3e3d9;
   border-radius: 50px;
   background: rgba(255, 255, 255, 0.55);
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .ik-search:focus-within {
@@ -296,9 +266,7 @@
   background: #075b46;
   color: #fff;
   cursor: pointer;
-  transition:
-    background 0.2s ease,
-    transform 0.2s ease;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .ik-search button:hover {
@@ -311,9 +279,7 @@
   height: 20px;
 }
 
-/* =========================================
-   THREE-DOT SETTINGS MENU
-========================================= */
+/* THREE-DOT SETTINGS BUTTON */
 
 .ik-header-settings {
   position: relative;
@@ -332,54 +298,52 @@
   background: rgba(255, 255, 255, 0.65);
   color: #075b46;
   cursor: pointer;
-  transition:
-    background 0.2s ease,
-    border-color 0.2s ease,
-    transform 0.2s ease;
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 .ik-header-settings-button:hover {
-  transform: translateY(-1px);
   border-color: #b6cbbd;
   background: #edf4ed;
 }
 
-.ik-header-settings-button svg {
-  width: 22px;
-  height: 22px;
+.ik-header-settings-button span {
+  font-size: 25px;
+  line-height: 1;
 }
+
+/* COMPACT SETTINGS POPUP */
 
 .ik-header-settings-menu {
   position: absolute;
-  top: calc(100% + 10px);
+  top: calc(100% + 9px);
   right: 0;
   z-index: 300;
-  width: 250px;
-  padding: 17px;
-  border: 1px solid rgba(12, 83, 64, 0.12);
-  border-radius: 16px;
+  width: 235px;
+  padding: 14px;
+  border: 1px solid #e5e8dc;
+  border-radius: 14px;
   background: #fffdf7;
-  box-shadow: 0 18px 45px rgba(23, 54, 42, 0.16);
+  box-shadow: 0 14px 35px rgba(23, 54, 42, 0.17);
   animation: ik-dropdown-in 0.18s ease-out;
 }
 
 .ik-header-settings-title {
-  margin: 0 0 15px;
+  margin: 0 0 12px;
   color: #075b46;
   font-family: "Playfair Display", Georgia, serif;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 700;
 }
 
 .ik-header-setting-group {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 6px;
 }
 
 .ik-header-setting-group + .ik-header-setting-group {
-  margin-top: 17px;
-  padding-top: 15px;
+  margin-top: 13px;
+  padding-top: 12px;
   border-top: 1px solid #eee9dc;
 }
 
@@ -387,27 +351,29 @@
   margin-bottom: 3px;
   color: #69796a;
   font-family: "DM Sans", Arial, sans-serif;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.8px;
   text-transform: uppercase;
 }
 
 .ik-header-settings-menu button {
+  display: flex;
   width: 100%;
-  padding: 10px 11px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 36px;
+  padding: 8px 10px;
   border: 1px solid transparent;
-  border-radius: 9px;
+  border-radius: 8px;
   background: transparent;
   color: #40504a;
   font-family: "DM Sans", Arial, sans-serif;
   font-size: 13px;
   text-align: left;
   cursor: pointer;
-  transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    border-color 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .ik-header-settings-menu button:hover {
@@ -422,9 +388,7 @@
   font-weight: 700;
 }
 
-/* =========================================
-   MOBILE MENU BUTTON
-========================================= */
+/* MOBILE MENU BUTTON */
 
 .ik-mobile-toggle {
   display: none;
@@ -444,61 +408,13 @@
   height: 24px;
 }
 
-/* =========================================
-   MOBILE MENU PANEL
-========================================= */
+/* MOBILE MENU PANEL */
 
 .ik-mobile-panel {
   display: none;
 }
 
-/* =========================================
-   MOBILE SETTINGS
-========================================= */
-
-.ik-mobile-settings {
-  margin-top: 18px;
-  padding: 17px 12px;
-  border: 1px solid #e6e8dc;
-  border-radius: 13px;
-  background: #faf9f1;
-}
-
-.ik-mobile-settings .ik-header-setting-group + .ik-header-setting-group {
-  margin-top: 15px;
-  padding-top: 14px;
-}
-
-.ik-mobile-settings-options {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 7px;
-}
-
-.ik-mobile-settings-options button {
-  min-height: 39px;
-  padding: 9px 8px;
-  border: 1px solid #e1e6da;
-  border-radius: 8px;
-  background: #fffdf7;
-  color: #40504a;
-  font-family: "DM Sans", Arial, sans-serif;
-  font-size: 12px;
-  text-align: center;
-  cursor: pointer;
-}
-
-.ik-mobile-settings-options button:hover,
-.ik-mobile-settings-options button.ik-setting-active {
-  border-color: #b9d0bc;
-  background: #edf4e9;
-  color: #075b46;
-  font-weight: 700;
-}
-
-/* =========================================
-   DROPDOWN ANIMATION
-========================================= */
+/* DROPDOWN ANIMATION */
 
 @keyframes ik-dropdown-in {
   from {
@@ -512,9 +428,7 @@
   }
 }
 
-/* =========================================
-   TABLET
-========================================= */
+/* TABLET */
 
 @media (max-width: 1100px) {
   .ik-navbar {
@@ -555,9 +469,7 @@
   }
 }
 
-/* =========================================
-   MOBILE
-========================================= */
+/* MOBILE */
 
 @media (max-width: 850px) {
   .ik-navbar {
@@ -579,8 +491,7 @@
   }
 
   .ik-desktop-nav,
-  .ik-desktop-search,
-  .ik-header-settings {
+  .ik-desktop-search {
     display: none;
   }
 
@@ -602,11 +513,7 @@
     background: #fffdf7;
     box-shadow: 0 20px 50px rgba(30, 53, 41, 0.16);
     opacity: 0;
-    transition:
-      max-height 0.35s ease,
-      opacity 0.25s ease,
-      visibility 0.25s ease,
-      border-color 0.25s ease;
+    transition: max-height 0.35s ease, opacity 0.25s ease, visibility 0.25s ease;
   }
 
   .ik-mobile-panel.ik-panel-open {
@@ -729,9 +636,7 @@
   }
 }
 
-/* =========================================
-   SMALL MOBILE
-========================================= */
+/* SMALL MOBILE */
 
 @media (max-width: 420px) {
   .ik-navbar {
@@ -774,9 +679,7 @@
   }
 }
 
-/* =========================================
-   ACCESSIBILITY
-========================================= */
+/* ACCESSIBILITY */
 
 @media (prefers-reduced-motion: reduce) {
   .ik-header *,
@@ -787,4 +690,4 @@
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
   }
-}
+   }
