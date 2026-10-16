@@ -1,72 +1,65 @@
+"use client";
+
 import Link from "next/link";
+import { useLanguage } from "./LanguageProvider";
 
 export default function Footer() {
+  const { t, language } = useLanguage();
+
   return (
     <footer className="ik-footer">
-      {/* Main Footer */}
       <div className="ik-footer-main">
-        {/* Brand */}
         <div className="ik-footer-brand">
           <Link href="/" className="ik-footer-logo">
             <span className="ik-footer-icon">☾</span>
             <span>Islamic Kalam</span>
           </Link>
 
-          <p className="ik-footer-description">
-            Naat Sharif, Manqabat aur buzurgan-e-deen ki
-            zindagi se judi maloomat ka ek majmua.
-          </p>
+          <p className="ik-footer-description">{t("footerDescription")}</p>
 
           <div className="ik-footer-motto">
             <span>✦</span>
-            <span>Ilm se roshni · Kalam se mohabbat</span>
+            <span>{t("motto")}</span>
           </div>
         </div>
 
-        {/* Explore */}
         <div className="ik-footer-column">
-          <h3>Explore</h3>
-          <Link href="/">Home</Link>
-          <Link href="/naat">Naat Sharif</Link>
-          <Link href="/manqabat">Manqabat</Link>
-          <Link href="/biography">Islamic Personalities</Link>
+          <h3>{t("explore")}</h3>
+          <Link href="/">{t("home")}</Link>
+          <Link href="/naat">{t("naat")}</Link>
+          <Link href="/manqabat">{t("manqabat")}</Link>
+          <Link href="/salam">{t("salam")}</Link>
+          <Link href="/hamd">{t("hamd")}</Link>
+          <Link href="/biography">{t("personalities")}</Link>
         </div>
 
-        {/* Information */}
         <div className="ik-footer-column">
-          <h3>Information</h3>
-          <Link href="/about">About Us</Link>
-          <Link href="/contact">Contact Us</Link>
-          <Link href="/privacy-policy">Privacy Policy</Link>
-          <Link href="/disclaimer">Disclaimer</Link>
-          <Link href="/terms">Terms &amp; Conditions</Link>
+          <h3>{language === "urdu" ? "معلومات" : language === "hindi" ? "जानकारी" : "Information"}</h3>
+          <Link href="/about">{t("about")}</Link>
+          <Link href="/contact">{t("contact")}</Link>
+          <Link href="/privacy-policy">{t("privacy")}</Link>
+          <Link href="/disclaimer">{t("disclaimer")}</Link>
+          <Link href="/terms">{t("terms")}</Link>
         </div>
 
-        {/* Purpose */}
         <div className="ik-footer-column ik-footer-purpose">
-          <h3>Our Purpose</h3>
+          <h3>{t("purpose")}</h3>
 
-          <p>
-            Hamara maqsad Islamic kalaam aur deeni shakhsiyat
-            se mutalliq maloomat ko aasaan aur munazzam andaaz
-            mein pesh karna hai.
-          </p>
+          <p>{t("purposeDescription")}</p>
 
           <Link href="/about" className="ik-footer-about-button">
-            Know More <span>→</span>
+            {t("knowMore")} <span>→</span>
           </Link>
         </div>
       </div>
 
-      {/* Bottom Bar */}
       <div className="ik-footer-bottom">
         <p>
-          © {new Date().getFullYear()} Islamic Kalam.
-          All rights reserved.
+          © {new Date().getFullYear()} Islamic Kalam. {t("allRights")}
         </p>
 
         <p className="ik-footer-credit">
-          Made with <span>♥</span> for the love of Kalam
+          {t("footerCredit")}
         </p>
       </div>
     </footer>
