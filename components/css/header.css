@@ -1,29 +1,35 @@
 /* =========================================
-   ISLAMIC KALAM — PREMIUM HEADER
+   ISLAMIC KALAM — CLEAN HEADER
 ========================================= */
 
 .ik-header {
   position: relative;
   z-index: 100;
   width: 100%;
-  background: rgba(253, 251, 245, 0.97);
+  background: #fdfbf5;
   border-bottom: 1px solid rgba(12, 83, 64, 0.12);
-  box-shadow: 0 8px 30px rgba(32, 53, 39, 0.06);
+  box-shadow: 0 5px 22px rgba(32, 53, 39, 0.06);
 }
 
 .ik-header-pattern {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.17;
+  opacity: 0.14;
   background-image:
     radial-gradient(circle at 0 0, transparent 25px, #c69b43 26px, transparent 28px),
     radial-gradient(circle at 100% 100%, transparent 25px, #c69b43 26px, transparent 28px);
   background-size: 42px 42px;
-  mask-image: linear-gradient(90deg, #000 0, transparent 13%, transparent 87%, #000 100%);
+  mask-image: linear-gradient(
+    90deg,
+    #000,
+    transparent 13%,
+    transparent 87%,
+    #000
+  );
 }
 
-/* NAVBAR */
+/* Navbar layout */
 
 .ik-navbar {
   position: relative;
@@ -32,17 +38,17 @@
   justify-content: space-between;
   gap: 20px;
   max-width: 1500px;
-  min-height: 112px;
+  min-height: 100px;
   margin: 0 auto;
-  padding: 18px 5%;
+  padding: 14px 4%;
 }
 
-/* BRAND & LOGO */
+/* Brand */
 
 .ik-brand {
   display: inline-flex;
   align-items: center;
-  gap: 13px;
+  gap: 11px;
   flex-shrink: 0;
   color: #075b46;
   text-decoration: none;
@@ -50,8 +56,8 @@
 
 .ik-logo {
   display: grid;
-  width: 65px;
-  height: 76px;
+  width: 58px;
+  height: 68px;
   flex-shrink: 0;
   place-items: center;
 }
@@ -70,7 +76,7 @@
 .ik-brand-name {
   color: #075b46;
   font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(23px, 2.1vw, 34px);
+  font-size: clamp(22px, 2vw, 32px);
   font-weight: 700;
   line-height: 1.15;
   white-space: nowrap;
@@ -79,9 +85,9 @@
 .ik-brand-tagline {
   color: #a87822;
   font-family: "DM Sans", Arial, sans-serif;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 600;
-  letter-spacing: 1.4px;
+  letter-spacing: 1px;
   white-space: nowrap;
 }
 
@@ -90,13 +96,13 @@
   font-style: normal;
 }
 
-/* DESKTOP NAVIGATION */
+/* Desktop navigation */
 
 .ik-desktop-nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(14px, 2.1vw, 31px);
+  gap: clamp(12px, 1.6vw, 25px);
 }
 
 .ik-nav-link {
@@ -104,7 +110,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  min-height: 44px;
+  min-height: 42px;
   padding: 5px 0;
   border: 0;
   background: transparent;
@@ -131,11 +137,15 @@
 .ik-home-link::after {
   position: absolute;
   right: 0;
-  bottom: 1px;
+  bottom: 0;
   left: 0;
   height: 2px;
   background: #087157;
   content: "";
+}
+
+.ik-menu-wrap {
+  position: relative;
 }
 
 .ik-menu-button svg {
@@ -148,23 +158,19 @@
   transform: rotate(180deg);
 }
 
-.ik-menu-wrap {
-  position: relative;
-}
-
-/* NAVIGATION DROPDOWN */
+/* Navigation dropdown */
 
 .ik-dropdown {
   position: absolute;
-  top: calc(100% + 8px);
-  left: -18px;
+  top: calc(100% + 7px);
+  left: -16px;
   z-index: 200;
-  width: 250px;
-  padding: 13px;
-  border: 1px solid rgba(12, 83, 64, 0.1);
-  border-radius: 15px;
+  width: 245px;
+  padding: 12px;
+  border: 1px solid #e6e8dc;
+  border-radius: 13px;
   background: #fffdf7;
-  box-shadow: 0 18px 45px rgba(23, 54, 42, 0.14);
+  box-shadow: 0 14px 35px rgba(23, 54, 42, 0.13);
   animation: ik-dropdown-in 0.18s ease-out;
 }
 
@@ -172,7 +178,7 @@
   display: flex;
   align-items: center;
   gap: 9px;
-  padding: 10px 11px 13px;
+  padding: 10px;
   border-bottom: 1px solid #eee9dc;
   color: #075b46;
   font-family: "Playfair Display", Georgia, serif;
@@ -190,7 +196,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  padding: 12px 11px;
+  padding: 11px 10px;
   border-radius: 8px;
   color: #40504a;
   font-family: "DM Sans", Arial, sans-serif;
@@ -204,18 +210,18 @@
   color: #075b46;
 }
 
-/* SEARCH */
+/* Search */
 
 .ik-search {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
   min-width: 0;
-  height: 49px;
-  padding: 4px 5px 4px 15px;
+  height: 45px;
+  padding: 4px 5px 4px 13px;
   border: 1px solid #e3e3d9;
   border-radius: 50px;
-  background: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.7);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -225,13 +231,13 @@
 }
 
 .ik-desktop-search {
-  width: clamp(200px, 23vw, 330px);
+  width: clamp(180px, 21vw, 300px);
   flex-shrink: 1;
 }
 
 .ik-search-icon {
-  width: 21px;
-  height: 21px;
+  width: 20px;
+  height: 20px;
   flex-shrink: 0;
   color: #2e4b48;
 }
@@ -257,8 +263,8 @@
 
 .ik-search button {
   display: grid;
-  width: 39px;
-  height: 39px;
+  width: 35px;
+  height: 35px;
   flex-shrink: 0;
   place-items: center;
   border: 0;
@@ -266,20 +272,19 @@
   background: #075b46;
   color: #fff;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition: background 0.2s ease;
 }
 
 .ik-search button:hover {
-  transform: scale(1.04);
   background: #0b7559;
 }
 
 .ik-search button svg {
-  width: 20px;
-  height: 20px;
+  width: 19px;
+  height: 19px;
 }
 
-/* THREE-DOT SETTINGS BUTTON */
+/* Three-dot settings */
 
 .ik-header-settings {
   position: relative;
@@ -290,28 +295,32 @@
 
 .ik-header-settings-button {
   display: grid;
-  width: 43px;
-  height: 43px;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
   place-items: center;
-  border: 1px solid rgba(7, 91, 70, 0.15);
+  border: 1px solid rgba(7, 91, 70, 0.16);
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.65);
+  background: #fffdf7;
   color: #075b46;
   cursor: pointer;
   transition: background 0.2s ease, border-color 0.2s ease;
 }
 
-.ik-header-settings-button:hover {
-  border-color: #b6cbbd;
-  background: #edf4ed;
+.ik-header-settings-button:hover,
+.ik-header-settings-button[aria-expanded="true"] {
+  border-color: #b9cdbd;
+  background: #edf4e9;
 }
 
 .ik-header-settings-button span {
+  display: block;
+  margin-top: -5px;
   font-size: 25px;
   line-height: 1;
 }
 
-/* COMPACT SETTINGS POPUP */
+/* Compact settings popup */
 
 .ik-header-settings-menu {
   position: absolute;
@@ -320,10 +329,10 @@
   z-index: 300;
   width: 235px;
   padding: 14px;
-  border: 1px solid #e5e8dc;
-  border-radius: 14px;
+  border: 1px solid #e4e8dc;
+  border-radius: 13px;
   background: #fffdf7;
-  box-shadow: 0 14px 35px rgba(23, 54, 42, 0.17);
+  box-shadow: 0 14px 35px rgba(23, 54, 42, 0.16);
   animation: ik-dropdown-in 0.18s ease-out;
 }
 
@@ -338,32 +347,35 @@
 .ik-header-setting-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
 
 .ik-header-setting-group + .ik-header-setting-group {
-  margin-top: 13px;
+  margin-top: 12px;
   padding-top: 12px;
   border-top: 1px solid #eee9dc;
 }
 
 .ik-header-setting-label {
-  margin-bottom: 3px;
+  display: block;
+  margin: 0 0 5px;
   color: #69796a;
   font-family: "DM Sans", Arial, sans-serif;
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.7px;
   text-transform: uppercase;
 }
 
-.ik-header-settings-menu button {
+/* Language and theme choices */
+
+.ik-header-settings-menu .ik-header-setting-group button {
   display: flex;
   width: 100%;
+  min-height: 36px;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
-  min-height: 36px;
+  gap: 10px;
   padding: 8px 10px;
   border: 1px solid transparent;
   border-radius: 8px;
@@ -376,50 +388,58 @@
   transition: background 0.2s ease, color 0.2s ease;
 }
 
-.ik-header-settings-menu button:hover {
-  background: #eff4eb;
+.ik-header-settings-menu .ik-header-setting-group button:hover {
+  background: #f0f4ec;
   color: #075b46;
 }
 
-.ik-header-settings-menu button.ik-setting-active {
-  border-color: #d5e4d6;
+.ik-header-settings-menu .ik-header-setting-group button.ik-setting-active {
+  border-color: #d7e4d6;
   background: #edf4e9;
   color: #075b46;
   font-weight: 700;
 }
 
-/* MOBILE MENU BUTTON */
+/* Keep Urdu aligned correctly */
+
+.ik-header-settings-menu button[lang="ur"],
+.ik-header-settings-menu button[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Mobile menu toggle */
 
 .ik-mobile-toggle {
   display: none;
-  width: 45px;
-  height: 45px;
+  width: 42px;
+  height: 42px;
   flex-shrink: 0;
   place-items: center;
   border: 0;
-  border-radius: 12px;
+  border-radius: 11px;
   background: #075b46;
   color: #fff;
   cursor: pointer;
 }
 
 .ik-mobile-toggle svg {
-  width: 24px;
-  height: 24px;
+  width: 23px;
+  height: 23px;
 }
 
-/* MOBILE MENU PANEL */
+/* Mobile navigation panel */
 
 .ik-mobile-panel {
   display: none;
 }
 
-/* DROPDOWN ANIMATION */
+/* Dropdown animation */
 
 @keyframes ik-dropdown-in {
   from {
     opacity: 0;
-    transform: translateY(7px);
+    transform: translateY(5px);
   }
 
   to {
@@ -428,71 +448,78 @@
   }
 }
 
-/* TABLET */
+/* Tablet */
 
 @media (max-width: 1100px) {
   .ik-navbar {
-    gap: 14px;
-    padding-right: 4%;
-    padding-left: 4%;
+    gap: 12px;
+    padding-right: 3%;
+    padding-left: 3%;
   }
 
   .ik-desktop-nav {
-    gap: 15px;
+    gap: 12px;
   }
 
   .ik-nav-link {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .ik-brand {
-    gap: 9px;
+    gap: 8px;
   }
 
   .ik-logo {
-    width: 53px;
-    height: 64px;
-  }
-
-  .ik-brand-tagline {
-    font-size: 8px;
-    letter-spacing: 1px;
-  }
-
-  .ik-desktop-search {
-    width: 190px;
-  }
-
-  .ik-header-settings-button {
-    width: 40px;
-    height: 40px;
-  }
-}
-
-/* MOBILE */
-
-@media (max-width: 850px) {
-  .ik-navbar {
-    min-height: 86px;
-    padding: 12px 5%;
-  }
-
-  .ik-logo {
-    width: 50px;
+    width: 49px;
     height: 59px;
   }
 
+  .ik-brand-tagline {
+    font-size: 8px;
+    letter-spacing: 0.7px;
+  }
+
+  .ik-desktop-search {
+    width: 175px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 850px) {
+  .ik-navbar {
+    min-height: 82px;
+    padding: 10px 4%;
+  }
+
+  .ik-logo {
+    width: 47px;
+    height: 56px;
+  }
+
   .ik-brand-name {
-    font-size: 25px;
+    font-size: 24px;
   }
 
   .ik-brand-tagline {
-    font-size: 8px;
+    font-size: 7px;
+    letter-spacing: 0.7px;
   }
 
   .ik-desktop-nav,
   .ik-desktop-search {
     display: none;
+  }
+
+  /* Keep settings visible beside the mobile menu button. */
+  .ik-header-settings {
+    display: flex;
+    margin-left: auto;
+  }
+
+  .ik-header-settings-button {
+    width: 38px;
+    height: 38px;
   }
 
   .ik-mobile-toggle {
@@ -501,19 +528,19 @@
 
   .ik-mobile-panel {
     position: absolute;
-    top: calc(100% + 8px);
-    right: 4%;
-    left: 4%;
+    top: calc(100% + 7px);
+    right: 3%;
+    left: 3%;
     display: block;
     max-height: 0;
     overflow: hidden;
     visibility: hidden;
     border: 1px solid transparent;
-    border-radius: 18px;
+    border-radius: 15px;
     background: #fffdf7;
-    box-shadow: 0 20px 50px rgba(30, 53, 41, 0.16);
+    box-shadow: 0 16px 38px rgba(30, 53, 41, 0.14);
     opacity: 0;
-    transition: max-height 0.35s ease, opacity 0.25s ease, visibility 0.25s ease;
+    transition: max-height 0.3s ease, opacity 0.2s ease, visibility 0.2s ease;
   }
 
   .ik-mobile-panel.ik-panel-open {
@@ -525,22 +552,22 @@
   }
 
   .ik-mobile-panel-inner {
-    padding: 15px;
+    padding: 13px;
   }
 
   .ik-mobile-link {
     display: flex;
     width: 100%;
+    min-height: 52px;
     align-items: center;
-    gap: 14px;
-    min-height: 58px;
-    padding: 12px 13px;
+    gap: 12px;
+    padding: 11px 12px;
     border: 0;
     border-bottom: 1px solid #eeece3;
     background: transparent;
     color: #263f3a;
     font-family: "Playfair Display", Georgia, serif;
-    font-size: 17px;
+    font-size: 16px;
     text-align: left;
     text-decoration: none;
     cursor: pointer;
@@ -549,7 +576,7 @@
   .ik-mobile-home {
     margin-bottom: 5px;
     border-bottom: 0;
-    border-radius: 10px;
+    border-radius: 9px;
     background: #edf3e9;
     color: #075b46;
     font-weight: 700;
@@ -557,12 +584,12 @@
 
   .ik-mobile-link-icon {
     display: grid;
-    width: 28px;
-    height: 28px;
+    width: 27px;
+    height: 27px;
     flex-shrink: 0;
     place-items: center;
     color: #075b46;
-    font-size: 23px;
+    font-size: 21px;
   }
 
   .ik-mobile-arrow {
@@ -584,16 +611,16 @@
   .ik-mobile-submenu {
     display: grid;
     gap: 2px;
-    padding: 6px 0 12px 42px;
+    padding: 5px 0 10px 39px;
     border-bottom: 1px solid #eeece3;
   }
 
   .ik-mobile-submenu a {
-    padding: 10px 12px;
+    padding: 9px 10px;
     border-radius: 7px;
     color: #52625b;
     font-family: "DM Sans", Arial, sans-serif;
-    font-size: 14px;
+    font-size: 13px;
     text-decoration: none;
   }
 
@@ -603,14 +630,14 @@
   }
 
   .ik-mobile-search {
-    margin-top: 20px;
+    margin-top: 16px;
   }
 
   .ik-mobile-bottom {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 23px 10px 14px;
+    padding: 20px 10px 12px;
     color: #8c9b77;
     text-align: center;
   }
@@ -618,68 +645,68 @@
   .ik-bottom-crescent {
     color: #b9994b;
     font-family: Georgia, serif;
-    font-size: 31px;
+    font-size: 28px;
   }
 
   .ik-mobile-bottom p {
-    margin: 7px 0 11px;
+    margin: 6px 0 10px;
     color: #69796a;
     font-family: "Playfair Display", Georgia, serif;
-    font-size: 14px;
+    font-size: 13px;
     font-style: italic;
   }
 
   .ik-bottom-divider {
     color: #c6a75b;
-    font-size: 12px;
+    font-size: 11px;
     letter-spacing: 3px;
   }
 }
 
-/* SMALL MOBILE */
+/* Small mobile */
 
 @media (max-width: 420px) {
   .ik-navbar {
-    min-height: 78px;
-    gap: 8px;
-    padding: 10px 4%;
+    min-height: 74px;
+    gap: 7px;
+    padding: 9px 3%;
   }
 
   .ik-logo {
-    width: 43px;
-    height: 52px;
+    width: 40px;
+    height: 49px;
   }
 
   .ik-brand {
-    gap: 7px;
+    gap: 6px;
   }
 
   .ik-brand-name {
-    font-size: 21px;
+    font-size: 20px;
   }
 
   .ik-brand-tagline {
-    font-size: 7px;
-    letter-spacing: 0.7px;
+    font-size: 6px;
+    letter-spacing: 0.5px;
   }
 
+  .ik-header-settings-button,
   .ik-mobile-toggle {
-    width: 41px;
-    height: 41px;
-    border-radius: 10px;
+    width: 36px;
+    height: 36px;
   }
 
-  .ik-mobile-panel {
-    right: 3%;
-    left: 3%;
+  .ik-header-settings-menu {
+    right: -42px;
+    width: 225px;
   }
 
   .ik-mobile-panel-inner {
-    padding: 12px;
+    padding: 11px;
   }
 }
 
-/* ACCESSIBILITY */
+/* Accessibility */
 
 @media (prefers-reduced-motion: reduce) {
   .ik-header *,
@@ -690,4 +717,4 @@
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
   }
-   }
+}
