@@ -1,5 +1,5 @@
 /* =========================================
-   ISLAMIC KALAM — PREMIUM NAVBAR
+   ISLAMIC KALAM — PREMIUM HEADER
 ========================================= */
 
 .ik-header {
@@ -17,8 +17,18 @@
   pointer-events: none;
   opacity: 0.17;
   background-image:
-    radial-gradient(circle at 0 0, transparent 25px, #c69b43 26px, transparent 28px),
-    radial-gradient(circle at 100% 100%, transparent 25px, #c69b43 26px, transparent 28px);
+    radial-gradient(
+      circle at 0 0,
+      transparent 25px,
+      #c69b43 26px,
+      transparent 28px
+    ),
+    radial-gradient(
+      circle at 100% 100%,
+      transparent 25px,
+      #c69b43 26px,
+      transparent 28px
+    );
   background-size: 42px 42px;
   mask-image: linear-gradient(
     90deg,
@@ -29,17 +39,25 @@
   );
 }
 
+/* =========================================
+   NAVBAR LAYOUT
+========================================= */
+
 .ik-navbar {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 26px;
+  gap: 20px;
   max-width: 1500px;
   min-height: 112px;
   margin: 0 auto;
   padding: 18px 5%;
 }
+
+/* =========================================
+   BRAND & LOGO
+========================================= */
 
 .ik-brand {
   display: inline-flex;
@@ -54,6 +72,7 @@
   display: grid;
   width: 65px;
   height: 76px;
+  flex-shrink: 0;
   place-items: center;
 }
 
@@ -90,6 +109,10 @@
   padding: 0 3px;
   font-style: normal;
 }
+
+/* =========================================
+   DESKTOP NAVIGATION
+========================================= */
 
 .ik-desktop-nav {
   display: flex;
@@ -151,6 +174,10 @@
   position: relative;
 }
 
+/* =========================================
+   NAVIGATION DROPDOWN
+========================================= */
+
 .ik-dropdown {
   position: absolute;
   top: calc(100% + 8px);
@@ -177,7 +204,8 @@
   font-weight: 700;
 }
 
-.ik-dropdown-symbol {
+.ik-dropdown-symbol,
+.ik-dropdown-arrow {
   color: #b58b37;
 }
 
@@ -192,7 +220,9 @@
   font-family: "DM Sans", Arial, sans-serif;
   font-size: 13px;
   text-decoration: none;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
 }
 
 .ik-dropdown-link:hover {
@@ -200,9 +230,9 @@
   color: #075b46;
 }
 
-.ik-dropdown-arrow {
-  color: #b58b37;
-}
+/* =========================================
+   SEARCH
+========================================= */
 
 .ik-search {
   display: flex;
@@ -214,7 +244,9 @@
   border: 1px solid #e3e3d9;
   border-radius: 50px;
   background: rgba(255, 255, 255, 0.55);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .ik-search:focus-within {
@@ -262,9 +294,11 @@
   border: 0;
   border-radius: 50%;
   background: #075b46;
-  color: white;
+  color: #fff;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .ik-search button:hover {
@@ -277,6 +311,121 @@
   height: 20px;
 }
 
+/* =========================================
+   THREE-DOT SETTINGS MENU
+========================================= */
+
+.ik-header-settings {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+.ik-header-settings-button {
+  display: grid;
+  width: 43px;
+  height: 43px;
+  place-items: center;
+  border: 1px solid rgba(7, 91, 70, 0.15);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.65);
+  color: #075b46;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.ik-header-settings-button:hover {
+  transform: translateY(-1px);
+  border-color: #b6cbbd;
+  background: #edf4ed;
+}
+
+.ik-header-settings-button svg {
+  width: 22px;
+  height: 22px;
+}
+
+.ik-header-settings-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 300;
+  width: 250px;
+  padding: 17px;
+  border: 1px solid rgba(12, 83, 64, 0.12);
+  border-radius: 16px;
+  background: #fffdf7;
+  box-shadow: 0 18px 45px rgba(23, 54, 42, 0.16);
+  animation: ik-dropdown-in 0.18s ease-out;
+}
+
+.ik-header-settings-title {
+  margin: 0 0 15px;
+  color: #075b46;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.ik-header-setting-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.ik-header-setting-group + .ik-header-setting-group {
+  margin-top: 17px;
+  padding-top: 15px;
+  border-top: 1px solid #eee9dc;
+}
+
+.ik-header-setting-label {
+  margin-bottom: 3px;
+  color: #69796a;
+  font-family: "DM Sans", Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.ik-header-settings-menu button {
+  width: 100%;
+  padding: 10px 11px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: transparent;
+  color: #40504a;
+  font-family: "DM Sans", Arial, sans-serif;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.ik-header-settings-menu button:hover {
+  background: #eff4eb;
+  color: #075b46;
+}
+
+.ik-header-settings-menu button.ik-setting-active {
+  border-color: #d5e4d6;
+  background: #edf4e9;
+  color: #075b46;
+  font-weight: 700;
+}
+
+/* =========================================
+   MOBILE MENU BUTTON
+========================================= */
+
 .ik-mobile-toggle {
   display: none;
   width: 45px;
@@ -286,7 +435,7 @@
   border: 0;
   border-radius: 12px;
   background: #075b46;
-  color: white;
+  color: #fff;
   cursor: pointer;
 }
 
@@ -295,9 +444,61 @@
   height: 24px;
 }
 
+/* =========================================
+   MOBILE MENU PANEL
+========================================= */
+
 .ik-mobile-panel {
   display: none;
 }
+
+/* =========================================
+   MOBILE SETTINGS
+========================================= */
+
+.ik-mobile-settings {
+  margin-top: 18px;
+  padding: 17px 12px;
+  border: 1px solid #e6e8dc;
+  border-radius: 13px;
+  background: #faf9f1;
+}
+
+.ik-mobile-settings .ik-header-setting-group + .ik-header-setting-group {
+  margin-top: 15px;
+  padding-top: 14px;
+}
+
+.ik-mobile-settings-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.ik-mobile-settings-options button {
+  min-height: 39px;
+  padding: 9px 8px;
+  border: 1px solid #e1e6da;
+  border-radius: 8px;
+  background: #fffdf7;
+  color: #40504a;
+  font-family: "DM Sans", Arial, sans-serif;
+  font-size: 12px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.ik-mobile-settings-options button:hover,
+.ik-mobile-settings-options button.ik-setting-active {
+  border-color: #b9d0bc;
+  background: #edf4e9;
+  color: #075b46;
+  font-weight: 700;
+}
+
+/* =========================================
+   DROPDOWN ANIMATION
+========================================= */
 
 @keyframes ik-dropdown-in {
   from {
@@ -311,11 +512,13 @@
   }
 }
 
-/* TABLET AND MOBILE */
+/* =========================================
+   TABLET
+========================================= */
 
 @media (max-width: 1100px) {
   .ik-navbar {
-    gap: 17px;
+    gap: 14px;
     padding-right: 4%;
     padding-left: 4%;
   }
@@ -343,9 +546,18 @@
   }
 
   .ik-desktop-search {
-    width: 205px;
+    width: 190px;
+  }
+
+  .ik-header-settings-button {
+    width: 40px;
+    height: 40px;
   }
 }
+
+/* =========================================
+   MOBILE
+========================================= */
 
 @media (max-width: 850px) {
   .ik-navbar {
@@ -367,7 +579,8 @@
   }
 
   .ik-desktop-nav,
-  .ik-desktop-search {
+  .ik-desktop-search,
+  .ik-header-settings {
     display: none;
   }
 
@@ -516,6 +729,10 @@
   }
 }
 
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
 @media (max-width: 420px) {
   .ik-navbar {
     min-height: 78px;
@@ -554,5 +771,20 @@
 
   .ik-mobile-panel-inner {
     padding: 12px;
+  }
+}
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .ik-header *,
+  .ik-header *::before,
+  .ik-header *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }
