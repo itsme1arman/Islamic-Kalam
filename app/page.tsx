@@ -31,11 +31,10 @@ const content = {
     stat1: "KALAM CATEGORIES",
     stat2: "MOHABBAT AUR AQEEDAT",
     stat3: "ADAB KI PEHCHAAN",
-    language: "Language",
-    theme: "Theme",
     light: "Light",
     dark: "Dark",
   },
+
   hindi: {
     badge: "अदब · अकीदत · मोहब्बत",
     title1: "ऐसे अल्फ़ाज़ जो दिल को",
@@ -60,11 +59,10 @@ const content = {
     stat1: "कलाम की श्रेणियाँ",
     stat2: "मोहब्बत और अकीदत",
     stat3: "अदब की पहचान",
-    language: "भाषा",
-    theme: "थीम",
     light: "लाइट",
     dark: "डार्क",
   },
+
   urdu: {
     badge: "ادب · عقیدت · محبت",
     title1: "الفاظ جو دل کو",
@@ -89,8 +87,6 @@ const content = {
     stat1: "کلام کی اقسام",
     stat2: "محبت اور عقیدت",
     stat3: "ادب کی پہچان",
-    language: "زبان",
-    theme: "تھیم",
     light: "لائٹ",
     dark: "ڈارک",
   },
@@ -107,7 +103,6 @@ const categoryItems = [
 export default function HomePage() {
   const [language, setLanguage] = useState<Language>("hinglish");
   const [theme, setTheme] = useState<Theme>("light");
-  const [menuOpen, setMenuOpen] = useState(false);
   const [search, setSearch] = useState("");
 
   useEffect(() => {
@@ -127,7 +122,7 @@ export default function HomePage() {
         setTheme(savedTheme);
       }
     } catch {
-      // Continue with default settings when storage is unavailable.
+      // Default settings will be used if storage is unavailable.
     }
   }, []);
 
@@ -140,6 +135,36 @@ export default function HomePage() {
     }
   }, [language, theme]);
 
+  useEffect(() => {
+    function handleSettingsChange(event: Event) {
+      const customEvent = event as CustomEvent<{
+        language?: Language;
+        theme?: Theme;
+      }>;
+
+      const nextLanguage = customEvent.detail?.language;
+      const nextTheme = customEvent.detail?.theme;
+
+      if (
+        nextLanguage === "hinglish" ||
+        nextLanguage === "hindi" ||
+        nextLanguage === "urdu"
+      ) {
+        setLanguage(nextLanguage);
+      }
+
+      if (nextTheme === "light" || nextTheme === "dark") {
+        setTheme(nextTheme);
+      }
+    }
+
+    window.addEventListener("ik-settings-change", handleSettingsChange);
+
+    return () => {
+      window.removeEventListener("ik-settings-change", handleSettingsChange);
+    };
+  }, []);
+
   const t = content[language];
 
   function submitSearch(event: React.FormEvent<HTMLFormElement>) {
@@ -148,7 +173,8 @@ export default function HomePage() {
     const query = search.trim();
 
     if (query) {
-      window.location.href = "/naat?search=" + encodeURIComponent(query);
+      window.location.href =
+        "/naat?search=" + encodeURIComponent(query);
     }
   }
 
@@ -158,131 +184,62 @@ export default function HomePage() {
       dir={language === "urdu" ? "rtl" : "ltr"}
     >
       <section className="ik-hero">
-        <div className="ik-settings-wrap">
-          <button
-            type="button"
-            className="ik-settings-button"
-            aria-label="Settings"
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((open) => !open)}
-          >
-            {menuOpen ? "×" : "⋯"}
-          </button>
-
-          {menuOpen && (
-            <div className="ik-settings-menu">
-              <div className="ik-setting-row">
-                <span>{t.language}</span>
-
-                <div className="ik-setting-options">
-                  <button
-                    type="button"
-                    className={language === "hinglish" ? "active" : ""}
-                    onClick={() => setLanguage("hinglish")}
-                  >
-                    Hinglish
-                  </button>
-
-                  <button
-                    type="button"
-                    className={language === "hindi" ? "active" : ""}
-                    onClick={() => setLanguage("hindi")}
-                  >
-                    हिन्दी
-                  </button>
-
-                  <button
-                    type="button"
-                    className={language === "urdu" ? "active" : ""}
-                    onClick={() => setLanguage("urdu")}
-                  >
-                    اردو
-                  </button>
-                </div>
-              </div>
-
-              <div className="ik-setting-row">
-                <span>{t.theme}</span>
-
-                <div className="ik-setting-options">
-                  <button
-                    type="button"
-                    className={theme === "light" ? "active" : ""}
-                    onClick={() => setTheme("light")}
-                  >
-                    ☀ {t.light}
-                  </button>
-
-                  <button
-                    type="button"
-                    className={theme === "dark" ? "active" : ""}
-                    onClick={() => setTheme("dark")}
-                  >
-                    ☾ {t.dark}
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
+        <div className="ik-badge">
+          <span>✦</span>
+          {t.badge}
+          <span>✦</span>
         </div>
 
-          <div className="ik-badge">
-            <span>✦</span>
-            {t.badge}
-            <span>✦</span>
-          </div>
+        <p className="ik-bismillah" lang="ar" dir="rtl">
+          بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+        </p>
 
-          <p className="ik-bismillah" lang="ar" dir="rtl">
-            بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-          </p>
+        <h1>
+          {t.title1}
+          <br />
+          {t.title2}
+          <br />
+          <em>{t.title3}</em>
+          <br />
+          {t.title4}
+        </h1>
 
-          <h1>
-            {t.title1}
-            <br />
-            {t.title2}
-            <br />
-            <em>{t.title3}</em>
-            <br />
-            {t.title4}
-          </h1>
+        <p className="ik-description">{t.description}</p>
 
-          <p className="ik-description">{t.description}</p>
+        <div className="ik-actions">
+          <Link href="/naat" className="ik-button ik-primary">
+            {t.explore} <span>↗</span>
+          </Link>
 
-          <div className="ik-actions">
-            <Link href="/naat" className="ik-button ik-primary">
-              {t.explore} <span>↗</span>
-            </Link>
+          <Link href="/biography" className="ik-button ik-outline">
+            {t.biography} <span>→</span>
+          </Link>
+        </div>
 
-            <Link href="/biography" className="ik-button ik-outline">
-              {t.biography} <span>→</span>
-            </Link>
-          </div>
+        <form className="ik-search" onSubmit={submitSearch}>
+          <span className="ik-search-icon" aria-hidden="true">
+            ⌕
+          </span>
 
-          <form className="ik-search" onSubmit={submitSearch}>
-            <span className="ik-search-icon" aria-hidden="true">
-              ⌕
-            </span>
+          <input
+            type="search"
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+            placeholder={t.placeholder}
+            aria-label={t.placeholder}
+          />
 
-            <input
-              type="search"
-              value={search}
-              onChange={(event) => setSearch(event.target.value)}
-              placeholder={t.placeholder}
-              aria-label={t.placeholder}
-            />
+          <button type="submit">{t.search} ↗</button>
+        </form>
 
-            <button type="submit">{t.search} ↗</button>
-          </form>
-
-          <div className="ik-hero-note">
-            <span />
-            <p>Ilm se roshni</p>
-            <b>·</b>
-            <p>Kalam se mohabbat</p>
-            <b>·</b>
-            <p>Adab ke saath</p>
-            <span />
-          </div>
+        <div className="ik-hero-note">
+          <span />
+          <p>Ilm se roshni</p>
+          <b>·</b>
+          <p>Kalam se mohabbat</p>
+          <b>·</b>
+          <p>Adab ke saath</p>
+          <span />
         </div>
       </section>
 
@@ -357,9 +314,11 @@ export default function HomePage() {
         <div className="ik-calligraphy">
           <div className="ik-calligraphy-ring" />
           <span className="ik-star">✦</span>
+
           <p lang="ar" dir="rtl">
             صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ
           </p>
+
           <span className="ik-gold-line" />
           <small>ISHQ · ADAB · AQEEDAT</small>
         </div>
@@ -380,4 +339,4 @@ export default function HomePage() {
       </section>
     </div>
   );
-}
+      }
