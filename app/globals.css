@@ -58,3 +58,47 @@ main {
   outline: 2px solid #b99a51;
   outline-offset: 3px;
 }
+
+html[dir="rtl"] body {
+  direction: rtl;
+}
+
+html[dir="rtl"] .ik-navbar,
+html[dir="rtl"] .ik-footer-main,
+html[dir="rtl"] .ik-footer-bottom {
+  direction: rtl;
+}
+
+html[dir="rtl"] .ik-settings-popup {
+  right: auto;
+  left: 0;
+}
+
+html[dir="rtl"] .ik-navigation-panel {
+  left: auto;
+  right: 0;
+}
+
+html[dir="rtl"] .ik-navigation-links a,
+html[dir="rtl"] .ik-setting-option {
+  text-align: right;
+}
+
+html[dir="rtl"] .ik-option-check {
+  margin-right: auto;
+  margin-left: 0;
+}
+
+html[dir="rtl"] .ik-navigation-arrow {
+  transform: rotate(180deg);
+}
+
+html[dir="rtl"] input,
+html[dir="rtl"] textarea {
+  text-align: right;
+}
+
+html[dir="rtl"] .ik-footer-column,
+html[dir="rtl"] .ik-footer-purpose {
+  text-align: right;
+}
