@@ -3,33 +3,29 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer className="ik-footer">
+      {/* Main Footer */}
       <div className="ik-footer-main">
-
         {/* Brand */}
         <div className="ik-footer-brand">
           <Link href="/" className="ik-footer-logo">
             <span className="ik-footer-icon">☾</span>
-
             <span>Islamic Kalam</span>
           </Link>
 
           <p className="ik-footer-description">
             Naat Sharif, Manqabat aur buzurgan-e-deen ki
             zindagi se judi maloomat ka ek majmua.
-            Mohabbat, adab aur ilm ke saath.
           </p>
 
           <div className="ik-footer-motto">
             <span>✦</span>
             <span>Ilm se roshni · Kalam se mohabbat</span>
-            <span>✦</span>
           </div>
         </div>
 
         {/* Explore */}
         <div className="ik-footer-column">
           <h3>Explore</h3>
-
           <Link href="/">Home</Link>
           <Link href="/naat">Naat Sharif</Link>
           <Link href="/manqabat">Manqabat</Link>
@@ -39,12 +35,11 @@ export default function Footer() {
         {/* Information */}
         <div className="ik-footer-column">
           <h3>Information</h3>
-
           <Link href="/about">About Us</Link>
           <Link href="/contact">Contact Us</Link>
           <Link href="/privacy-policy">Privacy Policy</Link>
           <Link href="/disclaimer">Disclaimer</Link>
-          <Link href="/terms">Terms & Conditions</Link>
+          <Link href="/terms">Terms &amp; Conditions</Link>
         </div>
 
         {/* Purpose */}
@@ -63,7 +58,7 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom bar */}
+      {/* Bottom Bar */}
       <div className="ik-footer-bottom">
         <p>
           © {new Date().getFullYear()} Islamic Kalam.
