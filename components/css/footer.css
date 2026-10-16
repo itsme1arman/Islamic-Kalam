@@ -1,112 +1,139 @@
-/* =================================
-   PROFESSIONAL ISLAMIC KALAM FOOTER
-================================= */
+/* =========================================
+   ISLAMIC KALAM — COMPACT PREMIUM FOOTER
+========================================= */
 
 .ik-footer {
   position: relative;
+  width: 100%;
+  margin-top: 35px;
   overflow: hidden;
-  margin-top: 60px;
   background: #103f34;
   color: #f9f5e9;
   font-family: "DM Sans", Arial, sans-serif;
 }
 
-.ik-footer::before {
+.ik-footer::before,
+.ik-footer::after {
   position: absolute;
-  top: -100px;
-  right: -90px;
-  width: 250px;
-  height: 250px;
-  border: 1px solid rgba(210, 180, 105, 0.17);
+  border: 1px solid rgba(210, 180, 105, 0.16);
   border-radius: 50%;
   content: "";
   pointer-events: none;
 }
 
-.ik-footer::after {
-  position: absolute;
-  top: -65px;
-  right: -55px;
-  width: 180px;
-  height: 180px;
-  border: 1px solid rgba(210, 180, 105, 0.14);
-  border-radius: 50%;
-  content: "";
-  pointer-events: none;
+.ik-footer::before {
+  top: -95px;
+  right: -75px;
+  width: 220px;
+  height: 220px;
 }
+
+.ik-footer::after {
+  top: -55px;
+  right: -35px;
+  width: 145px;
+  height: 145px;
+}
+
+/* Main layout */
 
 .ik-footer-main {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 1.5fr 0.8fr 1fr 1.2fr;
-  gap: 45px;
-  max-width: 1300px;
+  grid-template-columns: 1.4fr 0.8fr 1fr 1.15fr;
+  gap: 30px;
+  width: min(1160px, 90%);
   margin: 0 auto;
-  padding: 55px 5% 45px;
+  padding: 35px 0 28px;
+}
+
+/* Brand */
+
+.ik-footer-brand {
+  min-width: 0;
 }
 
 .ik-footer-logo {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
   color: #fffaf0;
   font-family: "Playfair Display", Georgia, serif;
-  font-size: 25px;
+  font-size: 23px;
   font-weight: 700;
   text-decoration: none;
 }
 
 .ik-footer-icon {
   display: grid;
-  width: 42px;
-  height: 42px;
+  width: 37px;
+  height: 37px;
+  flex-shrink: 0;
   place-items: center;
   border: 1px solid #c8a65b;
   border-radius: 50%;
   color: #d5b86f;
-  font-size: 28px;
+  font-size: 25px;
 }
 
 .ik-footer-description {
-  max-width: 340px;
-  margin: 20px 0;
+  max-width: 300px;
+  margin: 13px 0;
   color: #d4dfd5;
-  font-size: 14px;
-  line-height: 1.9;
+  font-size: 12.5px;
+  line-height: 1.8;
 }
 
 .ik-footer-motto {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
   color: #d8bc79;
-  font-size: 11px;
-  letter-spacing: 0.3px;
+  font-size: 10.5px;
+  line-height: 1.7;
 }
+
+/* Footer columns */
 
 .ik-footer-column {
   display: flex;
+  min-width: 0;
   flex-direction: column;
   align-items: flex-start;
-  gap: 13px;
+  gap: 9px;
 }
 
 .ik-footer-column h3 {
-  margin: 5px 0 10px;
+  position: relative;
+  margin: 3px 0 7px;
+  padding-bottom: 8px;
   color: #e1c782;
   font-family: "Playfair Display", Georgia, serif;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
+}
+
+.ik-footer-column h3::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 25px;
+  height: 2px;
+  border-radius: 2px;
+  background: #c8a65b;
+  content: "";
 }
 
 .ik-footer-column > a:not(.ik-footer-about-button) {
   color: #d4dfd5;
-  font-size: 13px;
-  line-height: 1.7;
+  font-size: 12px;
+  line-height: 1.65;
   text-decoration: none;
-  transition: color 0.2s ease, transform 0.2s ease;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .ik-footer-column > a:not(.ik-footer-about-button):hover {
@@ -114,30 +141,37 @@
   color: #e5cb85;
 }
 
+/* Purpose */
+
 .ik-footer-purpose p {
   margin: 0;
   color: #d4dfd5;
-  font-size: 13px;
-  line-height: 1.9;
+  font-size: 12px;
+  line-height: 1.8;
 }
 
 .ik-footer-about-button {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  margin-top: 7px;
-  padding: 10px 15px;
+  gap: 10px;
+  margin-top: 5px;
+  padding: 8px 12px;
   border: 1px solid rgba(221, 196, 130, 0.55);
-  border-radius: 7px;
+  border-radius: 6px;
   color: #f3e5bc;
-  font-size: 13px;
+  font-size: 12px;
   text-decoration: none;
-  transition: background 0.2s ease;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .ik-footer-about-button:hover {
+  border-color: #e1c782;
   background: rgba(255, 255, 255, 0.08);
 }
+
+/* Bottom bar */
 
 .ik-footer-bottom {
   position: relative;
@@ -145,8 +179,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 15px;
-  padding: 20px 5%;
+  gap: 12px;
+  width: 100%;
+  padding: 13px max(5%, calc((100% - 1160px) / 2));
   border-top: 1px solid rgba(230, 215, 170, 0.18);
   background: rgba(0, 0, 0, 0.12);
 }
@@ -154,7 +189,7 @@
 .ik-footer-bottom p {
   margin: 0;
   color: #cbd8ce;
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1.7;
 }
 
@@ -163,73 +198,93 @@
 }
 
 /* Tablet */
-@media (max-width: 900px) {
+
+@media (max-width: 1000px) {
   .ik-footer-main {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 35px;
-    padding: 45px 6%;
+    gap: 28px 35px;
+    width: 88%;
+    padding: 32px 0 26px;
+  }
+
+  .ik-footer-brand {
+    max-width: 340px;
   }
 }
 
 /* Mobile */
+
 @media (max-width: 540px) {
   .ik-footer {
-    margin-top: 40px;
+    margin-top: 28px;
   }
 
   .ik-footer-main {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 30px 22px;
-    padding: 38px 6% 30px;
+    gap: 25px 18px;
+    width: 90%;
+    padding: 27px 0 23px;
   }
 
   .ik-footer-brand {
     grid-column: 1 / -1;
+    max-width: 100%;
   }
 
   .ik-footer-logo {
-    font-size: 23px;
+    font-size: 22px;
   }
 
   .ik-footer-description {
-    margin: 15px 0;
-    font-size: 13px;
+    margin: 11px 0;
+    font-size: 12px;
   }
 
   .ik-footer-column {
-    gap: 11px;
+    gap: 9px;
   }
 
   .ik-footer-column h3 {
-    font-size: 16px;
+    font-size: 15px;
   }
 
-  .ik-footer-column > a:not(.ik-footer-about-button) {
-    font-size: 12px;
-  }
-
+  .ik-footer-column > a:not(.ik-footer-about-button),
   .ik-footer-purpose p {
-    font-size: 12px;
+    font-size: 11.5px;
   }
 
   .ik-footer-bottom {
     flex-direction: column;
     align-items: flex-start;
-    gap: 5px;
-    padding: 17px 6%;
+    gap: 4px;
+    padding: 12px 5%;
   }
 
   .ik-footer-bottom p {
-    font-size: 11px;
+    font-size: 10.5px;
   }
 }
+
+/* Very small screens */
 
 @media (max-width: 350px) {
   .ik-footer-main {
     grid-template-columns: 1fr;
+    gap: 22px;
   }
 
   .ik-footer-brand {
     grid-column: auto;
+  }
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .ik-footer *,
+  .ik-footer *::before,
+  .ik-footer *::after {
+    animation: none !important;
+    transition: none !important;
   }
 }
