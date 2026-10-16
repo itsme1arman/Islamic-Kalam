@@ -3,6 +3,7 @@ import "./globals.css";
 import "./home.css";
 import "../components/css/header.css";
 import "../components/css/footer.css";
+import "@/components/css/category.css";
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
