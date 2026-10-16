@@ -1,7 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+type Language = "hinglish" | "hindi" | "urdu";
+type Theme = "light" | "dark";
 
 const menus = [
   {
@@ -36,10 +39,53 @@ export default function Navbar() {
   const [activeMenu, setActiveMenu] = useState("");
   const [search, setSearch] = useState("");
 
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [language, setLanguage] = useState<Language>("hinglish");
+  const [theme, setTheme] = useState<Theme>("light");
+
+  useEffect(() => {
+    try {
+      const savedLanguage = localStorage.getItem("ik-language");
+      const savedTheme = localStorage.getItem("ik-theme");
+
+      if (
+        savedLanguage === "hinglish" ||
+        savedLanguage === "hindi" ||
+        savedLanguage === "urdu"
+      ) {
+        setLanguage(savedLanguage);
+      }
+
+      if (savedTheme === "light" || savedTheme === "dark") {
+        setTheme(savedTheme);
+      }
+    } catch {
+      // Use default settings if localStorage is unavailable.
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("ik-language", language);
+      localStorage.setItem("ik-theme", theme);
+    } catch {
+      // The site can still work without localStorage.
+    }
+
+    window.dispatchEvent(
+      new CustomEvent("ik-settings-change", {
+        detail: { language, theme },
+      })
+    );
+
+    document.documentElement.dataset.ikTheme = theme;
+  }, [language, theme]);
+
   function handleSearch(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const query = search.trim();
+
     if (!query) return;
 
     window.location.href = `/naat?search=${encodeURIComponent(query)}`;
@@ -51,7 +97,6 @@ export default function Navbar() {
       <div className="ik-header-pattern" />
 
       <nav className="ik-navbar">
-        {/* Logo */}
         <Link href="/" className="ik-brand" aria-label="Islamic Kalam Home">
           <span className="ik-logo">
             <svg
@@ -95,7 +140,6 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* Desktop navigation */}
         <div className="ik-desktop-nav">
           <Link href="/" className="ik-nav-link ik-home-link">
             Home
@@ -121,6 +165,7 @@ export default function Navbar() {
                 aria-expanded={activeMenu === menu.title}
               >
                 {menu.title}
+
                 <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
                   <path
                     d="m5 7 5 5 5-5"
@@ -156,7 +201,6 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Desktop search */}
         <form className="ik-search ik-desktop-search" onSubmit={handleSearch}>
           <svg
             className="ik-search-icon"
@@ -206,7 +250,90 @@ export default function Navbar() {
           </button>
         </form>
 
-        {/* Mobile menu button */}
+        {/* Three-dot settings button */}
+        <div className="ik-header-settings">
+          <button
+            type="button"
+            className="ik-header-settings-button"
+            onClick={() => setSettingsOpen((open) => !open)}
+            aria-label="Language and theme settings"
+            aria-expanded={settingsOpen}
+          >
+            <span>⋮</span>
+          </button>
+
+          {settingsOpen && (
+            <div className="ik-header-settings-menu">
+              <div className="ik-header-settings-title">
+                Settings
+              </div>
+
+              <div className="ik-header-setting-group">
+                <span className="ik-header-setting-label">Language</span>
+
+                <button
+                  type="button"
+                  className={
+                    language === "hinglish" ? "ik-setting-active" : ""
+                  }
+                  onClick={() => setLanguage("hinglish")}
+                >
+                  Hinglish
+                  {language === "hinglish" && <span>✓</span>}
+                </button>
+
+                <button
+                  type="button"
+                  className={
+                    language === "hindi" ? "ik-setting-active" : ""
+                  }
+                  onClick={() => setLanguage("hindi")}
+                >
+                  हिन्दी
+                  {language === "hindi" && <span>✓</span>}
+                </button>
+
+                <button
+                  type="button"
+                  className={
+                    language === "urdu" ? "ik-setting-active" : ""
+                  }
+                  onClick={() => setLanguage("urdu")}
+                >
+                  اردو
+                  {language === "urdu" && <span>✓</span>}
+                </button>
+              </div>
+
+              <div className="ik-header-setting-group">
+                <span className="ik-header-setting-label">Appearance</span>
+
+                <button
+                  type="button"
+                  className={
+                    theme === "light" ? "ik-setting-active" : ""
+                  }
+                  onClick={() => setTheme("light")}
+                >
+                  ☀ Light
+                  {theme === "light" && <span>✓</span>}
+                </button>
+
+                <button
+                  type="button"
+                  className={
+                    theme === "dark" ? "ik-setting-active" : ""
+                  }
+                  onClick={() => setTheme("dark")}
+                >
+                  ☾ Dark
+                  {theme === "dark" && <span>✓</span>}
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+
         <button
           type="button"
           className="ik-mobile-toggle"
@@ -236,7 +363,6 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile navigation */}
       <div className={`ik-mobile-panel ${mobileOpen ? "ik-panel-open" : ""}`}>
         <div className="ik-mobile-panel-inner">
           <Link
@@ -357,6 +483,59 @@ export default function Navbar() {
             </button>
           </form>
 
+          {/* Settings are available on mobile too */}
+          <div className="ik-mobile-settings">
+            <span className="ik-header-setting-label">Language</span>
+
+            <div className="ik-mobile-settings-options">
+              <button
+                type="button"
+                className={
+                  language === "hinglish" ? "ik-setting-active" : ""
+                }
+                onClick={() => setLanguage("hinglish")}
+              >
+                Hinglish
+              </button>
+
+              <button
+                type="button"
+                className={language === "hindi" ? "ik-setting-active" : ""}
+                onClick={() => setLanguage("hindi")}
+              >
+                हिन्दी
+              </button>
+
+              <button
+                type="button"
+                className={language === "urdu" ? "ik-setting-active" : ""}
+                onClick={() => setLanguage("urdu")}
+              >
+                اردو
+              </button>
+            </div>
+
+            <span className="ik-header-setting-label">Appearance</span>
+
+            <div className="ik-mobile-settings-options">
+              <button
+                type="button"
+                className={theme === "light" ? "ik-setting-active" : ""}
+                onClick={() => setTheme("light")}
+              >
+                ☀ Light
+              </button>
+
+              <button
+                type="button"
+                className={theme === "dark" ? "ik-setting-active" : ""}
+                onClick={() => setTheme("dark")}
+              >
+                ☾ Dark
+              </button>
+            </div>
+          </div>
+
           <div className="ik-mobile-bottom">
             <span className="ik-bottom-crescent">☾</span>
             <p>Words of love, faith &amp; devotion.</p>
@@ -366,4 +545,4 @@ export default function Navbar() {
       </div>
     </header>
   );
-}
+          }
