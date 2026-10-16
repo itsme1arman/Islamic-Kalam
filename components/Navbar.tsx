@@ -2,46 +2,24 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import type { FormEvent } from "react";
 import "./css/header.css";
 
 type Language = "hinglish" | "hindi" | "urdu";
 type Theme = "auto" | "light" | "dark";
 
-const navItems = [
-  {
-    label: "Naat Sharif",
-    href: "/naat",
-    children: [
-      { label: "Hindi Naat", href: "/naat?language=hindi" },
-      { label: "Urdu Naat", href: "/naat?language=urdu" },
-      { label: "Popular Naat", href: "/naat?sort=popular" },
-    ],
-  },
-  {
-    label: "Manqabat",
-    href: "/manqabat",
-    children: [
-      { label: "Manqabat Collection", href: "/manqabat" },
-    ],
-  },
-  {
-    label: "Biography",
-    href: "/biography",
-    children: [
-      { label: "Islamic Personalities", href: "/biography" },
-    ],
-  },
+const navigation = [
+  { label: "Home", href: "/" },
+  { label: "Naat Sharif", href: "/naat" },
+  { label: "Manqabat", href: "/manqabat" },
+  { label: "Biography", href: "/biography" },
 ];
 
 export default function Navbar() {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const [search, setSearch] = useState("");
   const [language, setLanguage] = useState<Language>("hinglish");
   const [theme, setTheme] = useState<Theme>("auto");
-  const [settingsLoaded, setSettingsLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   const settingsRef = useRef<HTMLDivElement>(null);
 
@@ -66,21 +44,25 @@ export default function Navbar() {
         setTheme(savedTheme);
       }
     } catch {
-      // Settings remain usable if localStorage is unavailable.
-    } finally {
-      setSettingsLoaded(true);
+      // Continue with default settings.
     }
+
+    setLoaded(true);
   }, []);
 
   useEffect(() => {
-    if (!settingsLoaded) return;
+    if (!loaded) return;
 
     const root = document.documentElement;
-    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
 
     const applySettings = () => {
       const effectiveTheme =
-        theme === "auto" ? (media.matches ? "dark" : "light") : theme;
+        theme === "auto"
+          ? systemTheme.matches
+            ? "dark"
+            : "light"
+          : theme;
 
       root.dataset.ikTheme = effectiveTheme;
       root.dataset.ikThemePreference = theme;
@@ -100,34 +82,33 @@ export default function Navbar() {
       localStorage.setItem("ik-language", language);
       localStorage.setItem("ik-theme", theme);
     } catch {
-      // The selected settings still apply to the current page.
+      // Settings still work for the current page.
     }
 
     applySettings();
 
     if (theme === "auto") {
-      media.addEventListener("change", applySettings);
-      return () => media.removeEventListener("change", applySettings);
+      systemTheme.addEventListener("change", applySettings);
+      return () => systemTheme.removeEventListener("change", applySettings);
     }
-  }, [language, theme, settingsLoaded]);
+  }, [language, theme, loaded]);
 
   useEffect(() => {
-    function handleOutsideClick(event: MouseEvent) {
+    const handleOutsideClick = (event: MouseEvent) => {
       if (
         settingsRef.current &&
         !settingsRef.current.contains(event.target as Node)
       ) {
         setSettingsOpen(false);
       }
-    }
+    };
 
-    function handleEscape(event: KeyboardEvent) {
+    const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
+        setMenuOpen(false);
         setSettingsOpen(false);
-        setMobileOpen(false);
-        setActiveMenu(null);
       }
-    }
+    };
 
     document.addEventListener("mousedown", handleOutsideClick);
     document.addEventListener("keydown", handleEscape);
@@ -138,180 +119,97 @@ export default function Navbar() {
     };
   }, []);
 
-  function handleSearch(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    const query = search.trim();
-    if (!query) return;
-
-    window.location.href = `/naat?search=${encodeURIComponent(query)}`;
-    setMobileOpen(false);
-  }
+  const closeMenu = () => setMenuOpen(false);
 
   return (
     <header className="ik-header">
-      <div className="ik-header-pattern" />
-
       <nav className="ik-navbar" aria-label="Main navigation">
-        {/* Left: mobile menu */}
+        {/* LEFT: MENU */}
         <button
-          className="ik-mobile-toggle"
+          className="ik-menu-toggle"
           type="button"
-          aria-label={mobileOpen ? "Close menu" : "Open menu"}
-          aria-expanded={mobileOpen}
-          onClick={() => setMobileOpen((value) => !value)}
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((open) => !open)}
         >
-          <span />
-          <span />
-          <span />
+          <span className={menuOpen ? "line line-one active" : "line line-one"} />
+          <span className={menuOpen ? "line line-two active" : "line line-two"} />
+          <span className={menuOpen ? "line line-three active" : "line line-three"} />
         </button>
 
-        {/* Brand */}
-        <Link
-          href="/"
-          className="ik-brand"
-          onClick={() => setMobileOpen(false)}
-        >
-          <span className="ik-logo" aria-hidden="true">
+        {/* CENTER: BRAND */}
+        <Link href="/" className="ik-brand" onClick={closeMenu}>
+          <span className="ik-brand-logo" aria-hidden="true">
             إ
           </span>
 
-          <span className="ik-brand-copy">
+          <span className="ik-brand-text">
             <span className="ik-brand-name">Islamic Kalam</span>
-            <span className="ik-brand-tagline">
-              A beautiful journey of faith
-            </span>
+            <span className="ik-brand-subtitle">A beautiful journey of faith</span>
           </span>
         </Link>
 
-        {/* Desktop navigation */}
-        <div className="ik-desktop-nav">
-          <Link className="ik-nav-link ik-home-link" href="/">
-            Home
-          </Link>
-
-          {navItems.map((item) => (
-            <div
-              className="ik-menu-wrap"
-              key={item.label}
-              onMouseEnter={() => setActiveMenu(item.label)}
-              onMouseLeave={() => setActiveMenu(null)}
-            >
-              <Link
-                href={item.href}
-                className="ik-nav-link ik-menu-button"
-                aria-expanded={activeMenu === item.label}
-                onClick={() =>
-                  setActiveMenu((current) =>
-                    current === item.label ? null : item.label
-                  )
-                }
-              >
-                {item.label}
-                <span className="ik-chevron">⌄</span>
-              </Link>
-
-              {activeMenu === item.label && (
-                <div className="ik-dropdown">
-                  {item.children.map((child) => (
-                    <Link
-                      href={child.href}
-                      key={child.label}
-                      className="ik-dropdown-link"
-                      onClick={() => setActiveMenu(null)}
-                    >
-                      {child.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-
-        {/* Desktop search */}
-        <form className="ik-search ik-desktop-search" onSubmit={handleSearch}>
-          <input
-            type="search"
-            placeholder="Search kalam..."
-            aria-label="Search kalam"
-            value={search}
-            onChange={(event) => setSearch(event.target.value)}
-          />
-          <button type="submit" aria-label="Search">
-            ⌕
-          </button>
-        </form>
-
-        {/* The ONLY settings button */}
-        <div className="ik-header-settings" ref={settingsRef}>
+        {/* RIGHT: SINGLE SETTINGS BUTTON */}
+        <div className="ik-settings" ref={settingsRef}>
           <button
-            className="ik-header-settings-button"
+            className="ik-settings-toggle"
             type="button"
-            aria-label="Settings"
+            aria-label="Language and theme settings"
             aria-expanded={settingsOpen}
-            onClick={() => setSettingsOpen((value) => !value)}
+            onClick={() => setSettingsOpen((open) => !open)}
           >
-            <span>⋮</span>
+            <span aria-hidden="true">⋮</span>
           </button>
 
           {settingsOpen && (
-            <div className="ik-header-settings-menu">
-              <div className="ik-header-settings-title">Settings</div>
+            <div className="ik-settings-popup">
+              <div className="ik-popup-heading">Settings</div>
 
-              <div className="ik-header-setting-group">
-                <span className="ik-header-setting-label">Language</span>
+              <section className="ik-setting-section">
+                <p className="ik-setting-label">Language</p>
 
                 <button
                   type="button"
-                  className={
-                    language === "hinglish"
-                      ? "ik-setting-option selected"
-                      : "ik-setting-option"
-                  }
+                  className={`ik-setting-option ${
+                    language === "hinglish" ? "selected" : ""
+                  }`}
                   onClick={() => setLanguage("hinglish")}
                 >
                   <span>Hinglish</span>
-                  <span className="ik-setting-check">
+                  <span className="ik-option-check">
                     {language === "hinglish" ? "✓" : ""}
                   </span>
                 </button>
 
                 <button
                   type="button"
-                  className={
-                    language === "hindi"
-                      ? "ik-setting-option selected"
-                      : "ik-setting-option"
-                  }
+                  className={`ik-setting-option ${
+                    language === "hindi" ? "selected" : ""
+                  }`}
                   onClick={() => setLanguage("hindi")}
                 >
                   <span>हिन्दी</span>
-                  <span className="ik-setting-check">
+                  <span className="ik-option-check">
                     {language === "hindi" ? "✓" : ""}
                   </span>
                 </button>
 
                 <button
                   type="button"
-                  className={
-                    language === "urdu"
-                      ? "ik-setting-option selected"
-                      : "ik-setting-option"
-                  }
+                  className={`ik-setting-option ${
+                    language === "urdu" ? "selected" : ""
+                  }`}
                   onClick={() => setLanguage("urdu")}
                 >
-                  <span lang="ur" dir="rtl">
-                    اردو
-                  </span>
-                  <span className="ik-setting-check">
+                  <span lang="ur" dir="rtl">اردو</span>
+                  <span className="ik-option-check">
                     {language === "urdu" ? "✓" : ""}
                   </span>
                 </button>
-              </div>
+              </section>
 
-              <div className="ik-header-setting-group">
-                <span className="ik-header-setting-label">Theme</span>
+              <section className="ik-setting-section">
+                <p className="ik-setting-label">Theme</p>
 
                 {(
                   [
@@ -321,71 +219,70 @@ export default function Navbar() {
                   ] as const
                 ).map(([value, icon, label]) => (
                   <button
-                    type="button"
                     key={value}
-                    className={
-                      theme === value
-                        ? "ik-setting-option selected"
-                        : "ik-setting-option"
-                    }
+                    type="button"
+                    className={`ik-setting-option ${
+                      theme === value ? "selected" : ""
+                    }`}
                     onClick={() => setTheme(value)}
                   >
-                    <span className="ik-setting-option-name">
+                    <span className="ik-option-name">
                       <span aria-hidden="true">{icon}</span>
                       {label}
                     </span>
-                    <span className="ik-setting-check">
+
+                    <span className="ik-option-check">
                       {theme === value ? "✓" : ""}
                     </span>
                   </button>
                 ))}
-              </div>
+              </section>
             </div>
           )}
         </div>
       </nav>
 
-      {/* Mobile navigation: no duplicate settings here */}
-      <div className={`ik-mobile-panel ${mobileOpen ? "is-open" : ""}`}>
-        <Link href="/" onClick={() => setMobileOpen(false)}>
-          Home
-        </Link>
-
-        {navItems.map((item) => (
-          <div className="ik-mobile-nav-group" key={item.label}>
-            <Link
-              href={item.href}
-              onClick={() => setMobileOpen(false)}
-            >
-              {item.label}
-            </Link>
-
-            {item.children.map((child) => (
-              <Link
-                href={child.href}
-                className="ik-mobile-sub-link"
-                key={child.label}
-                onClick={() => setMobileOpen(false)}
-              >
-                {child.label}
-              </Link>
-            ))}
-          </div>
-        ))}
-
-        <form className="ik-search ik-mobile-search" onSubmit={handleSearch}>
-          <input
-            type="search"
-            placeholder="Search kalam..."
-            aria-label="Search kalam"
-            value={search}
-            onChange={(event) => setSearch(event.target.value)}
+      {/* MENU PANEL */}
+      {menuOpen && (
+        <>
+          <button
+            className="ik-menu-backdrop"
+            aria-label="Close navigation menu"
+            onClick={closeMenu}
           />
-          <button type="submit" aria-label="Search">
-            ⌕
-          </button>
-        </form>
-      </div>
+
+          <aside className="ik-navigation-panel">
+            <div className="ik-navigation-heading">
+              <span>Explore</span>
+
+              <button
+                type="button"
+                aria-label="Close menu"
+                onClick={closeMenu}
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="ik-navigation-links">
+              {navigation.map((item) => (
+                <Link
+                  href={item.href}
+                  key={item.href}
+                  onClick={closeMenu}
+                >
+                  <span>{item.label}</span>
+                  <span className="ik-navigation-arrow">›</span>
+                </Link>
+              ))}
+            </div>
+
+            <div className="ik-navigation-footer">
+              Islamic Kalam
+            </div>
+          </aside>
+        </>
+      )}
     </header>
   );
-                }
+}
