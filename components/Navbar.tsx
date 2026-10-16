@@ -44,7 +44,7 @@ export default function Navbar() {
         setTheme(savedTheme);
       }
     } catch {
-      // Continue with default settings.
+      // Use defaults if localStorage is unavailable.
     }
 
     setLoaded(true);
@@ -54,7 +54,9 @@ export default function Navbar() {
     if (!loaded) return;
 
     const root = document.documentElement;
-    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
+    const systemTheme = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    );
 
     const applySettings = () => {
       const effectiveTheme =
@@ -82,14 +84,17 @@ export default function Navbar() {
       localStorage.setItem("ik-language", language);
       localStorage.setItem("ik-theme", theme);
     } catch {
-      // Settings still work for the current page.
+      // Settings remain available for this session.
     }
 
     applySettings();
 
     if (theme === "auto") {
       systemTheme.addEventListener("change", applySettings);
-      return () => systemTheme.removeEventListener("change", applySettings);
+
+      return () => {
+        systemTheme.removeEventListener("change", applySettings);
+      };
     }
   }, [language, theme, loaded]);
 
@@ -124,20 +129,35 @@ export default function Navbar() {
   return (
     <header className="ik-header">
       <nav className="ik-navbar" aria-label="Main navigation">
-        {/* LEFT: MENU */}
+        {/* Left: hamburger menu */}
         <button
           className="ik-menu-toggle"
           type="button"
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((open) => !open)}
+          onClick={() => {
+            setMenuOpen((open) => !open);
+            setSettingsOpen(false);
+          }}
         >
-          <span className={menuOpen ? "line line-one active" : "line line-one"} />
-          <span className={menuOpen ? "line line-two active" : "line line-two"} />
-          <span className={menuOpen ? "line line-three active" : "line line-three"} />
+          <span
+            className={
+              menuOpen ? "line line-one active" : "line line-one"
+            }
+          />
+          <span
+            className={
+              menuOpen ? "line line-two active" : "line line-two"
+            }
+          />
+          <span
+            className={
+              menuOpen ? "line line-three active" : "line line-three"
+            }
+          />
         </button>
 
-        {/* CENTER: BRAND */}
+        {/* Center: brand */}
         <Link href="/" className="ik-brand" onClick={closeMenu}>
           <span className="ik-brand-logo" aria-hidden="true">
             إ
@@ -145,67 +165,65 @@ export default function Navbar() {
 
           <span className="ik-brand-text">
             <span className="ik-brand-name">Islamic Kalam</span>
-            <span className="ik-brand-subtitle">A beautiful journey of faith</span>
+            <span className="ik-brand-subtitle">
+              A beautiful journey of faith
+            </span>
           </span>
         </Link>
 
-        {/* RIGHT: SINGLE SETTINGS BUTTON */}
+        {/* Right: settings */}
         <div className="ik-settings" ref={settingsRef}>
           <button
             className="ik-settings-toggle"
             type="button"
             aria-label="Language and theme settings"
             aria-expanded={settingsOpen}
-            onClick={() => setSettingsOpen((open) => !open)}
+            onClick={() => {
+              setSettingsOpen((open) => !open);
+              setMenuOpen(false);
+            }}
           >
             <span aria-hidden="true">⋮</span>
           </button>
 
           {settingsOpen && (
-            <div className="ik-settings-popup">
+            <div
+              className="ik-settings-popup"
+              role="dialog"
+              aria-label="Settings"
+            >
               <div className="ik-popup-heading">Settings</div>
 
               <section className="ik-setting-section">
                 <p className="ik-setting-label">Language</p>
 
-                <button
-                  type="button"
-                  className={`ik-setting-option ${
-                    language === "hinglish" ? "selected" : ""
-                  }`}
-                  onClick={() => setLanguage("hinglish")}
-                >
-                  <span>Hinglish</span>
-                  <span className="ik-option-check">
-                    {language === "hinglish" ? "✓" : ""}
-                  </span>
-                </button>
+                {(
+                  [
+                    ["hinglish", "Hinglish"],
+                    ["hindi", "हिन्दी"],
+                    ["urdu", "اردو"],
+                  ] as const
+                ).map(([value, label]) => (
+                  <button
+                    key={value}
+                    type="button"
+                    className={`ik-setting-option ${
+                      language === value ? "selected" : ""
+                    }`}
+                    onClick={() => setLanguage(value)}
+                  >
+                    <span
+                      lang={value === "urdu" ? "ur" : undefined}
+                      dir={value === "urdu" ? "rtl" : undefined}
+                    >
+                      {label}
+                    </span>
 
-                <button
-                  type="button"
-                  className={`ik-setting-option ${
-                    language === "hindi" ? "selected" : ""
-                  }`}
-                  onClick={() => setLanguage("hindi")}
-                >
-                  <span>हिन्दी</span>
-                  <span className="ik-option-check">
-                    {language === "hindi" ? "✓" : ""}
-                  </span>
-                </button>
-
-                <button
-                  type="button"
-                  className={`ik-setting-option ${
-                    language === "urdu" ? "selected" : ""
-                  }`}
-                  onClick={() => setLanguage("urdu")}
-                >
-                  <span lang="ur" dir="rtl">اردو</span>
-                  <span className="ik-option-check">
-                    {language === "urdu" ? "✓" : ""}
-                  </span>
-                </button>
+                    <span className="ik-option-check">
+                      {language === value ? "✓" : ""}
+                    </span>
+                  </button>
+                ))}
               </section>
 
               <section className="ik-setting-section">
@@ -242,16 +260,20 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* MENU PANEL */}
+      {/* Navigation drawer */}
       {menuOpen && (
         <>
           <button
             className="ik-menu-backdrop"
+            type="button"
             aria-label="Close navigation menu"
             onClick={closeMenu}
           />
 
-          <aside className="ik-navigation-panel">
+          <aside
+            className="ik-navigation-panel"
+            aria-label="Explore navigation"
+          >
             <div className="ik-navigation-heading">
               <span>Explore</span>
 
