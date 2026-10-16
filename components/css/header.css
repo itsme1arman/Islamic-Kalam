@@ -439,3 +439,184 @@ html[data-ik-theme="dark"] {
     transition-duration: 0.01ms !important;
   }
 }
+/* ===== Islamic Kalam Header Layout Fix ===== */
+
+.ik-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  background: var(--ik-header-bg);
+  border-bottom: 1px solid var(--ik-header-border);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+}
+
+.ik-navbar {
+  width: 100%;
+  max-width: 1280px;
+  min-height: 64px;
+  margin: 0 auto;
+  padding: 0 18px;
+
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
+  align-items: center;
+  gap: 12px;
+}
+
+.ik-menu-toggle,
+.ik-settings-toggle {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ik-brand {
+  justify-self: center;
+  min-width: 0;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.ik-brand-logo {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+}
+
+.ik-brand-text {
+  min-width: 0;
+}
+
+.ik-brand-name {
+  font-size: 19px;
+  line-height: 1.2;
+}
+
+.ik-brand-subtitle {
+  font-size: 9px;
+}
+
+.ik-settings {
+  justify-self: end;
+}
+
+/* Full-height menu drawer */
+
+.ik-navigation-panel {
+  position: fixed !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+
+  width: min(320px, 86vw);
+  height: 100vh !important;
+  height: 100dvh !important;
+  max-height: 100dvh !important;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  z-index: 10002 !important;
+}
+
+.ik-menu-backdrop {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 10001 !important;
+}
+
+.ik-navigation-heading {
+  flex-shrink: 0;
+}
+
+.ik-navigation-links {
+  flex: 1 0 auto;
+}
+
+.ik-navigation-footer {
+  flex-shrink: 0;
+}
+
+/* Settings popup */
+
+.ik-settings-popup {
+  z-index: 10010;
+  max-height: min(80dvh, 520px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* Mobile header */
+
+@media (max-width: 480px) {
+  .ik-navbar {
+    width: 100%;
+    min-height: 60px;
+    padding: 0 10px;
+    grid-template-columns: 38px minmax(0, 1fr) 38px;
+    gap: 6px;
+  }
+
+  .ik-menu-toggle,
+  .ik-settings-toggle {
+    width: 36px;
+    height: 36px;
+  }
+
+  .ik-brand {
+    gap: 6px;
+  }
+
+  .ik-brand-logo {
+    width: 32px;
+    height: 32px;
+    font-size: 22px;
+  }
+
+  .ik-brand-name {
+    font-size: clamp(14px, 4vw, 17px);
+  }
+
+  .ik-brand-subtitle {
+    font-size: 8px;
+  }
+
+  .ik-navigation-panel {
+    width: min(320px, 86vw);
+  }
+}
+
+@media (max-width: 350px) {
+  .ik-navbar {
+    padding: 0 7px;
+    gap: 4px;
+  }
+
+  .ik-brand {
+    gap: 4px;
+  }
+
+  .ik-brand-logo {
+    width: 29px;
+    height: 29px;
+  }
+
+  .ik-brand-name {
+    font-size: 13px;
+  }
+
+  .ik-brand-subtitle {
+    font-size: 7px;
+  }
+}
