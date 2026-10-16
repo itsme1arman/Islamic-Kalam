@@ -226,16 +226,6 @@ export default function HomePage() {
           )}
         </div>
 
-        <div className="ik-hero-content">
-          <div className="ik-brand">
-            <div className="ik-brand-mark">ا</div>
-
-            <div className="ik-brand-text">
-              <span>Islamic Kalam</span>
-              <small>NAAT · MANQABAT · BIOGRAPHY</small>
-            </div>
-          </div>
-
           <div className="ik-badge">
             <span>✦</span>
             {t.badge}
