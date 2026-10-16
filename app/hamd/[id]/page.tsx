@@ -1,62 +1,86 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { hamds } from "@/data/hamd";
+import { useLanguage } from "@/components/LanguageProvider";
+
+const pageContent = {
+  hinglish: {
+    back: "← Hamd par wapas jaayein",
+    poet: "Shaair",
+    notFound: "Hamd nahi mili",
+  },
+  hindi: {
+    back: "← हम्द पर वापस जाएँ",
+    poet: "शायर",
+    notFound: "हम्द नहीं मिली",
+  },
+  urdu: {
+    back: "← حمد پر واپس جائیں",
+    poet: "شاعر",
+    notFound: "حمد نہیں ملی",
+  },
+} as const;
 
 export default function HamdDetailPage() {
   const params = useParams<{ id: string }>();
-  const [language, setLanguage] = useState("roman");
+  const { language } = useLanguage();
 
   const kalam = hamds.find((item) => item.id === params.id);
+  const text = pageContent[language];
 
   if (!kalam) {
     return (
-      <main className="container">
-        <h1>Hamd not found</h1>
-        <Link href="/hamd">← Back to Hamd</Link>
+      <main
+        className="container"
+        lang={language === "urdu" ? "ur" : language === "hindi" ? "hi" : "en"}
+        dir={language === "urdu" ? "rtl" : "ltr"}
+      >
+        <h1>{text.notFound}</h1>
+        <Link href="/hamd">{text.back}</Link>
       </main>
     );
   }
 
-  const lyrics =
-    kalam.lyrics[language as keyof typeof kalam.lyrics];
+  const lyricLanguage =
+    language === "hinglish" ? "roman" : language;
+
+  const lyrics = kalam.lyrics[lyricLanguage];
 
   return (
-    <main className="container">
+    <main
+      className="container"
+      lang={language === "urdu" ? "ur" : language === "hindi" ? "hi" : "en"}
+      dir={language === "urdu" ? "rtl" : "ltr"}
+    >
       <section className="page-head">
-        <Link href="/hamd">← Back to Hamd</Link>
+        <Link href="/hamd">{text.back}</Link>
+
         <h1>{kalam.title}</h1>
-        <p>Poet: {kalam.poet}</p>
+
+        <p>
+          {text.poet}: {kalam.poet}
+        </p>
       </section>
 
       <section className="kalam-section">
-        <div className="language-buttons">
-          <button onClick={() => setLanguage("roman")}>
-            Roman Urdu
-          </button>
-          <button onClick={() => setLanguage("urdu")}>
-            اردو
-          </button>
-          <button onClick={() => setLanguage("hindi")}>
-            हिन्दी
-          </button>
-        </div>
-
-        <article
-          className="kalam-card lyrics"
-          lang={
-            language === "urdu"
-              ? "ur"
-              : language === "hindi"
-              ? "hi"
-              : "en"
-          }
-          dir={language === "urdu" ? "rtl" : "ltr"}
-        >
+        <article className="kalam-card lyrics">
           <h2>{kalam.title}</h2>
-          <p style={{ whiteSpace: "pre-wrap" }}>{lyrics}</p>
+
+          <p
+            lang={
+              language === "urdu"
+                ? "ur"
+                : language === "hindi"
+                  ? "hi"
+                  : "en"
+            }
+            dir={language === "urdu" ? "rtl" : "ltr"}
+            style={{ whiteSpace: "pre-wrap" }}
+          >
+            {lyrics}
+          </p>
         </article>
       </section>
     </main>
