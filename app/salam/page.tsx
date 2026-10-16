@@ -1,34 +1,106 @@
+"use client";
+
 import Link from "next/link";
 import { salams } from "@/data/salam";
+import { useLanguage } from "@/components/LanguageProvider";
+
+const pageContent = {
+  hinglish: {
+    title: "Salam",
+    description: "Nabi-e-Kareem ﷺ ki shaan mein Salam ka majmua",
+    poet: "Shaair",
+    readMore: "Kalaam padhein",
+    empty: "Abhi koi Salam maujood nahi hai.",
+  },
+  hindi: {
+    title: "सलाम",
+    description: "नबी-ए-करीम ﷺ की शान में सलाम का संग्रह",
+    poet: "शायर",
+    readMore: "कलाम पढ़ें",
+    empty: "अभी कोई सलाम उपलब्ध नहीं है।",
+  },
+  urdu: {
+    title: "سلام",
+    description: "نبی کریم ﷺ کی شان میں سلام کا مجموعہ",
+    poet: "شاعر",
+    readMore: "کلام پڑھیں",
+    empty: "فی الحال کوئی سلام موجود نہیں ہے۔",
+  },
+} as const;
 
 export default function SalamPage() {
+  const { language } = useLanguage();
+  const text = pageContent[language];
+
+  const lyricLanguage =
+    language === "hinglish" ? "roman" : language;
+
   return (
-    <main className="container">
-      <section className="page-head">
-        <h1>Salam</h1>
-        <p>A collection of Salam in praise of the Prophet ﷺ</p>
+    <main
+      className="container ik-category-page"
+      lang={
+        language === "urdu"
+          ? "ur"
+          : language === "hindi"
+            ? "hi"
+            : "en"
+      }
+      dir={language === "urdu" ? "rtl" : "ltr"}
+    >
+      <section className="page-head ik-category-head">
+        <h1>{text.title}</h1>
+        <p>{text.description}</p>
       </section>
 
       <section className="kalam-section">
-        <div className="kalam-grid">
-          {salams.map((kalam) => (
-            <article className="kalam-card" key={kalam.id}>
-              <h2>{kalam.title}</h2>
-              <p>Poet: {kalam.poet}</p>
+        {salams.length === 0 ? (
+          <p className="ik-category-empty">{text.empty}</p>
+        ) : (
+          <div className="kalam-grid ik-category-grid">
+            {salams.map((kalam) => {
+              const lyrics =
+                kalam.lyrics[
+                  lyricLanguage as keyof typeof kalam.lyrics
+                ];
 
-              <p className="kalam-preview">
-                {kalam.lyrics.roman.split("\n")[0]}
-              </p>
+              const preview = lyrics?.split("\n")[0] ?? "";
 
-              <Link
-                className="read-more"
-                href={`/salam/${kalam.id}`}
-              >
-                Read Kalam →
-              </Link>
-            </article>
-          ))}
-        </div>
+              return (
+                <article
+                  className="kalam-card ik-category-card"
+                  key={kalam.id}
+                >
+                  <h2>{kalam.title}</h2>
+
+                  <p className="ik-category-poet">
+                    {text.poet}: {kalam.poet}
+                  </p>
+
+                  <p
+                    className="kalam-preview"
+                    lang={
+                      language === "urdu"
+                        ? "ur"
+                        : language === "hindi"
+                          ? "hi"
+                          : "en"
+                    }
+                    dir={language === "urdu" ? "rtl" : "ltr"}
+                  >
+                    {preview}
+                  </p>
+
+                  <Link
+                    className="read-more"
+                    href={`/salam/${kalam.id}`}
+                  >
+                    {text.readMore} →
+                  </Link>
+                </article>
+              );
+            })}
+          </div>
+        )}
       </section>
     </main>
   );
