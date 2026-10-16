@@ -1,24 +1,26 @@
-/* =========================================
-   ISLAMIC KALAM — HOMEPAGE DESIGN
-   File: app/home.css
-   Header/Footer untouched
-   ========================================= */
+/* ========================================
+   ISLAMIC KALAM — HOMEPAGE
+   Mint Green | Responsive | Light & Dark
+   ======================================== */
 
 .ik-site {
-  --ik-green: #087f68;
+  --ik-bg: #fbfcf8;
+  --ik-surface: #ffffff;
+  --ik-green: #079b82;
   --ik-deep: #155c4b;
-  --ik-mint: #d9f8ee;
-  --ik-gold: #c3a15c;
-  --ik-ink: #243a33;
-  --ik-muted: #737d77;
-  --ik-cream: #faf9f5;
-  --ik-line: #e5e8df;
+  --ik-mint: #e1f8ef;
+  --ik-gold: #c2a15c;
+  --ik-ink: #243b33;
+  --ik-muted: #707b74;
+  --ik-border: #e2e9e2;
 
-  overflow: hidden;
+  position: relative;
   width: 100%;
+  overflow: hidden;
+  background: var(--ik-bg);
   color: var(--ik-ink);
-  background: var(--ik-cream);
   font-family: Arial, Helvetica, sans-serif;
+  transition: background 0.25s ease, color 0.25s ease;
 }
 
 .ik-site *,
@@ -28,11 +30,17 @@
 }
 
 .ik-site a {
+  color: inherit;
   text-decoration: none;
 }
 
-.ik-site p {
-  overflow-wrap: break-word;
+.ik-site button,
+.ik-site input {
+  font: inherit;
+}
+
+.ik-site button {
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* =============== HERO =============== */
@@ -40,105 +48,222 @@
 .ik-site .ik-hero {
   position: relative;
   isolation: isolate;
-  display: flex;
-  min-height: 670px;
-  align-items: center;
-  justify-content: center;
-  padding: 76px 24px 64px;
+  padding: 30px 24px 55px;
   overflow: hidden;
   background:
     radial-gradient(
-      ellipse at 50% 12%,
-      rgba(177, 241, 221, 0.75),
-      transparent 62%
+      ellipse at 50% 18%,
+      rgba(153, 237, 211, 0.7),
+      transparent 58%
     ),
-    linear-gradient(180deg, #e5faf2 0%, #f5faf5 60%, #faf9f5 100%);
+    linear-gradient(
+      155deg,
+      #d5f8e9 0%,
+      #eefaf4 44%,
+      #fbfcf8 100%
+    );
 }
 
-.ik-site .ik-hero::before {
-  position: absolute;
-  z-index: -1;
-  top: 35%;
-  left: -180px;
-  width: 340px;
-  height: 340px;
-  border: 1px solid rgba(8, 127, 104, 0.12);
-  border-radius: 50%;
-  box-shadow:
-    0 0 0 17px rgba(8, 127, 104, 0.025),
-    0 0 0 35px rgba(8, 127, 104, 0.025);
-  content: "";
-}
-
+.ik-site .ik-hero::before,
 .ik-site .ik-hero::after {
   position: absolute;
   z-index: -1;
-  top: 35%;
-  right: -180px;
-  width: 340px;
-  height: 340px;
-  border: 1px solid rgba(8, 127, 104, 0.12);
+  top: 48%;
+  width: 270px;
+  height: 270px;
+  border: 1px solid rgba(8, 127, 104, 0.13);
   border-radius: 50%;
-  box-shadow:
-    0 0 0 17px rgba(8, 127, 104, 0.025),
-    0 0 0 35px rgba(8, 127, 104, 0.025);
   content: "";
+  pointer-events: none;
+}
+
+.ik-site .ik-hero::before {
+  left: -205px;
+  box-shadow:
+    0 0 0 14px rgba(8, 127, 104, 0.025),
+    0 0 0 30px rgba(8, 127, 104, 0.025);
+}
+
+.ik-site .ik-hero::after {
+  right: -205px;
+  box-shadow:
+    0 0 0 14px rgba(8, 127, 104, 0.025),
+    0 0 0 30px rgba(8, 127, 104, 0.025);
 }
 
 .ik-site .ik-hero-decoration {
   position: absolute;
   z-index: -1;
-  top: 52%;
-  width: 170px;
-  height: 170px;
-  border: 1px solid rgba(195, 161, 92, 0.2);
+  top: 53%;
+  width: 120px;
+  height: 120px;
+  border: 1px solid rgba(194, 161, 92, 0.2);
   border-radius: 50%;
-  transform: translateY(-50%);
   pointer-events: none;
 }
 
-.ik-site .ik-hero-decoration::before,
-.ik-site .ik-hero-decoration::after {
+.ik-site .ik-hero-decoration::before {
   position: absolute;
-  inset: 15px;
-  border: 1px solid rgba(195, 161, 92, 0.2);
+  inset: 12px;
+  border: 1px solid rgba(194, 161, 92, 0.2);
   border-radius: 50%;
   content: "";
 }
 
-.ik-site .ik-hero-decoration::after {
-  inset: 30px;
-}
-
 .ik-site .ik-decoration-left {
-  left: -105px;
+  left: -80px;
 }
 
 .ik-site .ik-decoration-right {
-  right: -105px;
+  right: -80px;
 }
+
+/* =============== SETTINGS MENU =============== */
+
+.ik-site .ik-settings-wrap {
+  position: absolute;
+  z-index: 10;
+  top: 22px;
+  right: 24px;
+}
+
+.ik-site .ik-settings-button {
+  display: flex;
+  width: 46px;
+  height: 46px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(8, 127, 104, 0.17);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--ik-deep);
+  font-size: 29px;
+  cursor: pointer;
+  box-shadow: 0 3px 12px rgba(21, 92, 75, 0.06);
+}
+
+.ik-site .ik-settings-menu {
+  position: absolute;
+  top: 54px;
+  right: 0;
+  width: min(330px, calc(100vw - 36px));
+  padding: 10px 16px;
+  border: 1px solid var(--ik-border);
+  border-radius: 17px;
+  background: var(--ik-surface);
+  box-shadow: 0 16px 40px rgba(22, 59, 46, 0.16);
+}
+
+.ik-site .ik-setting-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 13px 0;
+}
+
+.ik-site .ik-setting-row + .ik-setting-row {
+  border-top: 1px solid var(--ik-border);
+}
+
+.ik-site .ik-setting-row > span {
+  color: var(--ik-ink);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.ik-site .ik-setting-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.ik-site .ik-setting-options button {
+  min-height: 36px;
+  padding: 7px 12px;
+  border: 1px solid var(--ik-border);
+  border-radius: 9px;
+  background: var(--ik-bg);
+  color: var(--ik-ink);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.ik-site .ik-setting-options button.active {
+  border-color: var(--ik-green);
+  background: var(--ik-green);
+  color: #ffffff;
+}
+
+/* =============== BRAND =============== */
 
 .ik-site .ik-hero-content {
   width: 100%;
   max-width: 780px;
-  margin: auto;
+  margin: 0 auto;
   text-align: center;
 }
+
+.ik-site .ik-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  margin: 8px auto 46px;
+}
+
+.ik-site .ik-brand-mark {
+  display: flex;
+  width: 58px;
+  height: 58px;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--ik-gold);
+  border-radius: 17px 17px 25px 25px;
+  background: linear-gradient(145deg, #168a6a, #075340);
+  color: #ffffff;
+  font-family: Georgia, serif;
+  font-size: 35px;
+  box-shadow: 0 5px 13px rgba(8, 88, 64, 0.16);
+}
+
+.ik-site .ik-brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+
+.ik-site .ik-brand-text > span {
+  color: #155c4b;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(22px, 4vw, 31px);
+  font-weight: 800;
+}
+
+.ik-site .ik-brand-text small {
+  color: #9b7d42;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+}
+
+/* =============== HEADLINE =============== */
 
 .ik-site .ik-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  margin-bottom: 28px;
-  padding: 12px 19px;
-  border: 1px solid #d8dfcf;
+  gap: 10px;
+  max-width: 100%;
+  margin-bottom: 22px;
+  padding: 11px 17px;
+  border: 1px solid #d9dfce;
   border-radius: 100px;
-  background: rgba(255, 255, 255, 0.76);
+  background: rgba(255, 255, 255, 0.78);
   color: #316b59;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 800;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.1px;
 }
 
 .ik-site .ik-badge span {
@@ -146,95 +271,141 @@
 }
 
 .ik-site .ik-bismillah {
-  margin: 0 0 18px;
-  color: #236b54;
+  margin: 0 0 17px;
+  color: #216b53;
   font-family: "Amiri", "Noto Naskh Arabic", Georgia, serif;
-  font-size: clamp(28px, 4vw, 42px);
+  font-size: clamp(29px, 5vw, 43px);
   line-height: 1.9;
 }
 
 .ik-site .ik-hero h1 {
-  margin: 0 auto 25px;
-  color: #174c3e;
+  margin: 0 auto 23px;
+  color: #153f33;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(42px, 6.3vw, 68px);
-  font-weight: 750;
+  font-size: clamp(40px, 6.2vw, 67px);
+  font-weight: 800;
   line-height: 1.13;
-  letter-spacing: -1.8px;
+  letter-spacing: -1.5px;
 }
 
 .ik-site .ik-hero h1 em {
-  color: #138b70;
+  color: #149c7c;
   font-weight: 500;
 }
 
 .ik-site .ik-description {
   max-width: 680px;
-  margin: 0 auto 36px;
-  color: #737a74;
+  margin: 0 auto 30px;
+  color: #707a73;
   font-size: clamp(15px, 2vw, 19px);
-  line-height: 1.95;
+  line-height: 1.9;
 }
+
+/* =============== BUTTONS =============== */
 
 .ik-site .ik-actions {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 15px;
-  margin-bottom: 35px;
+  gap: 13px;
+  margin-bottom: 26px;
 }
 
 .ik-site .ik-button {
   display: inline-flex;
-  min-height: 58px;
+  min-height: 57px;
   align-items: center;
   justify-content: center;
-  gap: 14px;
-  padding: 15px 26px;
+  gap: 13px;
+  padding: 15px 25px;
   border: 1px solid transparent;
   border-radius: 11px;
-  font-family: inherit;
   font-size: 15px;
   font-weight: 750;
   transition:
     transform 0.2s ease,
-    box-shadow 0.2s ease,
-    background 0.2s ease;
+    box-shadow 0.2s ease;
 }
 
 .ik-site .ik-button:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
 }
 
 .ik-site .ik-primary {
-  background: linear-gradient(135deg, #078c70, #086b58);
-  box-shadow: 0 10px 22px rgba(8, 127, 104, 0.16);
-  color: #fff;
-}
-
-.ik-site .ik-primary:hover {
-  background: #075b4a;
-  box-shadow: 0 12px 25px rgba(8, 127, 104, 0.22);
+  background: linear-gradient(135deg, #0ca68a, #07816a);
+  box-shadow: 0 9px 20px rgba(8, 127, 104, 0.18);
+  color: #ffffff;
 }
 
 .ik-site .ik-outline {
-  border-color: #dcded3;
-  background: rgba(255, 255, 255, 0.86);
-  color: #286b57;
+  border-color: #d8e1d9;
+  background: rgba(255, 255, 255, 0.9);
+  color: #24654f;
 }
 
-.ik-site .ik-outline:hover {
-  border-color: #91c9b7;
-  background: #fff;
+/* =============== SEARCH =============== */
+
+.ik-site .ik-search {
+  display: flex;
+  width: 100%;
+  max-width: 650px;
+  min-height: 70px;
+  align-items: center;
+  gap: 10px;
+  margin: 0 auto 25px;
+  padding: 7px 8px 7px 17px;
+  border: 1px solid #dfe5da;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 8px 25px rgba(40, 70, 55, 0.05);
 }
+
+.ik-site .ik-search-icon {
+  flex: 0 0 auto;
+  color: #b19a65;
+  font-size: 29px;
+}
+
+.ik-site .ik-search input {
+  width: 100%;
+  min-width: 0;
+  padding: 11px 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--ik-ink);
+  font-size: 14px;
+}
+
+.ik-site .ik-search input::placeholder {
+  color: #9c9e93;
+}
+
+.ik-site .ik-search button {
+  display: inline-flex;
+  min-height: 49px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: var(--ik-green);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+/* =============== HERO FOOTNOTE =============== */
 
 .ik-site .ik-hero-note {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  color: #81877f;
+  gap: 9px;
+  color: #7d867d;
   font-size: 12px;
 }
 
@@ -247,69 +418,9 @@
 }
 
 .ik-site .ik-hero-note > span {
-  width: 25px;
+  width: 22px;
   height: 1px;
   background: var(--ik-gold);
-}
-
-/* =============== SEARCH =============== */
-
-.ik-site .ik-search {
-  display: flex;
-  width: min(100%, 650px);
-  min-height: 72px;
-  align-items: center;
-  gap: 12px;
-  margin: 0 auto 32px;
-  padding: 8px 9px 8px 22px;
-  border: 1px solid #e1e3d8;
-  border-radius: 13px;
-  background: rgba(255, 255, 255, 0.91);
-  box-shadow: 0 10px 35px rgba(40, 70, 55, 0.055);
-}
-
-.ik-site .ik-search-icon {
-  flex: 0 0 auto;
-  color: #b19a65;
-  font-size: 30px;
-  line-height: 1;
-}
-
-.ik-site .ik-search input {
-  width: 100%;
-  min-width: 0;
-  padding: 12px 0;
-  border: 0;
-  outline: none;
-  background: transparent;
-  color: var(--ik-ink);
-  font-family: inherit;
-  font-size: 15px;
-}
-
-.ik-site .ik-search input::placeholder {
-  color: #a19f94;
-}
-
-.ik-site .ik-search button {
-  display: inline-flex;
-  min-height: 52px;
-  flex: 0 0 auto;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 20px;
-  border: 0;
-  border-radius: 8px;
-  background: var(--ik-green);
-  color: #fff;
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 750;
-  cursor: pointer;
-}
-
-.ik-site .ik-search button:hover {
-  background: #075b4a;
 }
 
 /* =============== STATS =============== */
@@ -319,8 +430,9 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   max-width: 1100px;
   margin: 0 auto;
-  padding: 55px 24px 60px;
-  border-top: 1px solid #e8e8df;
+  padding: 46px 22px 52px;
+  border-top: 1px solid var(--ik-border);
+  background: var(--ik-bg);
 }
 
 .ik-site .ik-stat {
@@ -328,105 +440,94 @@
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  padding: 10px;
+  padding: 8px;
   text-align: center;
 }
 
 .ik-site .ik-stat + .ik-stat {
-  border-left: 1px solid #e8e8df;
+  border-left: 1px solid var(--ik-border);
 }
 
 .ik-site .ik-stat strong {
-  color: #183f33;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(32px, 4.5vw, 46px);
-  line-height: 1.2;
+  color: var(--ik-ink);
+  font-size: clamp(29px, 4vw, 43px);
+  font-weight: 800;
 }
 
 .ik-site .ik-stat span {
-  color: #737b74;
-  font-size: 11px;
+  color: var(--ik-muted);
+  font-size: 10px;
   font-weight: 750;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
   line-height: 1.6;
 }
 
-/* =============== SECTION HEADINGS =============== */
+/* =============== COLLECTION =============== */
 
 .ik-site .ik-categories {
   max-width: 1180px;
   margin: 0 auto;
-  padding: 75px 24px 85px;
+  padding: 70px 24px 80px;
 }
 
 .ik-site .ik-section-heading {
   max-width: 650px;
-  margin: 0 auto 38px;
+  margin: 0 auto 35px;
   text-align: center;
 }
 
 .ik-site .ik-label {
-  color: var(--ik-gold);
+  color: #a88b4d;
   font-size: 10px;
   font-weight: 800;
-  letter-spacing: 2.2px;
+  letter-spacing: 2px;
 }
 
 .ik-site .ik-section-heading h2 {
-  margin: 15px 0 12px;
-  color: #184e3f;
+  margin: 13px 0;
+  color: var(--ik-deep);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(32px, 4.5vw, 46px);
-  line-height: 1.2;
-}
-
-.ik-site .ik-section-heading h2 em {
-  color: #138b70;
-  font-weight: 500;
+  font-size: clamp(32px, 4.5vw, 45px);
 }
 
 .ik-site .ik-section-heading > p {
   margin: 0;
   color: var(--ik-muted);
   font-size: 14px;
-  line-height: 1.9;
+  line-height: 1.8;
 }
-
-/* =============== CATEGORY CARDS =============== */
 
 .ik-site .ik-card-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
+  gap: 17px;
 }
 
 .ik-site .ik-card {
   display: flex;
   min-width: 0;
   flex-direction: column;
-  padding: 25px;
-  border: 1px solid #e4e8df;
-  border-radius: 13px;
-  background: #fff;
+  padding: 23px;
+  border: 1px solid var(--ik-border);
+  border-radius: 15px;
+  background: var(--ik-surface);
   color: var(--ik-ink);
   transition:
-    transform 0.22s ease,
-    border-color 0.22s ease,
-    box-shadow 0.22s ease;
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .ik-site .ik-card:hover {
-  transform: translateY(-5px);
-  border-color: #a9d8c8;
-  box-shadow: 0 15px 35px rgba(25, 78, 60, 0.08);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(21, 92, 75, 0.09);
 }
 
 .ik-site .ik-card-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 22px;
-  color: #a0a59b;
+  margin-bottom: 19px;
+  color: #9ba59b;
   font-size: 12px;
 }
 
@@ -437,32 +538,23 @@
 
 .ik-site .ik-medallion {
   display: flex;
-  width: 58px;
-  height: 58px;
+  width: 55px;
+  height: 55px;
   align-items: center;
   justify-content: center;
-  margin-bottom: 18px;
-  border: 1px solid #dcece2;
+  margin-bottom: 16px;
+  border: 1px solid #d6ebdf;
   border-radius: 50%;
-  background: #eaf8f1;
-  color: #087f68;
-  font-family: Georgia, serif;
-  font-size: 27px;
+  background: #e8f8ef;
+  color: #07816a;
+  font-size: 26px;
 }
 
 .ik-site .ik-card h3 {
-  margin: 0 0 5px;
-  color: #194b3d;
+  margin: 0 0 17px;
+  color: var(--ik-deep);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 22px;
-}
-
-.ik-site .ik-urdu {
-  margin: 0 0 15px;
-  color: #278568;
-  font-family: "Amiri", "Noto Naskh Arabic", Georgia, serif;
-  font-size: 23px;
-  line-height: 1.8;
+  font-size: 21px;
 }
 
 .ik-site .ik-card-link {
@@ -471,9 +563,9 @@
   justify-content: space-between;
   gap: 8px;
   margin-top: auto;
-  padding-top: 17px;
-  border-top: 1px solid #edf0e9;
-  color: #087f68;
+  padding-top: 15px;
+  border-top: 1px solid var(--ik-border);
+  color: var(--ik-green);
   font-size: 12px;
   font-weight: 750;
 }
@@ -484,67 +576,65 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: center;
-  gap: 50px;
-  padding: 75px max(24px, calc((100% - 1100px) / 2));
-  background: linear-gradient(135deg, #e4f8ef, #f7fbf6);
+  gap: 40px;
+  padding: 70px max(24px, calc((100% - 1080px) / 2));
+  background: linear-gradient(135deg, #e2f8ee, #f4faf5);
 }
 
 .ik-site .ik-feature-copy h2 {
-  margin: 15px 0;
-  color: #184e3f;
+  margin: 14px 0;
+  color: #155c4b;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(35px, 4.5vw, 50px);
+  font-size: clamp(35px, 4.5vw, 49px);
   line-height: 1.2;
 }
 
 .ik-site .ik-feature-copy h2 em {
-  color: #138b70;
+  color: #0d9b7c;
   font-weight: 500;
 }
 
 .ik-site .ik-feature-copy p {
   max-width: 460px;
-  margin: 0 0 24px;
+  margin: 0 0 23px;
   color: var(--ik-muted);
   font-size: 14px;
-  line-height: 1.95;
+  line-height: 1.9;
 }
 
 .ik-site .ik-calligraphy {
   position: relative;
   display: flex;
-  min-height: 300px;
+  min-height: 290px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 18px;
+  gap: 16px;
   overflow: hidden;
-  border: 1px solid #d7e9de;
-  border-radius: 16px;
-  background:
-    radial-gradient(circle, rgba(190, 224, 205, 0.6), transparent 65%),
-    #f8fcf7;
+  border: 1px solid #d8e9dd;
+  border-radius: 18px;
+  background: #f8fcf8;
 }
 
 .ik-site .ik-calligraphy-ring {
   position: absolute;
-  width: 230px;
-  height: 230px;
-  border: 1px solid rgba(195, 161, 92, 0.45);
+  width: 220px;
+  height: 220px;
+  border: 1px solid rgba(194, 161, 92, 0.5);
   border-radius: 50%;
 }
 
 .ik-site .ik-calligraphy-ring::before,
 .ik-site .ik-calligraphy-ring::after {
   position: absolute;
-  inset: 14px;
-  border: 1px solid rgba(195, 161, 92, 0.3);
+  inset: 13px;
+  border: 1px solid rgba(194, 161, 92, 0.35);
   border-radius: 50%;
   content: "";
 }
 
 .ik-site .ik-calligraphy-ring::after {
-  inset: 29px;
+  inset: 28px;
 }
 
 .ik-site .ik-star {
@@ -556,16 +646,15 @@
 .ik-site .ik-calligraphy p {
   z-index: 1;
   margin: 0;
+  padding: 0 12px;
   color: #17654f;
   font-family: "Amiri", "Noto Naskh Arabic", Georgia, serif;
-  font-size: clamp(25px, 3vw, 35px);
-  line-height: 1.9;
+  font-size: clamp(24px, 3vw, 34px);
   text-align: center;
 }
 
 .ik-site .ik-gold-line {
-  display: block;
-  width: 42px;
+  width: 40px;
   height: 2px;
   background: var(--ik-gold);
 }
@@ -575,127 +664,25 @@
   color: #38705c;
   font-size: 9px;
   font-weight: 800;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
 }
 
-/* =============== BIOGRAPHY =============== */
-
-.ik-site .ik-biography {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 30px;
-  padding: 65px 24px;
-  background: #fff;
-}
-
-.ik-site .ik-biography-mark {
-  display: flex;
-  width: 95px;
-  height: 95px;
-  flex: 0 0 95px;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #d7e8dc;
-  border-radius: 50%;
-  background: #eff9f3;
-  color: var(--ik-green);
-  font-size: 44px;
-}
-
-.ik-site .ik-biography-copy {
-  max-width: 610px;
-}
-
-.ik-site .ik-biography-copy h2 {
-  margin: 12px 0;
-  color: #184e3f;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(28px, 4vw, 40px);
-  line-height: 1.25;
-}
-
-.ik-site .ik-biography-copy p {
-  margin: 0 0 18px;
-  color: var(--ik-muted);
-  font-size: 13px;
-  line-height: 1.9;
-}
-
-.ik-site .ik-text-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  color: #087f68;
-  font-size: 13px;
-  font-weight: 750;
-}
-
-/* =============== QUOTE =============== */
-
-.ik-site .ik-quote {
-  position: relative;
-  display: flex;
-  min-height: 300px;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 55px 24px;
-  overflow: hidden;
-  background: linear-gradient(135deg, #155c4b, #0b4437);
-  color: #fff;
-  text-align: center;
-}
-
-.ik-site .ik-quote::before {
-  position: absolute;
-  inset: 15px;
-  border: 1px solid rgba(225, 204, 151, 0.25);
-  content: "";
-}
-
-.ik-site .ik-quote-mark {
-  color: #d9bd7e;
-  font-family: Georgia, serif;
-  font-size: 65px;
-  line-height: 0.9;
-}
-
-.ik-site .ik-quote p {
-  margin: 15px 0 20px;
-  color: #fff;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(25px, 4vw, 39px);
-  line-height: 1.5;
-}
-
-.ik-site .ik-quote .ik-gold-line {
-  margin-bottom: 15px;
-}
-
-.ik-site .ik-quote small {
-  color: #e1c991;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 2px;
-}
-
-/* =============== BOTTOM CTA =============== */
+/* =============== BOTTOM =============== */
 
 .ik-site .ik-bottom {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 24px;
-  padding: 50px max(24px, calc((100% - 1100px) / 2));
-  background: #f8faf5;
+  gap: 23px;
+  padding: 48px max(24px, calc((100% - 1080px) / 2));
+  background: var(--ik-bg);
 }
 
 .ik-site .ik-bottom-logo {
   display: flex;
-  width: 65px;
-  height: 65px;
-  flex: 0 0 65px;
+  width: 62px;
+  height: 62px;
+  flex: 0 0 62px;
   align-items: center;
   justify-content: center;
   border: 1px solid #d8e7dc;
@@ -703,25 +690,18 @@
   background: #eaf7ef;
   color: var(--ik-green);
   font-family: Georgia, serif;
-  font-size: 35px;
+  font-size: 34px;
 }
 
 .ik-site .ik-bottom-copy {
   flex: 1;
-  max-width: 560px;
 }
 
 .ik-site .ik-bottom-copy h2 {
-  margin: 7px 0;
-  color: #184e3f;
+  margin: 8px 0;
+  color: var(--ik-deep);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(23px, 3vw, 31px);
-  line-height: 1.35;
-}
-
-.ik-site .ik-bottom-copy h2 em {
-  color: #138b70;
-  font-weight: 500;
+  font-size: clamp(22px, 3vw, 30px);
 }
 
 .ik-site .ik-bottom-copy p {
@@ -731,15 +711,97 @@
   line-height: 1.8;
 }
 
+/* =============== DARK THEME =============== */
+
+.ik-site.ik-theme-dark {
+  --ik-bg: #101d19;
+  --ik-surface: #192a23;
+  --ik-green: #12a98b;
+  --ik-deep: #b4e8d1;
+  --ik-mint: #1d382d;
+  --ik-ink: #edf6ef;
+  --ik-muted: #b2c1b7;
+  --ik-border: #30483c;
+
+  background: var(--ik-bg);
+  color: var(--ik-ink);
+}
+
+.ik-site.ik-theme-dark .ik-hero {
+  background:
+    radial-gradient(ellipse at 50% 12%, #234a3b, transparent 62%),
+    linear-gradient(160deg, #142d23, #101d19);
+}
+
+.ik-site.ik-theme-dark .ik-brand-text > span,
+.ik-site.ik-theme-dark .ik-hero h1,
+.ik-site.ik-theme-dark .ik-feature-copy h2,
+.ik-site.ik-theme-dark .ik-section-heading h2,
+.ik-site.ik-theme-dark .ik-card h3,
+.ik-site.ik-theme-dark .ik-bottom-copy h2 {
+  color: #d3f3e2;
+}
+
+.ik-site.ik-theme-dark .ik-hero h1 em,
+.ik-site.ik-theme-dark .ik-feature-copy h2 em {
+  color: #46d3ac;
+}
+
+.ik-site.ik-theme-dark .ik-description,
+.ik-site.ik-theme-dark .ik-section-heading > p,
+.ik-site.ik-theme-dark .ik-feature-copy p {
+  color: #b4c5b9;
+}
+
+.ik-site.ik-theme-dark .ik-badge,
+.ik-site.ik-theme-dark .ik-search,
+.ik-site.ik-theme-dark .ik-outline,
+.ik-site.ik-theme-dark .ik-settings-button {
+  border-color: #385447;
+  background: #1c3026;
+  color: #d6efe0;
+}
+
+.ik-site.ik-theme-dark .ik-search input {
+  color: #f2faf3;
+}
+
+.ik-site.ik-theme-dark .ik-search input::placeholder {
+  color: #9aafa1;
+}
+
+.ik-site.ik-theme-dark .ik-stats,
+.ik-site.ik-theme-dark .ik-bottom {
+  background: var(--ik-bg);
+}
+
+.ik-site.ik-theme-dark .ik-feature {
+  background: linear-gradient(135deg, #18372b, #13251d);
+}
+
+.ik-site.ik-theme-dark .ik-calligraphy {
+  border-color: #365746;
+  background: #1b3025;
+}
+
+.ik-site.ik-theme-dark .ik-calligraphy p {
+  color: #b9ecd2;
+}
+
+.ik-site.ik-theme-dark .ik-setting-options button {
+  border-color: var(--ik-border);
+  background: #1c3026;
+  color: var(--ik-ink);
+}
+
+.ik-site.ik-theme-dark .ik-setting-options button.active {
+  background: var(--ik-green);
+  color: #ffffff;
+}
+
 /* =============== TABLET =============== */
 
 @media (max-width: 800px) {
-  .ik-site .ik-hero {
-    min-height: 0;
-    padding-top: 65px;
-    padding-bottom: 55px;
-  }
-
   .ik-site .ik-card-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -747,180 +809,176 @@
   .ik-site .ik-feature {
     gap: 25px;
   }
-
-  .ik-site .ik-bottom {
-    flex-wrap: wrap;
-  }
 }
 
 /* =============== MOBILE =============== */
 
 @media (max-width: 600px) {
   .ik-site .ik-hero {
-    padding: 88px 20px 55px;
+    padding: 25px 18px 44px;
   }
 
-  .ik-site .ik-hero::before,
-  .ik-site .ik-hero::after {
-    top: 40%;
-    width: 220px;
-    height: 220px;
+  .ik-site .ik-settings-wrap {
+    top: 14px;
+    right: 15px;
   }
 
-  .ik-site .ik-hero::before {
-    left: -155px;
+  .ik-site .ik-settings-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 13px;
   }
 
-  .ik-site .ik-hero::after {
-    right: -155px;
+  .ik-site .ik-settings-menu {
+    top: 48px;
   }
 
-  .ik-site .ik-hero-decoration {
-    width: 100px;
-    height: 100px;
+  .ik-site .ik-brand {
+    justify-content: flex-start;
+    margin: 12px 38px 43px 0;
   }
 
-  .ik-site .ik-decoration-left {
-    left: -70px;
+  .ik-site .ik-brand-mark {
+    width: 49px;
+    height: 49px;
+    font-size: 29px;
   }
 
-  .ik-site .ik-decoration-right {
-    right: -70px;
+  .ik-site .ik-brand-text > span {
+    font-size: 23px;
+  }
+
+  .ik-site .ik-brand-text small {
+    font-size: 8px;
+    letter-spacing: 0.8px;
   }
 
   .ik-site .ik-badge {
-    gap: 8px;
-    margin-bottom: 25px;
-    padding: 10px 13px;
-    font-size: 10px;
-    letter-spacing: 1px;
+    gap: 7px;
+    margin-bottom: 20px;
+    padding: 10px 12px;
+    font-size: 9px;
+    letter-spacing: 0.8px;
   }
 
   .ik-site .ik-bismillah {
-    margin-bottom: 18px;
+    margin-bottom: 14px;
     font-size: 29px;
   }
 
   .ik-site .ik-hero h1 {
-    margin-bottom: 25px;
-    font-size: clamp(36px, 8.2vw, 48px);
-    line-height: 1.18;
-    letter-spacing: -1px;
+    margin-bottom: 22px;
+    font-size: clamp(34px, 8vw, 46px);
+    line-height: 1.17;
+    letter-spacing: -0.8px;
   }
 
   .ik-site .ik-description {
-    margin-bottom: 32px;
-    font-size: 15px;
+    margin-bottom: 27px;
+    font-size: 14px;
     line-height: 1.9;
   }
 
   .ik-site .ik-actions {
     flex-direction: column;
-    gap: 12px;
-    margin-bottom: 28px;
+    gap: 11px;
+    margin-bottom: 24px;
   }
 
   .ik-site .ik-actions .ik-button {
     width: 100%;
-    min-height: 58px;
+    min-height: 55px;
     border-radius: 100px;
-    font-size: 15px;
   }
 
   .ik-site .ik-search {
-    min-height: 62px;
-    gap: 8px;
-    margin-bottom: 28px;
-    padding: 6px 6px 6px 14px;
+    min-height: 60px;
+    gap: 7px;
+    margin-bottom: 23px;
+    padding: 6px;
     border-radius: 12px;
   }
 
   .ik-site .ik-search-icon {
-    font-size: 25px;
+    padding-left: 6px;
+    font-size: 24px;
   }
 
   .ik-site .ik-search input {
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .ik-site .ik-search button {
-    min-height: 46px;
-    padding: 10px 12px;
-    border-radius: 8px;
-    font-size: 12px;
+    min-height: 45px;
+    padding: 8px 10px;
+    font-size: 11px;
   }
 
   .ik-site .ik-hero-note {
-    gap: 7px;
-    font-size: 10px;
+    gap: 6px;
+    font-size: 9px;
   }
 
   .ik-site .ik-hero-note > span {
-    width: 12px;
+    width: 11px;
   }
 
   .ik-site .ik-stats {
-    padding: 35px 12px 40px;
+    padding: 34px 8px 38px;
   }
 
   .ik-site .ik-stat {
     gap: 10px;
-    padding: 10px 5px;
+    padding: 8px 4px;
   }
 
   .ik-site .ik-stat strong {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: clamp(24px, 7vw, 34px);
-    font-weight: 800;
+    font-size: clamp(25px, 7vw, 34px);
   }
 
   .ik-site .ik-stat span {
-    font-size: 9px;
-    letter-spacing: 0.6px;
+    font-size: 8px;
+    letter-spacing: 0.4px;
   }
 
   .ik-site .ik-categories {
-    padding: 55px 17px;
+    padding: 50px 16px 58px;
   }
 
   .ik-site .ik-section-heading {
-    margin-bottom: 28px;
+    margin-bottom: 25px;
   }
 
   .ik-site .ik-section-heading h2 {
-    font-size: 34px;
+    font-size: 32px;
   }
 
   .ik-site .ik-section-heading > p {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .ik-site .ik-card-grid {
-    gap: 12px;
+    gap: 11px;
   }
 
   .ik-site .ik-card {
-    padding: 16px;
-    border-radius: 11px;
+    padding: 14px;
+    border-radius: 12px;
   }
 
   .ik-site .ik-card-top {
-    margin-bottom: 17px;
+    margin-bottom: 15px;
   }
 
   .ik-site .ik-medallion {
-    width: 47px;
-    height: 47px;
-    margin-bottom: 15px;
-    font-size: 23px;
+    width: 44px;
+    height: 44px;
+    margin-bottom: 13px;
+    font-size: 22px;
   }
 
   .ik-site .ik-card h3 {
-    font-size: 18px;
-  }
-
-  .ik-site .ik-urdu {
-    font-size: 20px;
+    font-size: 17px;
   }
 
   .ik-site .ik-card-link {
@@ -929,75 +987,44 @@
 
   .ik-site .ik-feature {
     grid-template-columns: 1fr;
-    gap: 30px;
-    padding: 55px 20px;
+    gap: 26px;
+    padding: 48px 20px;
   }
 
   .ik-site .ik-feature-copy h2 {
-    font-size: 39px;
-  }
-
-  .ik-site .ik-feature-copy p {
-    font-size: 13px;
+    font-size: 37px;
   }
 
   .ik-site .ik-calligraphy {
-    min-height: 250px;
+    min-height: 245px;
   }
 
   .ik-site .ik-calligraphy-ring {
-    width: 195px;
-    height: 195px;
+    width: 190px;
+    height: 190px;
   }
 
   .ik-site .ik-calligraphy p {
-    padding: 0 12px;
-    font-size: 27px;
-  }
-
-  .ik-site .ik-biography {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 20px;
-    padding: 48px 22px;
-  }
-
-  .ik-site .ik-biography-mark {
-    width: 70px;
-    height: 70px;
-    flex-basis: 70px;
-    font-size: 35px;
-  }
-
-  .ik-site .ik-biography-copy h2 {
-    font-size: 31px;
-  }
-
-  .ik-site .ik-quote {
-    min-height: 250px;
-    padding: 45px 25px;
-  }
-
-  .ik-site .ik-quote p {
-    font-size: 26px;
+    font-size: 25px;
   }
 
   .ik-site .ik-bottom {
     align-items: flex-start;
     flex-direction: column;
-    gap: 18px;
-    padding: 40px 22px;
+    gap: 17px;
+    padding: 38px 22px;
   }
 
   .ik-site .ik-bottom-logo {
-    width: 55px;
-    height: 55px;
-    flex-basis: 55px;
+    width: 54px;
+    height: 54px;
+    flex-basis: 54px;
     font-size: 30px;
   }
 
   .ik-site .ik-bottom-copy h2 {
-    font-size: 26px;
+    font-size: 25px;
+    line-height: 1.4;
   }
 
   .ik-site .ik-bottom > .ik-button {
@@ -1006,59 +1033,41 @@
   }
 }
 
-/* =============== SMALL PHONES =============== */
-
 @media (max-width: 380px) {
-  .ik-site .ik-hero {
-    padding-right: 14px;
-    padding-left: 14px;
-  }
-
-  .ik-site .ik-badge {
-    gap: 6px;
-    padding: 9px 10px;
-    font-size: 9px;
+  .ik-site .ik-brand-text > span {
+    font-size: 20px;
   }
 
   .ik-site .ik-hero h1 {
-    font-size: 33px;
-    letter-spacing: -0.7px;
+    font-size: 32px;
   }
 
   .ik-site .ik-search {
-    gap: 5px;
-    padding-left: 9px;
+    gap: 4px;
   }
 
   .ik-site .ik-search input {
-    font-size: 11px;
+    font-size: 10px;
   }
 
   .ik-site .ik-search button {
-    padding: 9px;
-    font-size: 11px;
+    padding: 8px;
+    font-size: 10px;
   }
 
   .ik-site .ik-card {
-    padding: 12px;
+    padding: 11px;
   }
 
   .ik-site .ik-card h3 {
-    font-size: 16px;
-  }
-
-  .ik-site .ik-card-link {
-    font-size: 9px;
+    font-size: 15px;
   }
 }
-
-/* =============== ACCESSIBILITY =============== */
 
 @media (prefers-reduced-motion: reduce) {
   .ik-site *,
   .ik-site *::before,
   .ik-site *::after {
-    scroll-behavior: auto !important;
     transition: none !important;
   }
    }
