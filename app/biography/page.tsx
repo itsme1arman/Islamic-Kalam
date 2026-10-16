@@ -1,35 +1,103 @@
+"use client";
+
 import { biographies } from "@/data/biographies";
+import { useLanguage } from "@/components/LanguageProvider";
+
+const pageContent = {
+  hinglish: {
+    title: "Islami Shakhsiyatein",
+    description: "Mashhoor Islami ulama aur shayaron ki zindagi ke baare mein padhein.",
+    birth: "Paidaish",
+    death: "Wisaal",
+    biography: "Mukhtasar Sawaneh Hayat",
+    empty: "Abhi koi biography maujood nahi hai.",
+  },
+  hindi: {
+    title: "इस्लामी शख़्सियात",
+    description: "प्रसिद्ध इस्लामी विद्वानों और शायरों की ज़िंदगी के बारे में पढ़ें।",
+    birth: "जन्म",
+    death: "विसाल",
+    biography: "संक्षिप्त जीवनी",
+    empty: "अभी कोई जीवनी उपलब्ध नहीं है।",
+  },
+  urdu: {
+    title: "اسلامی شخصیات",
+    description: "مشہور اسلامی علماء اور شعراء کی زندگی کے بارے میں پڑھیں۔",
+    birth: "پیدائش",
+    death: "وصال",
+    biography: "مختصر سوانح حیات",
+    empty: "فی الحال کوئی سوانح حیات موجود نہیں ہے۔",
+  },
+} as const;
 
 export default function BiographyPage() {
+  const { language } = useLanguage();
+  const text = pageContent[language];
+
   return (
-    <main className="container">
-      <section className="page-head">
-        <h1>Islamic Biographies</h1>
-        <p>Learn about renowned Islamic scholars and poets.</p>
+    <main
+      className="container ik-category-page"
+      lang={
+        language === "urdu"
+          ? "ur"
+          : language === "hindi"
+            ? "hi"
+            : "en"
+      }
+      dir={language === "urdu" ? "rtl" : "ltr"}
+    >
+      <section className="page-head ik-category-head">
+        <h1>{text.title}</h1>
+        <p>{text.description}</p>
       </section>
 
       <section className="kalam-section">
-        <div className="kalam-grid">
-          {biographies.map((person) => (
-            <article className="kalam-card" key={person.id}>
-              <h2>{person.name}</h2>
+        {biographies.length === 0 ? (
+          <p className="ik-category-empty">{text.empty}</p>
+        ) : (
+          <div className="kalam-grid ik-category-grid">
+            {biographies.map((person) => {
+              const biography =
+                language === "hinglish"
+                  ? person.roman
+                  : language === "hindi"
+                    ? person.hindi
+                    : person.urdu;
 
-              <p>Birth: {person.birth}</p>
-              <p>Death: {person.death}</p>
+              return (
+                <article
+                  className="kalam-card ik-category-card"
+                  key={person.id}
+                >
+                  <h2>{person.name}</h2>
 
-              <div className="biography-text">
-                <h3>Roman Urdu</h3>
-                <p>{person.roman}</p>
+                  <p>
+                    <strong>{text.birth}:</strong> {person.birth}
+                  </p>
 
-                <h3>اردو</h3>
-                <p lang="ur" dir="rtl">{person.urdu}</p>
+                  <p>
+                    <strong>{text.death}:</strong> {person.death}
+                  </p>
 
-                <h3>हिन्दी</h3>
-                <p lang="hi">{person.hindi}</p>
-              </div>
-            </article>
-          ))}
-        </div>
+                  <div
+                    className="biography-text"
+                    lang={
+                      language === "urdu"
+                        ? "ur"
+                        : language === "hindi"
+                          ? "hi"
+                          : "en"
+                    }
+                    dir={language === "urdu" ? "rtl" : "ltr"}
+                  >
+                    <h3>{text.biography}</h3>
+                    <p>{biography}</p>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        )}
       </section>
     </main>
   );
