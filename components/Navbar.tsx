@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Language = "hinglish" | "hindi" | "urdu";
-type Theme = "light" | "dark";
+type Theme = "light" | "dark" | "auto";
 
 const menus = [
   {
@@ -34,6 +34,17 @@ const menus = [
   },
 ];
 
+function getSystemTheme(): "light" | "dark" {
+  if (
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+  ) {
+    return "dark";
+  }
+
+  return "light";
+}
+
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState("");
@@ -41,7 +52,10 @@ export default function Navbar() {
 
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [language, setLanguage] = useState<Language>("hinglish");
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>("auto");
+  const [mounted, setMounted] = useState(false);
+
+  const settingsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     try {
@@ -56,30 +70,87 @@ export default function Navbar() {
         setLanguage(savedLanguage);
       }
 
-      if (savedTheme === "light" || savedTheme === "dark") {
+      if (
+        savedTheme === "light" ||
+        savedTheme === "dark" ||
+        savedTheme === "auto"
+      ) {
         setTheme(savedTheme);
       }
     } catch {
-      // Use default settings if localStorage is unavailable.
+      // Default settings will be used.
     }
+
+    setMounted(true);
   }, []);
 
   useEffect(() => {
+    if (!mounted) return;
+
+    const applyTheme = () => {
+      const effectiveTheme =
+        theme === "auto" ? getSystemTheme() : theme;
+
+      document.documentElement.dataset.ikTheme = effectiveTheme;
+      document.documentElement.style.colorScheme = effectiveTheme;
+
+      window.dispatchEvent(
+        new CustomEvent("ik-settings-change", {
+          detail: {
+            language,
+            theme,
+            effectiveTheme,
+          },
+        })
+      );
+    };
+
     try {
       localStorage.setItem("ik-language", language);
       localStorage.setItem("ik-theme", theme);
     } catch {
-      // The site can still work without localStorage.
+      // Settings still work for the current session.
     }
 
-    window.dispatchEvent(
-      new CustomEvent("ik-settings-change", {
-        detail: { language, theme },
-      })
+    applyTheme();
+
+    if (theme !== "auto") return;
+
+    const mediaQuery = window.matchMedia(
+      "(prefers-color-scheme: dark)"
     );
 
-    document.documentElement.dataset.ikTheme = theme;
-  }, [language, theme]);
+    mediaQuery.addEventListener("change", applyTheme);
+
+    return () => {
+      mediaQuery.removeEventListener("change", applyTheme);
+    };
+  }, [language, theme, mounted]);
+
+  useEffect(() => {
+    function handleOutsideClick(event: MouseEvent) {
+      if (
+        settingsRef.current &&
+        !settingsRef.current.contains(event.target as Node)
+      ) {
+        setSettingsOpen(false);
+      }
+    }
+
+    function handleEscape(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setSettingsOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
 
   function handleSearch(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -89,7 +160,17 @@ export default function Navbar() {
     if (!query) return;
 
     window.location.href = `/naat?search=${encodeURIComponent(query)}`;
+
     setMobileOpen(false);
+    setSettingsOpen(false);
+  }
+
+  function chooseLanguage(value: Language) {
+    setLanguage(value);
+  }
+
+  function chooseTheme(value: Theme) {
+    setTheme(value);
   }
 
   return (
@@ -250,86 +331,99 @@ export default function Navbar() {
           </button>
         </form>
 
-        {/* Three-dot settings button */}
-        <div className="ik-header-settings">
+        {/* Compact settings popup */}
+        <div className="ik-header-settings" ref={settingsRef}>
           <button
             type="button"
             className="ik-header-settings-button"
             onClick={() => setSettingsOpen((open) => !open)}
-            aria-label="Language and theme settings"
+            aria-label="Open settings"
             aria-expanded={settingsOpen}
+            aria-haspopup="dialog"
           >
-            <span>⋮</span>
+            <span aria-hidden="true">⋮</span>
           </button>
 
           {settingsOpen && (
-            <div className="ik-header-settings-menu">
-              <div className="ik-header-settings-title">
-                Settings
-              </div>
+            <div
+              className="ik-header-settings-menu"
+              role="dialog"
+              aria-label="Language and theme settings"
+            >
+              <div className="ik-header-settings-title">Settings</div>
 
-              <div className="ik-header-setting-group">
-                <span className="ik-header-setting-label">Language</span>
+              <section className="ik-settings-section">
+                <h3 className="ik-header-setting-label">Language</h3>
 
-                <button
-                  type="button"
-                  className={
-                    language === "hinglish" ? "ik-setting-active" : ""
-                  }
-                  onClick={() => setLanguage("hinglish")}
-                >
-                  Hinglish
-                  {language === "hinglish" && <span>✓</span>}
-                </button>
+                <div className="ik-settings-options ik-language-options">
+                  <button
+                    type="button"
+                    lang="en"
+                    className={language === "hinglish" ? "ik-setting-active" : ""}
+                    onClick={() => chooseLanguage("hinglish")}
+                    aria-pressed={language === "hinglish"}
+                  >
+                    Hinglish
+                  </button>
 
-                <button
-                  type="button"
-                  className={
-                    language === "hindi" ? "ik-setting-active" : ""
-                  }
-                  onClick={() => setLanguage("hindi")}
-                >
-                  हिन्दी
-                  {language === "hindi" && <span>✓</span>}
-                </button>
+                  <button
+                    type="button"
+                    lang="hi"
+                    className={language === "hindi" ? "ik-setting-active" : ""}
+                    onClick={() => chooseLanguage("hindi")}
+                    aria-pressed={language === "hindi"}
+                  >
+                    हिन्दी
+                  </button>
 
-                <button
-                  type="button"
-                  className={
-                    language === "urdu" ? "ik-setting-active" : ""
-                  }
-                  onClick={() => setLanguage("urdu")}
-                >
-                  اردو
-                  {language === "urdu" && <span>✓</span>}
-                </button>
-              </div>
+                  <button
+                    type="button"
+                    lang="ur"
+                    dir="rtl"
+                    className={language === "urdu" ? "ik-setting-active" : ""}
+                    onClick={() => chooseLanguage("urdu")}
+                    aria-pressed={language === "urdu"}
+                  >
+                    اردو
+                  </button>
+                </div>
+              </section>
 
-              <div className="ik-header-setting-group">
-                <span className="ik-header-setting-label">Appearance</span>
+              <section className="ik-settings-section">
+                <h3 className="ik-header-setting-label">Theme</h3>
 
-                <button
-                  type="button"
-                  className={
-                    theme === "light" ? "ik-setting-active" : ""
-                  }
-                  onClick={() => setTheme("light")}
-                >
-                  ☀ Light
-                  {theme === "light" && <span>✓</span>}
-                </button>
+                <div className="ik-settings-options ik-theme-options">
+                  <button
+                    type="button"
+                    className={theme === "light" ? "ik-setting-active" : ""}
+                    onClick={() => chooseTheme("light")}
+                    aria-pressed={theme === "light"}
+                  >
+                    <span aria-hidden="true">☀</span>
+                    Light
+                  </button>
 
-                <button
-                  type="button"
-                  className={
-                    theme === "dark" ? "ik-setting-active" : ""
-                  }
-                  onClick={() => setTheme("dark")}
-                >
-                  ☾ Dark
-                  {theme === "dark" && <span>✓</span>}
-                </button>
-              </div>
+                  <button
+                    type="button"
+                    className={theme === "dark" ? "ik-setting-active" : ""}
+                    onClick={() => chooseTheme("dark")}
+                    aria-pressed={theme === "dark"}
+                  >
+                    <span aria-hidden="true">☾</span>
+                    Dark
+                  </button>
+
+                  <button
+                    type="button"
+                    className={theme === "auto" ? "ik-setting-active" : ""}
+                    onClick={() => chooseTheme("auto")}
+                    aria-pressed={theme === "auto"}
+                  >
+                    <span aria-hidden="true">◐</span>
+                    Auto
+                  </button>
+                </div>
+              </section>
             </div>
           )}
         </div>
@@ -337,7 +431,7 @@ export default function Navbar() {
         <button
           type="button"
           className="ik-mobile-toggle"
-          onClick={() => setMobileOpen(!mobileOpen)}
+          onClick={() => setMobileOpen((open) => !open)}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileOpen}
         >
@@ -483,59 +577,6 @@ export default function Navbar() {
             </button>
           </form>
 
-          {/* Settings are available on mobile too */}
-          <div className="ik-mobile-settings">
-            <span className="ik-header-setting-label">Language</span>
-
-            <div className="ik-mobile-settings-options">
-              <button
-                type="button"
-                className={
-                  language === "hinglish" ? "ik-setting-active" : ""
-                }
-                onClick={() => setLanguage("hinglish")}
-              >
-                Hinglish
-              </button>
-
-              <button
-                type="button"
-                className={language === "hindi" ? "ik-setting-active" : ""}
-                onClick={() => setLanguage("hindi")}
-              >
-                हिन्दी
-              </button>
-
-              <button
-                type="button"
-                className={language === "urdu" ? "ik-setting-active" : ""}
-                onClick={() => setLanguage("urdu")}
-              >
-                اردو
-              </button>
-            </div>
-
-            <span className="ik-header-setting-label">Appearance</span>
-
-            <div className="ik-mobile-settings-options">
-              <button
-                type="button"
-                className={theme === "light" ? "ik-setting-active" : ""}
-                onClick={() => setTheme("light")}
-              >
-                ☀ Light
-              </button>
-
-              <button
-                type="button"
-                className={theme === "dark" ? "ik-setting-active" : ""}
-                onClick={() => setTheme("dark")}
-              >
-                ☾ Dark
-              </button>
-            </div>
-          </div>
-
           <div className="ik-mobile-bottom">
             <span className="ik-bottom-crescent">☾</span>
             <p>Words of love, faith &amp; devotion.</p>
@@ -545,4 +586,4 @@ export default function Navbar() {
       </div>
     </header>
   );
-          }
+}
