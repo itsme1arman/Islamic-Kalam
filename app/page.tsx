@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState, type FormEvent } from "react";
+import { useLanguage } from "@/components/LanguageProvider";
 
 type Language = "hinglish" | "hindi" | "urdu";
-type Theme = "light" | "dark";
 
 const content = {
   hinglish: {
@@ -31,6 +31,15 @@ const content = {
     stat1: "KALAM CATEGORIES",
     stat2: "MOHABBAT AUR AQEEDAT",
     stat3: "ADAB KI PEHCHAAN",
+    featureLabel: "A JOURNEY OF DEVOTION",
+    featureTitle1: "Har lafz mein",
+    featureTitle2: "mohabbat.",
+    featureDescription:
+      "Aise kalaam ka majmua jo dil ko sukoon de aur rooh ko roshan kare.",
+    bottomTitle: "Kalam se judein, adab ke saath.",
+    bottomDescription:
+      "Naat, Manqabat, Hamd, Salam aur Islami biographies.",
+    calligraphyCaption: "ISHQ · ADAB · AQEEDAT",
     light: "Light",
     dark: "Dark",
   },
@@ -59,6 +68,15 @@ const content = {
     stat1: "कलाम की श्रेणियाँ",
     stat2: "मोहब्बत और अकीदत",
     stat3: "अदब की पहचान",
+    featureLabel: "अकीदत का एक सफ़र",
+    featureTitle1: "हर लफ़्ज़ में",
+    featureTitle2: "मोहब्बत।",
+    featureDescription:
+      "ऐसे कलाम का संग्रह जो दिल को सुकून दे और रूह को रोशन करे।",
+    bottomTitle: "अदब के साथ कलाम से जुड़ें।",
+    bottomDescription:
+      "नात, मनक़बत, हम्द, सलाम और इस्लामी जीवनियाँ।",
+    calligraphyCaption: "इश्क़ · अदब · अकीदत",
     light: "लाइट",
     dark: "डार्क",
   },
@@ -72,7 +90,7 @@ const content = {
     description:
       "نعت شریف، منقبت، حمد، سلام اور بزرگانِ دین کی زندگی کا منتخب مجموعہ — محبت اور ادب کے ساتھ۔",
     explore: "کلام دیکھیں",
-    biography: "سوانح حیات",
+    biography: "سوانح حیات پڑھیں",
     placeholder: "نعت، منقبت یا نام تلاش کریں...",
     search: "تلاش",
     categories: "ہمارا مجموعہ",
@@ -87,10 +105,19 @@ const content = {
     stat1: "کلام کی اقسام",
     stat2: "محبت اور عقیدت",
     stat3: "ادب کی پہچان",
+    featureLabel: "عقیدت کا ایک سفر",
+    featureTitle1: "ہر لفظ میں",
+    featureTitle2: "محبت۔",
+    featureDescription:
+      "ایسے کلام کا مجموعہ جو دل کو سکون دے اور روح کو روشن کرے۔",
+    bottomTitle: "ادب کے ساتھ کلام سے جڑیں۔",
+    bottomDescription:
+      "نعت، منقبت، حمد، سلام اور اسلامی سوانح حیات۔",
+    calligraphyCaption: "عشق · ادب · عقیدت",
     light: "لائٹ",
     dark: "ڈارک",
   },
-};
+} satisfies Record<Language, Record<string, string>>;
 
 const categoryItems = [
   { key: "naat", href: "/naat", symbol: "۞" },
@@ -101,93 +128,32 @@ const categoryItems = [
 ] as const;
 
 export default function HomePage() {
-  const [language, setLanguage] = useState<Language>("hinglish");
-  const [theme, setTheme] = useState<Theme>("light");
+  const { language, theme } = useLanguage();
   const [search, setSearch] = useState("");
-
-  useEffect(() => {
-    try {
-      const savedLanguage = localStorage.getItem("ik-language");
-      const savedTheme = localStorage.getItem("ik-theme");
-
-      if (
-        savedLanguage === "hinglish" ||
-        savedLanguage === "hindi" ||
-        savedLanguage === "urdu"
-      ) {
-        setLanguage(savedLanguage);
-      }
-
-      if (savedTheme === "light" || savedTheme === "dark") {
-        setTheme(savedTheme);
-      }
-    } catch {
-      // Default settings will be used if storage is unavailable.
-    }
-  }, []);
-
-  useEffect(() => {
-    try {
-      localStorage.setItem("ik-language", language);
-      localStorage.setItem("ik-theme", theme);
-    } catch {
-      // The page remains usable if storage is unavailable.
-    }
-  }, [language, theme]);
-
-  useEffect(() => {
-    function handleSettingsChange(event: Event) {
-      const customEvent = event as CustomEvent<{
-        language?: Language;
-        theme?: Theme;
-      }>;
-
-      const nextLanguage = customEvent.detail?.language;
-      const nextTheme = customEvent.detail?.theme;
-
-      if (
-        nextLanguage === "hinglish" ||
-        nextLanguage === "hindi" ||
-        nextLanguage === "urdu"
-      ) {
-        setLanguage(nextLanguage);
-      }
-
-      if (nextTheme === "light" || nextTheme === "dark") {
-        setTheme(nextTheme);
-      }
-    }
-
-    window.addEventListener("ik-settings-change", handleSettingsChange);
-
-    return () => {
-      window.removeEventListener("ik-settings-change", handleSettingsChange);
-    };
-  }, []);
 
   const t = content[language];
 
-  function submitSearch(event: React.FormEvent<HTMLFormElement>) {
+  function submitSearch(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const query = search.trim();
 
     if (query) {
-      window.location.href =
-        "/naat?search=" + encodeURIComponent(query);
+      window.location.href = `/naat?search=${encodeURIComponent(query)}`;
     }
   }
 
   return (
     <div
-      className={`ik-site ik-theme-${theme}`}
+      className={`ik-site ik-theme-${theme === "auto" ? "light" : theme}`}
+      lang={language === "urdu" ? "ur" : language === "hindi" ? "hi" : "en"}
       dir={language === "urdu" ? "rtl" : "ltr"}
     >
       <section className="ik-hero">
         <div className="ik-badge">
-          <span>✦</span>
+          <span aria-hidden="true">✦</span>
           {t.badge}
-          <span>✦</span>
+          <span aria-hidden="true">✦</span>
         </div>
 
         <p className="ik-bismillah" lang="ar" dir="rtl">
@@ -208,11 +174,11 @@ export default function HomePage() {
 
         <div className="ik-actions">
           <Link href="/naat" className="ik-button ik-primary">
-            {t.explore} <span>↗</span>
+            {t.explore} <span aria-hidden="true">↗</span>
           </Link>
 
           <Link href="/biography" className="ik-button ik-outline">
-            {t.biography} <span>→</span>
+            {t.biography} <span aria-hidden="true">→</span>
           </Link>
         </div>
 
@@ -229,16 +195,36 @@ export default function HomePage() {
             aria-label={t.placeholder}
           />
 
-          <button type="submit">{t.search} ↗</button>
+          <button type="submit">
+            {t.search} <span aria-hidden="true">↗</span>
+          </button>
         </form>
 
         <div className="ik-hero-note">
           <span />
-          <p>Ilm se roshni</p>
+          <p>
+            {language === "urdu"
+              ? "علم سے روشنی"
+              : language === "hindi"
+                ? "ज्ञान से रोशनी"
+                : "Ilm se roshni"}
+          </p>
           <b>·</b>
-          <p>Kalam se mohabbat</p>
+          <p>
+            {language === "urdu"
+              ? "کلام سے محبت"
+              : language === "hindi"
+                ? "कलाम से मोहब्बत"
+                : "Kalam se mohabbat"}
+          </p>
           <b>·</b>
-          <p>Adab ke saath</p>
+          <p>
+            {language === "urdu"
+              ? "ادب کے ساتھ"
+              : language === "hindi"
+                ? "अदब के साथ"
+                : "Adab ke saath"}
+          </p>
           <span />
         </div>
       </section>
@@ -276,15 +262,19 @@ export default function HomePage() {
             >
               <div className="ik-card-top">
                 <span>0{index + 1}</span>
-                <span className="ik-arrow">↗</span>
+                <span className="ik-arrow" aria-hidden="true">
+                  ↗
+                </span>
               </div>
 
-              <div className="ik-medallion">{item.symbol}</div>
+              <div className="ik-medallion" aria-hidden="true">
+                {item.symbol}
+              </div>
 
               <h3>{t[item.key]}</h3>
 
               <span className="ik-card-link">
-                {t.explore} <span>→</span>
+                {t.explore} <span aria-hidden="true">→</span>
               </span>
             </Link>
           ))}
@@ -293,50 +283,51 @@ export default function HomePage() {
 
       <section className="ik-feature">
         <div className="ik-feature-copy">
-          <span className="ik-label">A JOURNEY OF DEVOTION</span>
+          <span className="ik-label">{t.featureLabel}</span>
 
           <h2>
-            Har lafz mein
+            {t.featureTitle1}
             <br />
-            <em>mohabbat.</em>
+            <em>{t.featureTitle2}</em>
           </h2>
 
-          <p>
-            Aise kalaam ka majmua jo dil ko sukoon de aur rooh ko
-            roshan kare.
-          </p>
+          <p>{t.featureDescription}</p>
 
           <Link href="/naat" className="ik-button ik-primary">
-            {t.explore} <span>↗</span>
+            {t.explore} <span aria-hidden="true">↗</span>
           </Link>
         </div>
 
         <div className="ik-calligraphy">
           <div className="ik-calligraphy-ring" />
-          <span className="ik-star">✦</span>
+          <span className="ik-star" aria-hidden="true">
+            ✦
+          </span>
 
           <p lang="ar" dir="rtl">
             صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ
           </p>
 
           <span className="ik-gold-line" />
-          <small>ISHQ · ADAB · AQEEDAT</small>
+          <small>{t.calligraphyCaption}</small>
         </div>
       </section>
 
       <section className="ik-bottom">
-        <div className="ik-bottom-logo">ا</div>
+        <div className="ik-bottom-logo" aria-hidden="true">
+          ا
+        </div>
 
         <div className="ik-bottom-copy">
           <span className="ik-label">ISLAMIC KALAM</span>
-          <h2>Kalam se judein, adab ke saath.</h2>
-          <p>Naat, Manqabat, Hamd, Salam aur Islami biographies.</p>
+          <h2>{t.bottomTitle}</h2>
+          <p>{t.bottomDescription}</p>
         </div>
 
         <Link href="/naat" className="ik-button ik-primary">
-          {t.explore} <span>→</span>
+          {t.explore} <span aria-hidden="true">→</span>
         </Link>
       </section>
     </div>
   );
-      }
+}
